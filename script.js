@@ -1,75 +1,18 @@
-// ============================================================
-// FIND WATSON
-// COMPLETE VERSION
-// ============================================================
+/* ============================================================
+FIND WATSON
+COMPLETE GAME + FIREBASE LEADERBOARD
+============================================================ */
 
-
-// ============================================================
-// FIREBASE
-// ============================================================
-
-import { initializeApp } from
-    "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
-
-import {
-    getDatabase,
-    ref,
-    set,
-    get,
-    query,
-    orderByChild
-} from
-    "https://www.gstatic.com/firebasejs/12.4.0/firebase-database.js";
-
-
-const firebaseConfig = {
-
-    apiKey:
-        "AIzaSyAvs8RGpxommOqs_5Xe5JgKZp5xcSsFlQw",
-
-    authDomain:
-        "find-the-watson-game.firebaseapp.com",
-
-    projectId:
-        "find-the-watson-game",
-
-    storageBucket:
-        "find-the-watson-game.firebasestorage.app",
-
-    messagingSenderId:
-        "642451332683",
-
-    appId:
-        "1:642451332683:web:125d0f0b1b7c825d5b37ce",
-
-    measurementId:
-        "G-L8CLXMKT2R"
-
-};
-
-
-const firebaseApp =
-    initializeApp(firebaseConfig);
-
-const database =
-    getDatabase(firebaseApp);
-
-
-console.log("Firebase initialized!");
-
-
-// ============================================================
-// SETTINGS
-// ============================================================
+/* ============================================================
+SETTINGS
+============================================================ */
 
 const GAME_LENGTH = 61;
 
 const STARTING_WATSON_SIZE = 115;
-
 const MIN_WATSON_SIZE = 37;
 
 const STARTING_FIND_TIME = 20;
-
 const MIN_FIND_TIME = 2.5;
 
 const POINTS_PER_FIND = 12;
@@ -78,632 +21,478 @@ const WRONG_CLICK_PENALTY = 10;
 
 const WATSONS_PER_LEVEL = 4;
 
-
-// ============================================================
-// ELEMENTS
-// ============================================================
+/* ============================================================
+ELEMENTS
+============================================================ */
 
 const gameMusic =
-    document.getElementById("gameMusic");
+document.getElementById("gameMusic");
 
 const menuScreen =
-    document.getElementById("menuScreen");
+document.getElementById("menuScreen");
 
 const gameScreen =
-    document.getElementById("gameScreen");
+document.getElementById("gameScreen");
 
 const gameOverScreen =
-    document.getElementById("gameOverScreen");
+document.getElementById("gameOverScreen");
 
 const leaderboardScreen =
-    document.getElementById("leaderboardScreen");
+document.getElementById("leaderboardScreen");
 
 const playButton =
-    document.getElementById("playButton");
+document.getElementById("playButton");
 
 const playAgainButton =
-    document.getElementById("playAgainButton");
+document.getElementById("playAgainButton");
 
 const menuButton =
-    document.getElementById("menuButton");
+document.getElementById("menuButton");
 
 const highScoreButton =
-    document.getElementById("highScoreButton");
-
-const highScoreModal =
-    document.getElementById("highScoreModal");
-
-const closeHighScore =
-    document.getElementById("closeHighScore");
-
-const modalPlayButton =
-    document.getElementById("modalPlayButton");
+document.getElementById("highScoreButton");
 
 const leaderboardButton =
-    document.getElementById("leaderboardButton");
+document.getElementById("leaderboardButton");
 
 const leaderboardBackButton =
-    document.getElementById("leaderboardBackButton");
+document.getElementById("leaderboardBackButton");
 
-const addLeaderboardButton =
-    document.getElementById("addLeaderboardButton");
+const highScoreModal =
+document.getElementById("highScoreModal");
 
-const leaderboardNameOverlay =
-    document.getElementById("leaderboardNameOverlay");
+const closeHighScore =
+document.getElementById("closeHighScore");
 
-const leaderboardNameInput =
-    document.getElementById("leaderboardNameInput");
-
-const leaderboardScore =
-    document.getElementById("leaderboardScore");
-
-const leaderboardNameError =
-    document.getElementById("leaderboardNameError");
-
-const submitLeaderboardButton =
-    document.getElementById("submitLeaderboardButton");
-
-const cancelLeaderboardButton2 =
-    document.getElementById("cancelLeaderboardButton2");
-
-const leaderboardList =
-    document.getElementById("leaderboardList");
+const modalPlayButton =
+document.getElementById("modalPlayButton");
 
 const watson =
-    document.getElementById("watson");
+document.getElementById("watson");
 
 const gameArea =
-    document.getElementById("gameArea");
+document.getElementById("gameArea");
 
 const scoreDisplay =
-    document.getElementById("score");
+document.getElementById("score");
 
 const streakDisplay =
-    document.getElementById("streak");
+document.getElementById("streak");
 
 const multiplierDisplay =
-    document.getElementById("multiplier");
+document.getElementById("multiplier");
 
 const levelDisplay =
-    document.getElementById("level");
+document.getElementById("level");
 
 const timerDisplay =
-    document.getElementById("timer");
+document.getElementById("timer");
 
 const findTimerDisplay =
-    document.getElementById("findTimer");
+document.getElementById("findTimer");
 
 const levelProgressBar =
-    document.getElementById("levelProgressBar");
+document.getElementById("levelProgressBar");
 
 const levelMessage =
-    document.getElementById("levelMessage");
+document.getElementById("levelMessage");
 
 const levelMessageSmall =
-    document.getElementById("levelMessageSmall");
+document.getElementById("levelMessageSmall");
 
 const levelMessageBig =
-    document.getElementById("levelMessageBig");
+document.getElementById("levelMessageBig");
 
 const feedback =
-    document.getElementById("feedback");
+document.getElementById("feedback");
 
 const menuHighScore =
-    document.getElementById("menuHighScore");
+document.getElementById("menuHighScore");
 
 const modalHighScore =
-    document.getElementById("modalHighScore");
+document.getElementById("modalHighScore");
 
 const finalScore =
-    document.getElementById("finalScore");
+document.getElementById("finalScore");
 
 const finalWatsons =
-    document.getElementById("finalWatsons");
+document.getElementById("finalWatsons");
 
 const finalBestStreak =
-    document.getElementById("finalBestStreak");
+document.getElementById("finalBestStreak");
 
 const finalAccuracy =
-    document.getElementById("finalAccuracy");
+document.getElementById("finalAccuracy");
 
 const finalLevel =
-    document.getElementById("finalLevel");
+document.getElementById("finalLevel");
 
 const newHighScore =
-    document.getElementById("newHighScore");
+document.getElementById("newHighScore");
 
+const leaderboardList =
+document.getElementById("leaderboardList");
 
-// ============================================================
-// BACKGROUNDS
-// ============================================================
+const addLeaderboardButton =
+document.getElementById("addLeaderboardButton");
+
+const leaderboardNameOverlay =
+document.getElementById("leaderboardNameOverlay");
+
+const leaderboardNameInput =
+document.getElementById("leaderboardNameInput");
+
+const leaderboardScore =
+document.getElementById("leaderboardScore");
+
+const leaderboardNameError =
+document.getElementById("leaderboardNameError");
+
+const submitLeaderboardButton =
+document.getElementById("submitLeaderboardButton");
+
+const cancelLeaderboardButton =
+document.getElementById("cancelLeaderboardButton");
+
+/* ============================================================
+BACKGROUNDS
+============================================================ */
 
 const backgrounds = [
 
-    "background1.jpg",
-    "background2.jpg",
-    "background3.jpg",
-    "background4.jpg",
-    "background5.jpg",
-    "background6.jpg",
-    "background7.jpg"
+```
+"background1.jpg",
+"background2.jpg",
+"background3.jpg",
+"background4.jpg",
+"background5.jpg",
+"background6.jpg",
+"background7.jpg"
+```
 
 ];
 
-
-// ============================================================
-// GAME VARIABLES
-// ============================================================
+/* ============================================================
+GAME VARIABLES
+============================================================ */
 
 let score = 0;
-
 let streak = 0;
-
 let bestStreak = 0;
-
 let watsonsFound = 0;
-
 let wrongClicks = 0;
 
 let level = 1;
 
 let gameTime = GAME_LENGTH;
 
-let currentFindTime =
-    STARTING_FIND_TIME;
-
 let currentWatsonSize =
-    STARTING_WATSON_SIZE;
+STARTING_WATSON_SIZE;
 
 let gameTimer = null;
-
 let findTimer = null;
 
 let gameRunning = false;
 
-
-// ============================================================
-// START GAME
-// ============================================================
+/* ============================================================
+START GAME
+============================================================ */
 
 function startGame() {
 
-    console.log("Starting Find Watson...");
+```
+console.log("Starting Find Watson...");
 
 
-    score = 0;
+score = 0;
+streak = 0;
+bestStreak = 0;
+watsonsFound = 0;
+wrongClicks = 0;
 
-    streak = 0;
+level = 1;
 
-    bestStreak = 0;
+gameTime =
+    GAME_LENGTH;
 
-    watsonsFound = 0;
+currentWatsonSize =
+    STARTING_WATSON_SIZE;
 
-    wrongClicks = 0;
-
-    level = 1;
-
-    gameTime = GAME_LENGTH;
-
-    currentFindTime =
-        STARTING_FIND_TIME;
-
-    currentWatsonSize =
-        STARTING_WATSON_SIZE;
+gameRunning = true;
 
 
-    gameRunning = true;
+gameMusic.currentTime = 0;
+gameMusic.volume = 0.5;
+
+gameMusic.play().catch(
+    error => console.log(
+        "Music could not autoplay:",
+        error
+    )
+);
 
 
-    clearInterval(gameTimer);
-    clearInterval(findTimer);
+menuScreen.classList.add("hidden");
+gameOverScreen.classList.add("hidden");
+leaderboardScreen.classList.add("hidden");
+highScoreModal.classList.add("hidden");
+
+leaderboardNameOverlay.classList.add("hidden");
+
+gameScreen.classList.remove("hidden");
 
 
-    menuScreen.classList.add("hidden");
+changeBackground();
 
-    gameOverScreen.classList.add("hidden");
+updateDisplays();
 
-    leaderboardScreen.classList.add("hidden");
+spawnWatson();
 
-    highScoreModal.classList.add("hidden");
+startGameTimer();
 
-    leaderboardNameOverlay.classList.add("hidden");
-
-    gameScreen.classList.remove("hidden");
+startFindTimer();
 
 
-    changeBackground();
-
-    updateDisplays();
-
-    spawnWatson();
-
-    startGameTimer();
-
-    startFindTimer();
-
-
-    gameMusic.currentTime = 0;
-
-    gameMusic.volume = 0.35;
-
-    gameMusic.play().catch(() => {});
-
-
-    showLevelMessage(
-        "GET READY",
-        "LEVEL 1"
-    );
+showLevelMessage(
+    "GET READY",
+    "LEVEL 1"
+);
+```
 
 }
 
-
-// ============================================================
-// SPAWN WATSON
-// ============================================================
+/* ============================================================
+SPAWN WATSON
+============================================================ */
 
 function spawnWatson() {
 
-    if (!gameRunning) {
-        return;
-    }
-
-
-    const areaWidth =
-        gameArea.clientWidth;
-
-    const areaHeight =
-        gameArea.clientHeight;
-
-
-    const maxX =
-        Math.max(
-            0,
-            areaWidth -
-            currentWatsonSize
-        );
-
-
-    const maxY =
-        Math.max(
-            0,
-            areaHeight -
-            currentWatsonSize
-        );
-
-
-    const randomX =
-        Math.random() * maxX;
-
-
-    const randomY =
-        Math.random() * maxY;
-
-
-    watson.style.width =
-        `${currentWatsonSize}px`;
-
-
-    watson.style.left =
-        `${randomX}px`;
-
-
-    watson.style.top =
-        `${randomY}px`;
-
-
-    watson.style.display =
-        "block";
-
-
-    const rotation =
-        Math.random() * 12 - 6;
-
-
-    watson.style.transform =
-        `rotate(${rotation}deg)`;
-
+```
+if (!gameRunning) {
+    return;
 }
 
 
-// ============================================================
-// WATSON CLICK
-// ============================================================
+const areaWidth =
+    gameArea.clientWidth;
+
+const areaHeight =
+    gameArea.clientHeight;
+
+
+const maxX =
+    Math.max(
+        0,
+        areaWidth -
+        currentWatsonSize
+    );
+
+
+const maxY =
+    Math.max(
+        0,
+        areaHeight -
+        currentWatsonSize
+    );
+
+
+const randomX =
+    Math.random() *
+    maxX;
+
+
+const randomY =
+    Math.random() *
+    maxY;
+
+
+watson.style.width =
+    `${currentWatsonSize}px`;
+
+watson.style.left =
+    `${randomX}px`;
+
+watson.style.top =
+    `${randomY}px`;
+
+watson.style.display =
+    "block";
+
+
+const rotation =
+    Math.random() * 12 - 6;
+
+
+watson.style.transform =
+    `rotate(${rotation}deg)`;
+```
+
+}
+
+/* ============================================================
+WATSON CLICK
+============================================================ */
 
 watson.addEventListener(
-    "click",
-    function(event) {
+"click",
+function(event) {
 
-        event.stopPropagation();
+```
+    event.stopPropagation();
 
-
-        if (!gameRunning) {
-            return;
-        }
-
-
-        watsonsFound++;
-
-        streak++;
-
-
-        if (streak > bestStreak) {
-            bestStreak = streak;
-        }
-
-
-        const multiplier =
-            getMultiplier();
-
-
-        const points =
-            Math.round(
-                POINTS_PER_FIND *
-                multiplier
-            );
-
-
-        score += points;
-
-
-        showFeedback(
-            `+${points} 🔥`,
-            event.clientX,
-            event.clientY
-        );
-
-
-        increaseDifficulty();
-
-        checkLevel();
-
-        spawnWatson();
-
-        resetFindTimer();
-
-        updateDisplays();
-
-    }
-);
-
-
-// ============================================================
-// WRONG CLICK
-// ============================================================
-
-gameArea.addEventListener(
-    "click",
-    function(event) {
-
-        if (!gameRunning) {
-            return;
-        }
-
-
-        wrongClicks++;
-
-        score -= WRONG_CLICK_PENALTY;
-
-
-        if (score < 0) {
-            score = 0;
-        }
-
-
-        showFeedback(
-            `-${WRONG_CLICK_PENALTY} ❌`,
-            event.clientX,
-            event.clientY
-        );
-
-
-        updateDisplays();
-
-    }
-);
-
-
-// ============================================================
-// MULTIPLIER
-// ============================================================
-
-function getMultiplier() {
-
-    const multiplierLevel =
-        Math.floor(streak / 1);
-
-
-    return Math.min(
-        1 +
-        multiplierLevel * 0.15,
-        5
-    );
-
-}
-
-
-// ============================================================
-// DIFFICULTY
-// ============================================================
-
-function increaseDifficulty() {
-
-    currentWatsonSize -= 3;
-
-
-    if (
-        currentWatsonSize <
-        MIN_WATSON_SIZE
-    ) {
-
-        currentWatsonSize =
-            MIN_WATSON_SIZE;
-
-    }
-
-}
-
-
-// ============================================================
-// FIND TIMER
-// ============================================================
-
-function startFindTimer() {
-
-    clearInterval(findTimer);
-
-
-    currentFindTime =
-        getFindTime();
-
-
-    updateFindTimer();
-
-
-    findTimer =
-        setInterval(
-            function() {
-
-                if (!gameRunning) {
-                    return;
-                }
-
-
-                currentFindTime--;
-
-
-                updateFindTimer();
-
-
-                if (
-                    currentFindTime <= 0
-                ) {
-
-                    watsonExplodes();
-
-                }
-
-            },
-            1000
-        );
-
-}
-
-
-// ============================================================
-// RESET FIND TIMER
-// ============================================================
-
-function resetFindTimer() {
-
-    currentFindTime =
-        getFindTime();
-
-
-    updateFindTimer();
-
-}
-
-
-// ============================================================
-// FIND TIME
-// ============================================================
-
-function getFindTime() {
-
-    const reduction =
-        (level - 1) * 3;
-
-
-    return Math.max(
-        STARTING_FIND_TIME -
-        reduction,
-        MIN_FIND_TIME
-    );
-
-}
-
-
-// ============================================================
-// FIND TIMER DISPLAY
-// ============================================================
-
-function updateFindTimer() {
-
-    findTimerDisplay.textContent =
-        Math.ceil(currentFindTime);
-
-
-    if (
-        currentFindTime <= 5
-    ) {
-
-        findTimerDisplay.style.color =
-            "#ff4444";
-
-        findTimerDisplay.style.transform =
-            "scale(1.15)";
-
-    } else {
-
-        findTimerDisplay.style.color =
-            "white";
-
-        findTimerDisplay.style.transform =
-            "scale(1)";
-
-    }
-
-}
-
-
-// ============================================================
-// EXPLOSION
-// ============================================================
-
-function watsonExplodes() {
 
     if (!gameRunning) {
         return;
     }
 
 
-    clearInterval(findTimer);
+    watsonsFound++;
+
+    streak++;
 
 
-    watson.style.display =
-        "none";
+    if (streak > bestStreak) {
+        bestStreak = streak;
+    }
 
 
-    streak = 0;
+    const multiplier =
+        getMultiplier();
 
 
-    gameScreen.classList.add(
-        "screen-shake"
+    const points =
+        Math.round(
+            POINTS_PER_FIND *
+            multiplier
+        );
+
+
+    score += points;
+
+
+    showFeedback(
+        `+${points} 🔥`,
+        event.clientX,
+        event.clientY
     );
 
 
-    setTimeout(
-        function() {
+    increaseDifficulty();
 
-            gameScreen.classList.remove(
-                "screen-shake"
-            );
+    checkLevel();
 
-        },
-        500
-    );
+    spawnWatson();
+
+    resetFindTimer();
+
+    updateDisplays();
+
+}
+```
+
+);
+
+/* ============================================================
+WRONG CLICK
+============================================================ */
+
+gameArea.addEventListener(
+"click",
+function(event) {
+
+```
+    if (!gameRunning) {
+        return;
+    }
 
 
-    showLevelMessage(
-        "TOO SLOW 💥",
-        "WATSON EXPLODED"
+    wrongClicks++;
+
+    score -=
+        WRONG_CLICK_PENALTY;
+
+
+    if (score < 0) {
+        score = 0;
+    }
+
+
+    showFeedback(
+        `-${WRONG_CLICK_PENALTY} ❌`,
+        event.clientX,
+        event.clientY
     );
 
 
     updateDisplays();
 
+}
+```
 
-    setTimeout(
+);
+
+/* ============================================================
+MULTIPLIER
+============================================================ */
+
+function getMultiplier() {
+
+```
+const multiplierLevel =
+    Math.floor(streak / 1);
+
+
+return Math.min(
+    1 +
+    multiplierLevel * 0.15,
+    5
+);
+```
+
+}
+
+/* ============================================================
+DIFFICULTY
+============================================================ */
+
+function increaseDifficulty() {
+
+```
+currentWatsonSize -= 3;
+
+
+if (
+    currentWatsonSize <
+    MIN_WATSON_SIZE
+) {
+
+    currentWatsonSize =
+        MIN_WATSON_SIZE;
+
+}
+```
+
+}
+
+/* ============================================================
+FIND TIMER
+============================================================ */
+
+function startFindTimer() {
+
+```
+clearInterval(findTimer);
+
+
+currentFindTime =
+    getFindTime();
+
+
+updateFindTimer();
+
+
+findTimer =
+    setInterval(
         function() {
 
             if (!gameRunning) {
@@ -711,1084 +500,1301 @@ function watsonExplodes() {
             }
 
 
-            spawnWatson();
-
-            resetFindTimer();
-
-            startFindTimer();
-
-        },
-        700
-    );
-
-}
+            currentFindTime--;
 
 
-// ============================================================
-// LEVEL SYSTEM
-// ============================================================
-
-function checkLevel() {
-
-    const newLevel =
-        Math.floor(
-            watsonsFound /
-            WATSONS_PER_LEVEL
-        ) + 1;
+            updateFindTimer();
 
 
-    if (
-        newLevel >
-        level
-    ) {
+            if (
+                currentFindTime <= 0
+            ) {
 
-        level =
-            newLevel;
+                watsonExplodes();
 
-
-        showLevelMessage(
-            "LEVEL UP!",
-            `LEVEL ${level}`
-        );
-
-
-        changeBackground();
-
-    }
-
-
-    updateLevelProgress();
-
-}
-
-
-// ============================================================
-// LEVEL PROGRESS
-// ============================================================
-
-function updateLevelProgress() {
-
-    const progress =
-        watsonsFound %
-        WATSONS_PER_LEVEL;
-
-
-    const percentage =
-        (
-            progress /
-            WATSONS_PER_LEVEL
-        ) * 100;
-
-
-    levelProgressBar.style.width =
-        `${percentage}%`;
-
-}
-
-
-// ============================================================
-// LEVEL MESSAGE
-// ============================================================
-
-function showLevelMessage(
-    smallText,
-    bigText
-) {
-
-    levelMessageSmall.textContent =
-        smallText;
-
-    levelMessageBig.textContent =
-        bigText;
-
-
-    levelMessage.style.opacity =
-        "1";
-
-
-    levelMessage.style.transform =
-        "translate(-50%, -50%) scale(1.05)";
-
-
-    setTimeout(
-        function() {
-
-            levelMessage.style.opacity =
-                "0";
-
-            levelMessage.style.transform =
-                "translate(-50%, -50%) scale(0.8)";
+            }
 
         },
         1000
     );
+```
+
+}
+
+function resetFindTimer() {
+
+```
+currentFindTime =
+    getFindTime();
+
+updateFindTimer();
+```
+
+}
+
+function getFindTime() {
+
+```
+const reduction =
+    (level - 1) * 3;
+
+
+return Math.max(
+    STARTING_FIND_TIME -
+    reduction,
+    MIN_FIND_TIME
+);
+```
+
+}
+
+function updateFindTimer() {
+
+```
+findTimerDisplay.textContent =
+    Math.ceil(currentFindTime);
+
+
+if (
+    currentFindTime <= 5
+) {
+
+    findTimerDisplay.style.color =
+        "#ff4444";
+
+    findTimerDisplay.style.transform =
+        "scale(1.15)";
+
+} else {
+
+    findTimerDisplay.style.color =
+        "white";
+
+    findTimerDisplay.style.transform =
+        "scale(1)";
+
+}
+```
+
+}
+
+/* ============================================================
+EXPLOSION
+============================================================ */
+
+function watsonExplodes() {
+
+```
+if (!gameRunning) {
+    return;
+}
+
+
+watson.style.display =
+    "none";
+
+
+streak = 0;
+
+
+gameScreen.classList.add(
+    "screen-shake"
+);
+
+
+setTimeout(
+    function() {
+
+        gameScreen.classList.remove(
+            "screen-shake"
+        );
+
+    },
+    500
+);
+
+
+showLevelMessage(
+    "TOO SLOW 💥",
+    "WATSON EXPLODED"
+);
+
+
+setTimeout(
+    function() {
+
+        if (!gameRunning) {
+            return;
+        }
+
+
+        spawnWatson();
+
+        resetFindTimer();
+
+    },
+    700
+);
+
+
+updateDisplays();
+```
+
+}
+
+/* ============================================================
+LEVEL
+============================================================ */
+
+function checkLevel() {
+
+```
+const newLevel =
+    Math.floor(
+        watsonsFound /
+        WATSONS_PER_LEVEL
+    ) + 1;
+
+
+if (
+    newLevel > level
+) {
+
+    level =
+        newLevel;
+
+
+    showLevelMessage(
+        "LEVEL UP!",
+        `LEVEL ${level}`
+    );
+
+
+    changeBackground();
 
 }
 
 
-// ============================================================
-// BACKGROUND
-// ============================================================
+updateLevelProgress();
+```
+
+}
+
+function updateLevelProgress() {
+
+```
+const progress =
+    watsonsFound %
+    WATSONS_PER_LEVEL;
+
+
+const percentage =
+    (
+        progress /
+        WATSONS_PER_LEVEL
+    ) * 100;
+
+
+levelProgressBar.style.width =
+    `${percentage}%`;
+```
+
+}
+
+/* ============================================================
+LEVEL MESSAGE
+============================================================ */
+
+function showLevelMessage(
+smallText,
+bigText
+) {
+
+```
+levelMessageSmall.textContent =
+    smallText;
+
+levelMessageBig.textContent =
+    bigText;
+
+
+levelMessage.style.opacity =
+    "1";
+
+
+levelMessage.style.transform =
+    "translate(-50%, -50%) scale(1.05)";
+
+
+setTimeout(
+    function() {
+
+        levelMessage.style.opacity =
+            "0";
+
+        levelMessage.style.transform =
+            "translate(-50%, -50%) scale(0.8)";
+
+    },
+    1000
+);
+```
+
+}
+
+/* ============================================================
+BACKGROUND
+============================================================ */
 
 function changeBackground() {
 
-    const index =
-        (level - 1) %
-        backgrounds.length;
+```
+const index =
+    (level - 1) %
+    backgrounds.length;
 
 
-    gameScreen.style.backgroundImage =
-        `
-        linear-gradient(
-            rgba(0,0,0,0.25),
-            rgba(0,0,0,0.25)
-        ),
-        url("${backgrounds[index]}")
-        `;
+gameScreen.style.backgroundImage =
+    `
+    linear-gradient(
+        rgba(0,0,0,0.25),
+        rgba(0,0,0,0.25)
+    ),
+    url("${backgrounds[index]}")
+    `;
+```
 
 }
 
-
-// ============================================================
-// GAME TIMER
-// ============================================================
+/* ============================================================
+GAME TIMER
+============================================================ */
 
 function startGameTimer() {
 
-    clearInterval(gameTimer);
+```
+clearInterval(gameTimer);
 
 
-    gameTimer =
-        setInterval(
-            function() {
+gameTimer =
+    setInterval(
+        function() {
 
-                if (!gameRunning) {
-                    return;
-                }
-
-
-                gameTime--;
+            if (!gameRunning) {
+                return;
+            }
 
 
-                updateTimer();
+            gameTime--;
+
+            updateTimer();
 
 
-                if (
-                    gameTime <= 0
-                ) {
+            if (
+                gameTime <= 0
+            ) {
 
-                    endGame();
+                endGame();
 
-                }
+            }
 
-            },
-            1000
-        );
+        },
+        1000
+    );
+```
 
 }
-
-
-// ============================================================
-// TIMER
-// ============================================================
 
 function updateTimer() {
 
-    const minutes =
-        Math.floor(
-            gameTime / 60
-        );
+```
+const minutes =
+    Math.floor(
+        gameTime / 60
+    );
 
 
-    const seconds =
-        gameTime % 60;
+const seconds =
+    gameTime % 60;
 
 
-    timerDisplay.textContent =
-        `${minutes}:${String(seconds).padStart(2, "0")}`;
+timerDisplay.textContent =
+    `${minutes}:${String(seconds)
+        .padStart(2, "0")}`;
 
 
-    if (
-        gameTime <= 10
-    ) {
+if (
+    gameTime <= 10
+) {
 
-        timerDisplay.style.color =
-            "#ff3333";
+    timerDisplay.style.color =
+        "#ff3333";
 
-    } else {
+} else {
 
-        timerDisplay.style.color =
-            "white";
+    timerDisplay.style.color =
+        "white";
 
-    }
+}
+```
 
 }
 
-
-// ============================================================
-// UI
-// ============================================================
+/* ============================================================
+DISPLAY UPDATE
+============================================================ */
 
 function updateDisplays() {
 
-    scoreDisplay.textContent =
-        score.toLocaleString();
+```
+scoreDisplay.textContent =
+    score.toLocaleString();
 
 
-    streakDisplay.textContent =
-        streak;
+streakDisplay.textContent =
+    streak;
 
 
-    multiplierDisplay.textContent =
-        `${getMultiplier().toFixed(1)}x`;
+multiplierDisplay.textContent =
+    `${getMultiplier().toFixed(1)}x`;
 
 
-    levelDisplay.textContent =
-        level;
+levelDisplay.textContent =
+    level;
 
 
-    updateTimer();
+updateTimer();
 
-    updateFindTimer();
+updateFindTimer();
 
-    updateLevelProgress();
+updateLevelProgress();
+```
 
 }
 
-
-// ============================================================
-// FEEDBACK
-// ============================================================
+/* ============================================================
+FEEDBACK
+============================================================ */
 
 function showFeedback(
-    text,
-    x,
-    y
+text,
+x,
+y
 ) {
 
-    const rect =
-        gameArea.getBoundingClientRect();
+```
+const rect =
+    gameArea.getBoundingClientRect();
 
 
-    feedback.textContent =
-        text;
+feedback.textContent =
+    text;
 
 
-    feedback.style.left =
-        `${x - rect.left}px`;
+feedback.style.left =
+    `${x - rect.left}px`;
 
 
-    feedback.style.top =
-        `${y - rect.top}px`;
+feedback.style.top =
+    `${y - rect.top}px`;
 
 
-    feedback.style.opacity =
-        "1";
+feedback.style.opacity =
+    "1";
 
 
-    feedback.style.transform =
-        "translate(-50%, -50%) scale(1.3)";
+feedback.style.transform =
+    "translate(-50%, -50%) scale(1.3)";
 
 
-    setTimeout(
-        function() {
+setTimeout(
+    function() {
 
-            feedback.style.opacity =
-                "0";
+        feedback.style.opacity =
+            "0";
 
-            feedback.style.transform =
-                "translate(-50%, -50%) scale(1)";
+        feedback.style.transform =
+            "translate(-50%, -50%) scale(1)";
 
-        },
-        400
-    );
+    },
+    400
+);
+```
 
 }
 
-
-// ============================================================
-// END GAME
-// ============================================================
+/* ============================================================
+END GAME
+============================================================ */
 
 function endGame() {
 
-    if (!gameRunning) {
-        return;
-    }
+```
+if (!gameRunning) {
+    return;
+}
 
 
-    gameRunning = false;
+gameRunning = false;
 
 
-    clearInterval(gameTimer);
+clearInterval(gameTimer);
 
-    clearInterval(findTimer);
-
-
-    watson.style.display =
-        "none";
+clearInterval(findTimer);
 
 
-    const totalClicks =
-        watsonsFound +
-        wrongClicks;
+watson.style.display =
+    "none";
 
 
-    let accuracy = 0;
+const totalClicks =
+    watsonsFound +
+    wrongClicks;
 
 
-    if (totalClicks > 0) {
-
-        accuracy =
-            Math.round(
-                (
-                    watsonsFound /
-                    totalClicks
-                ) * 100
-            );
-
-    }
+let accuracy = 0;
 
 
-    finalScore.textContent =
-        score.toLocaleString();
+if (
+    totalClicks > 0
+) {
 
-
-    finalWatsons.textContent =
-        watsonsFound;
-
-
-    finalBestStreak.textContent =
-        bestStreak;
-
-
-    finalAccuracy.textContent =
-        `${accuracy}%`;
-
-
-    finalLevel.textContent =
-        level;
-
-
-    const oldHighScore =
-        getHighScore();
-
-
-    if (score > oldHighScore) {
-
-        localStorage.setItem(
-            "watsonHighScore",
-            score
+    accuracy =
+        Math.round(
+            (
+                watsonsFound /
+                totalClicks
+            ) * 100
         );
-
-
-        newHighScore.classList.remove(
-            "hidden"
-        );
-
-    } else {
-
-        newHighScore.classList.add(
-            "hidden"
-        );
-
-    }
-
-
-    updateHighScoreDisplays();
-
-
-    gameScreen.classList.add(
-        "hidden"
-    );
-
-    gameOverScreen.classList.remove(
-        "hidden"
-    );
 
 }
 
 
-// ============================================================
-// HIGH SCORE
-// ============================================================
+finalScore.textContent =
+    score.toLocaleString();
 
-function getHighScore() {
+finalWatsons.textContent =
+    watsonsFound;
 
-    return Number(
+finalBestStreak.textContent =
+    bestStreak;
+
+finalAccuracy.textContent =
+    `${accuracy}%`;
+
+finalLevel.textContent =
+    level;
+
+
+const oldHighScore =
+    Number(
         localStorage.getItem(
             "watsonHighScore"
         ) || 0
     );
 
+
+if (
+    score > oldHighScore
+) {
+
+    localStorage.setItem(
+        "watsonHighScore",
+        score
+    );
+
+    newHighScore.classList.remove(
+        "hidden"
+    );
+
+} else {
+
+    newHighScore.classList.add(
+        "hidden"
+    );
+
 }
 
+
+updateHighScoreDisplays();
+
+
+gameScreen.classList.add(
+    "hidden"
+);
+
+gameOverScreen.classList.remove(
+    "hidden"
+);
+```
+
+}
+
+/* ============================================================
+HIGH SCORE
+============================================================ */
+
+function getHighScore() {
+
+```
+return Number(
+    localStorage.getItem(
+        "watsonHighScore"
+    ) || 0
+);
+```
+
+}
 
 function updateHighScoreDisplays() {
 
-    const highScore =
-        getHighScore();
+```
+const highScore =
+    getHighScore();
 
 
-    menuHighScore.textContent =
-        highScore.toLocaleString();
+menuHighScore.textContent =
+    highScore.toLocaleString();
 
 
-    modalHighScore.textContent =
-        highScore.toLocaleString();
+modalHighScore.textContent =
+    highScore.toLocaleString();
+```
 
 }
 
-
-// ============================================================
-// HIGH SCORE MODAL
-// ============================================================
+/* ============================================================
+HIGH SCORE BUTTON
+============================================================ */
 
 highScoreButton.addEventListener(
-    "click",
-    function() {
+"click",
+function() {
 
-        updateHighScoreDisplays();
+```
+    updateHighScoreDisplays();
 
-        highScoreModal.classList.remove(
-            "hidden"
-        );
+    highScoreModal.classList.remove(
+        "hidden"
+    );
 
-    }
+}
+```
+
 );
 
-
 closeHighScore.addEventListener(
-    "click",
-    function() {
+"click",
+function() {
+
+```
+    highScoreModal.classList.add(
+        "hidden"
+    );
+
+}
+```
+
+);
+
+modalPlayButton.addEventListener(
+"click",
+function() {
+
+```
+    startGame();
+
+}
+```
+
+);
+
+highScoreModal.addEventListener(
+"click",
+function(event) {
+
+```
+    if (
+        event.target ===
+        highScoreModal
+    ) {
 
         highScoreModal.classList.add(
             "hidden"
         );
 
     }
+
+}
+```
+
 );
 
-
-modalPlayButton.addEventListener(
-    "click",
-    function() {
-
-        startGame();
-
-    }
-);
-
-
-highScoreModal.addEventListener(
-    "click",
-    function(event) {
-
-        if (
-            event.target ===
-            highScoreModal
-        ) {
-
-            highScoreModal.classList.add(
-                "hidden"
-            );
-
-        }
-
-    }
-);
-
-
-// ============================================================
-// MAIN BUTTONS
-// ============================================================
+/* ============================================================
+MAIN BUTTONS
+============================================================ */
 
 playButton.addEventListener(
-    "click",
-    startGame
+"click",
+startGame
 );
-
 
 playAgainButton.addEventListener(
-    "click",
-    startGame
+"click",
+startGame
 );
-
 
 menuButton.addEventListener(
-    "click",
-    function() {
+"click",
+function() {
 
-        gameRunning = false;
+```
+    gameRunning = false;
 
-        clearInterval(gameTimer);
+    clearInterval(gameTimer);
+    clearInterval(findTimer);
 
-        clearInterval(findTimer);
 
+    gameOverScreen.classList.add(
+        "hidden"
+    );
 
-        gameMusic.pause();
+    gameScreen.classList.add(
+        "hidden"
+    );
 
+    leaderboardScreen.classList.add(
+        "hidden"
+    );
 
-        gameOverScreen.classList.add(
-            "hidden"
-        );
+    menuScreen.classList.remove(
+        "hidden"
+    );
 
-        gameScreen.classList.add(
-            "hidden"
-        );
 
-        leaderboardScreen.classList.add(
-            "hidden"
-        );
-
-        menuScreen.classList.remove(
-            "hidden"
-        );
-
-
-        updateHighScoreDisplays();
-
-    }
-);
-
-
-// ============================================================
-// LEADERBOARD
-// ============================================================
-
-leaderboardButton.addEventListener(
-    "click",
-    function() {
-
-        console.log("Leaderboard button clicked!");
-
-        gameRunning = false;
-
-        clearInterval(gameTimer);
-
-        clearInterval(findTimer);
-
-        gameScreen.classList.add("hidden");
-
-        gameOverScreen.classList.add("hidden");
-
-        highScoreModal.classList.add("hidden");
-
-        menuScreen.classList.add("hidden");
-
-        leaderboardScreen.classList.remove("hidden");
-
-        loadLeaderboard();
-
-    }
-);
-
-
-// ============================================================
-// LEADERBOARD BACK
-// ============================================================
-
-leaderboardBackButton.addEventListener(
-    "click",
-    function() {
-
-        leaderboardScreen.classList.add(
-            "hidden"
-        );
-
-        menuScreen.classList.remove(
-            "hidden"
-        );
-
-    }
-);
-
-
-// ============================================================
-// LOAD LEADERBOARD
-// ============================================================
-
-async function loadLeaderboard() {
-
-    console.log("Loading leaderboard...");
-
-
-    leaderboardList.innerHTML = `
-        <div class="leaderboard-loading">
-            LOADING...
-        </div>
-    `;
-
-
-    try {
-
-        const leaderboardRef =
-            ref(
-                database,
-                "leaderboard"
-            );
-
-
-        const leaderboardQuery =
-            query(
-                leaderboardRef,
-                orderByChild("score")
-            );
-
-
-        const snapshot =
-            await get(
-                leaderboardQuery
-            );
-
-
-        if (!snapshot.exists()) {
-
-            leaderboardList.innerHTML = `
-                <div class="leaderboard-empty">
-                    🏆<br><br>
-                    NO SCORES YET!<br>
-                    BE THE FIRST WATSON HUNTER!
-                </div>
-            `;
-
-            return;
-
-        }
-
-
-        const scores = [];
-
-
-        snapshot.forEach(
-            function(child) {
-
-                const data =
-                    child.val();
-
-
-                scores.push({
-
-                    name:
-                        String(
-                            data.name || "UNKNOWN"
-                        ),
-
-                    score:
-                        Number(
-                            data.score || 0
-                        ),
-
-                    date:
-                        String(
-                            data.date || "--/--/--"
-                        )
-
-                });
-
-            }
-        );
-
-
-        scores.sort(
-            function(a, b) {
-
-                return b.score - a.score;
-
-            }
-        );
-
-
-        const topTen =
-            scores.slice(0, 10);
-
-
-        leaderboardList.innerHTML =
-            "";
-
-
-        topTen.forEach(
-            function(player, index) {
-
-                const row =
-                    document.createElement(
-                        "div"
-                    );
-
-
-                row.className =
-                    "leaderboard-row";
-
-
-                let rankText =
-                    String(index + 1);
-
-
-                if (index === 0) {
-                    rankText = "🥇";
-                }
-
-                else if (index === 1) {
-                    rankText = "🥈";
-                }
-
-                else if (index === 2) {
-                    rankText = "🥉";
-                }
-
-
-                row.innerHTML = `
-
-                    <div class="leaderboard-rank">
-                        ${rankText}
-                    </div>
-
-                    <div class="leaderboard-name">
-                        ${escapeHTML(player.name)}
-                    </div>
-
-                    <div class="leaderboard-score">
-                        ${player.score.toLocaleString()}
-                    </div>
-
-                    <div class="leaderboard-date">
-                        ${escapeHTML(player.date)}
-                    </div>
-
-                `;
-
-
-                leaderboardList.appendChild(
-                    row
-                );
-
-            }
-        );
-
-
-        console.log(
-            "Leaderboard loaded!"
-        );
-
-    }
-
-    catch (error) {
-
-        console.error(
-            "LEADERBOARD ERROR:",
-            error
-        );
-
-
-        leaderboardList.innerHTML = `
-            <div class="leaderboard-empty">
-                ❌<br><br>
-                COULDN'T LOAD LEADERBOARD.<br>
-                CHECK THE CONSOLE FOR DETAILS.
-            </div>
-        `;
-
-    }
+    updateHighScoreDisplays();
 
 }
+```
 
-
-// ============================================================
-// HTML ESCAPE
-// ============================================================
-
-function escapeHTML(text) {
-
-    return String(text)
-
-        .replace(/&/g, "&amp;")
-
-        .replace(/</g, "&lt;")
-
-        .replace(/>/g, "&gt;")
-
-        .replace(/"/g, "&quot;")
-
-        .replace(/'/g, "&#039;");
-
-}
-
-
-// ============================================================
-// OPEN SUBMISSION
-// ============================================================
-
-addLeaderboardButton.addEventListener(
-    "click",
-    function() {
-
-        console.log(
-            "Add to leaderboard clicked!"
-        );
-
-
-        leaderboardScore.textContent =
-            score.toLocaleString();
-
-
-        leaderboardNameInput.value =
-            "";
-
-
-        leaderboardNameError.textContent =
-            "";
-
-
-        leaderboardNameOverlay.classList.remove(
-            "hidden"
-        );
-
-
-        leaderboardNameInput.focus();
-
-    }
 );
 
-
-// ============================================================
-// CANCEL SUBMISSION
-// ============================================================
-
-cancelLeaderboardButton2.addEventListener(
-    "click",
-    function() {
-
-        leaderboardNameOverlay.classList.add(
-            "hidden"
-        );
-
-    }
-);
-
-
-// ============================================================
-// NAME MODERATION
-// ============================================================
+/* ============================================================
+NAME MODERATION
+============================================================ */
 
 const blockedWords = [
 
-    "fuck",
-    "shit",
-    "cunt",
-    "bitch",
-    "asshole",
-    "nigger",
-    "nigga",
-    "faggot",
-    "whore",
-    "slut",
-    "porn",
-    "sex"
+```
+"fuck",
+"shit",
+"cunt",
+"bitch",
+"asshole",
+"nigger",
+"nigga",
+"faggot",
+"whore",
+"slut",
+"porn",
+"sex"
+```
 
 ];
 
-
 function namePassesModeration(name) {
 
-    const cleaned =
-        name
-            .toLowerCase()
-            .replace(
-                /[^a-z0-9]/g,
-                ""
-            );
+```
+const cleaned =
+    name
+        .toLowerCase()
+        .replace(
+            /[^a-z0-9]/g,
+            ""
+        );
 
+
+if (
+    cleaned.length < 2 ||
+    cleaned.length > 20
+) {
+
+    return false;
+
+}
+
+
+for (
+    const word of blockedWords
+) {
 
     if (
-        cleaned.length < 2 ||
-        cleaned.length > 20
+        cleaned.includes(word)
     ) {
 
         return false;
 
     }
 
+}
 
-    for (
-        const word of blockedWords
+
+return true;
+```
+
+}
+
+/* ============================================================
+DATE
+============================================================ */
+
+function getLeaderboardDate() {
+
+```
+const now =
+    new Date();
+
+
+const day =
+    String(
+        now.getDate()
+    ).padStart(2, "0");
+
+
+const month =
+    String(
+        now.getMonth() + 1
+    ).padStart(2, "0");
+
+
+const year =
+    String(
+        now.getFullYear()
+    ).slice(-2);
+
+
+return `${day}/${month}/${year}`;
+```
+
+}
+
+/* ============================================================
+LEADERBOARD BUTTON
+============================================================ */
+
+leaderboardButton.addEventListener(
+"click",
+function() {
+
+```
+    menuScreen.classList.add(
+        "hidden"
+    );
+
+    gameOverScreen.classList.add(
+        "hidden"
+    );
+
+    leaderboardScreen.classList.remove(
+        "hidden"
+    );
+
+
+    loadLeaderboard();
+
+}
+```
+
+);
+
+/* ============================================================
+LEADERBOARD BACK
+============================================================ */
+
+leaderboardBackButton.addEventListener(
+"click",
+function() {
+
+```
+    leaderboardScreen.classList.add(
+        "hidden"
+    );
+
+    menuScreen.classList.remove(
+        "hidden"
+    );
+
+}
+```
+
+);
+
+/* ============================================================
+LOAD LEADERBOARD
+============================================================ */
+
+async function loadLeaderboard() {
+
+```
+leaderboardList.innerHTML = `
+    <div class="leaderboard-loading">
+        Loading leaderboard...
+    </div>
+`;
+
+
+try {
+
+    if (
+        !window.firebaseDatabase
     ) {
 
-        if (
-            cleaned.includes(word)
-        ) {
-
-            return false;
-
-        }
+        throw new Error(
+            "Firebase has not initialized yet."
+        );
 
     }
 
 
-    return true;
-
-}
-
-
-// ============================================================
-// DATE
-// ============================================================
-
-function getLeaderboardDate() {
-
-    const now =
-        new Date();
+    const database =
+        window.firebaseDatabase;
 
 
-    const day =
-        String(
-            now.getDate()
-        ).padStart(2, "0");
+    const leaderboardRef =
+        window.firebaseRef(
+            database,
+            "leaderboard"
+        );
 
 
-    const month =
-        String(
-            now.getMonth() + 1
-        ).padStart(2, "0");
+    const leaderboardQuery =
+        window.firebaseQuery(
+            leaderboardRef,
+            window.firebaseOrderByChild(
+                "score"
+            )
+        );
 
 
-    const year =
-        String(
-            now.getFullYear()
-        ).slice(-2);
-
-
-    return `${day}/${month}/${year}`;
-
-}
-
-
-// ============================================================
-// SUBMIT SCORE
-// ============================================================
-
-submitLeaderboardButton.addEventListener(
-    "click",
-    submitLeaderboardScore
-);
-
-
-async function submitLeaderboardScore() {
-
-    const name =
-        leaderboardNameInput.value.trim();
-
-
-    leaderboardNameError.textContent =
-        "";
+    const snapshot =
+        await window.firebaseGet(
+            leaderboardQuery
+        );
 
 
     if (
-        !namePassesModeration(name)
+        !snapshot.exists()
     ) {
 
-        leaderboardNameError.textContent =
-            "Name Didn't Pass Moderation, Please Enter Another Name";
+        leaderboardList.innerHTML = `
+            <div class="leaderboard-empty">
+                🏆<br><br>
+                NO SCORES YET
+                <br><br>
+                Be the first Watson Hunter!
+            </div>
+        `;
 
         return;
 
     }
 
 
-    submitLeaderboardButton.disabled =
-        true;
+    const scores = [];
 
 
-    submitLeaderboardButton.textContent =
-        "SUBMITTING...";
+    snapshot.forEach(
+        child => {
+
+            const data =
+                child.val();
 
 
-    try {
+            scores.push({
 
-        const leaderboardRef =
-            ref(
-                database,
-                "leaderboard"
-            );
+                name:
+                    String(
+                        data.name || "Unknown"
+                    ),
 
+                score:
+                    Number(
+                        data.score || 0
+                    ),
 
-        const snapshot =
-            await get(
-                leaderboardRef
-            );
+                date:
+                    data.date || "--/--/--"
 
+            });
 
-        let nameAlreadyExists =
-            false;
-
-
-        if (snapshot.exists()) {
-
-            snapshot.forEach(
-                function(child) {
-
-                    const existingName =
-                        String(
-                            child.val().name || ""
-                        ).toLowerCase();
+        }
+    );
 
 
-                    if (
-                        existingName ===
-                        name.toLowerCase()
-                    ) {
+    scores.sort(
+        (a, b) =>
+            b.score - a.score
+    );
 
-                        nameAlreadyExists =
-                            true;
 
-                    }
+    const topTen =
+        scores.slice(0, 10);
 
-                }
+
+    leaderboardList.innerHTML =
+        "";
+
+
+    topTen.forEach(
+        (player, index) => {
+
+            const row =
+                document.createElement(
+                    "div"
+                );
+
+
+            row.className =
+                "leaderboard-row";
+
+
+            let rank =
+                index + 1;
+
+
+            if (index === 0) {
+                rank = "🥇";
+            }
+
+            else if (index === 1) {
+                rank = "🥈";
+            }
+
+            else if (index === 2) {
+                rank = "🥉";
+            }
+
+
+            row.innerHTML = `
+
+                <div class="leaderboard-rank">
+                    ${rank}
+                </div>
+
+                <div class="leaderboard-name">
+                    ${escapeLeaderboardHTML(
+                        player.name
+                    )}
+                </div>
+
+                <div class="leaderboard-score">
+                    ${player.score.toLocaleString()}
+                </div>
+
+                <div class="leaderboard-date">
+                    ${escapeLeaderboardHTML(
+                        player.date
+                    )}
+                </div>
+
+            `;
+
+
+            leaderboardList.appendChild(
+                row
             );
 
         }
+    );
+
+}
+
+catch (error) {
+
+    console.error(
+        "Leaderboard error:",
+        error
+    );
 
 
-        if (nameAlreadyExists) {
+    leaderboardList.innerHTML = `
+        <div class="leaderboard-empty">
+            ❌<br><br>
+            COULDN'T LOAD LEADERBOARD
+            <br><br>
+            Check your Firebase setup.
+        </div>
+    `;
+
+}
+```
+
+}
+
+/* ============================================================
+HTML ESCAPE
+============================================================ */
+
+function escapeLeaderboardHTML(text) {
+
+```
+return String(text)
+
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+
+    .replace(
+        /</g,
+        "&lt;"
+    )
+
+    .replace(
+        />/g,
+        "&gt;"
+    )
+
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+
+    .replace(
+        /'/g,
+        "&#039;"
+    );
+```
+
+}
+
+/* ============================================================
+OPEN SCORE SUBMISSION
+============================================================ */
+
+addLeaderboardButton.addEventListener(
+"click",
+function() {
+
+```
+    leaderboardScore.textContent =
+        score.toLocaleString();
+
+
+    leaderboardNameInput.value =
+        "";
+
+
+    leaderboardNameError.textContent =
+        "";
+
+
+    leaderboardNameOverlay.classList.remove(
+        "hidden"
+    );
+
+
+    leaderboardNameInput.focus();
+
+}
+```
+
+);
+
+/* ============================================================
+CANCEL SCORE
+============================================================ */
+
+cancelLeaderboardButton.addEventListener(
+"click",
+function() {
+
+```
+    leaderboardNameOverlay.classList.add(
+        "hidden"
+    );
+
+}
+```
+
+);
+
+/* ============================================================
+SUBMIT SCORE
+============================================================ */
+
+submitLeaderboardButton.addEventListener(
+"click",
+submitLeaderboardScore
+);
+
+leaderboardNameInput.addEventListener(
+"keydown",
+function(event) {
+
+```
+    if (
+        event.key === "Enter"
+    ) {
+
+        submitLeaderboardScore();
+
+    }
+
+}
+```
+
+);
+
+async function submitLeaderboardScore() {
+
+```
+const name =
+    leaderboardNameInput.value.trim();
+
+
+leaderboardNameError.textContent =
+    "";
+
+
+if (
+    !namePassesModeration(name)
+) {
+
+    leaderboardNameError.textContent =
+        "Name Didn't Pass Moderation, Please Enter Another Name";
+
+    return;
+
+}
+
+
+submitLeaderboardButton.disabled =
+    true;
+
+submitLeaderboardButton.textContent =
+    "SUBMITTING...";
+
+
+try {
+
+    if (
+        !window.firebaseDatabase
+    ) {
+
+        throw new Error(
+            "Firebase has not initialized."
+        );
+
+    }
+
+
+    const database =
+        window.firebaseDatabase;
+
+
+    const leaderboardRef =
+        window.firebaseRef(
+            database,
+            "leaderboard"
+        );
+
+
+    /*
+        Check whether this name already exists.
+    */
+
+    const snapshot =
+        await window.firebaseGet(
+            leaderboardRef
+        );
+
+
+    let existingEntry =
+        null;
+
+
+    if (
+        snapshot.exists()
+    ) {
+
+        snapshot.forEach(
+            child => {
+
+                const data =
+                    child.val();
+
+
+                if (
+                    String(
+                        data.name
+                    ).toLowerCase() ===
+                    name.toLowerCase()
+                ) {
+
+                    existingEntry = {
+
+                        key:
+                            child.key,
+
+                        score:
+                            Number(
+                                data.score || 0
+                            )
+
+                    };
+
+                }
+
+            }
+        );
+
+    }
+
+
+    /*
+        If the player already has a score,
+        only keep the highest score.
+    */
+
+    if (
+        existingEntry
+    ) {
+
+        if (
+            score <=
+            existingEntry.score
+        ) {
 
             leaderboardNameError.textContent =
-                "That Name Is Already Taken, Please Choose Another Name";
-
+                "You already have a higher score on the leaderboard!";
 
             submitLeaderboardButton.disabled =
                 false;
 
-
             submitLeaderboardButton.textContent =
                 "SUBMIT SCORE";
-
 
             return;
 
         }
 
 
-        const scoreId =
-            `${Date.now()}_${Math.random()
-                .toString(36)
-                .substring(2, 8)}`;
-
-
-        const newScoreRef =
-            ref(
+        const existingRef =
+            window.firebaseRef(
                 database,
-                `leaderboard/${scoreId}`
+                "leaderboard/" +
+                existingEntry.key
             );
 
 
-        await set(
-            newScoreRef,
+        await window.firebaseSet(
+            existingRef,
             {
 
-                name:
-                    name,
+                name: name,
 
-                score:
-                    Number(score),
+                score: Number(score),
 
                 date:
                     getLeaderboardDate()
@@ -1796,62 +1802,83 @@ async function submitLeaderboardScore() {
             }
         );
 
-
-        console.log(
-            "Score submitted successfully!"
-        );
-
-
-        leaderboardNameOverlay.classList.add(
-            "hidden"
-        );
-
-
-        gameOverScreen.classList.add(
-            "hidden"
-        );
-
-
-        leaderboardScreen.classList.remove(
-            "hidden"
-        );
-
-
-        loadLeaderboard();
-
     }
 
-    catch (error) {
+    else {
 
-        console.error(
-            "SCORE SUBMISSION ERROR:",
-            error
+        /*
+            New player.
+        */
+
+        const newScoreRef =
+            window.firebasePush(
+                leaderboardRef
+            );
+
+
+        await window.firebaseSet(
+            newScoreRef,
+            {
+
+                name: name,
+
+                score: Number(score),
+
+                date:
+                    getLeaderboardDate()
+
+            }
         );
-
-
-        leaderboardNameError.textContent =
-            "Couldn't submit score. Please try again.";
 
     }
 
 
-    submitLeaderboardButton.disabled =
-        false;
+    leaderboardNameOverlay.classList.add(
+        "hidden"
+    );
+
+    gameOverScreen.classList.add(
+        "hidden"
+    );
+
+    leaderboardScreen.classList.remove(
+        "hidden"
+    );
 
 
-    submitLeaderboardButton.textContent =
-        "SUBMIT SCORE";
+    await loadLeaderboard();
+
+}
+
+catch (error) {
+
+    console.error(
+        "Score submission error:",
+        error
+    );
+
+
+    leaderboardNameError.textContent =
+        "Couldn't submit score. Please try again.";
 
 }
 
 
-// ============================================================
-// INITIALIZE
-// ============================================================
+submitLeaderboardButton.disabled =
+    false;
+
+submitLeaderboardButton.textContent =
+    "SUBMIT SCORE";
+```
+
+}
+
+/* ============================================================
+INITIALIZE
+============================================================ */
 
 updateHighScoreDisplays();
 
-
 console.log(
-    "Find Watson loaded successfully!"
+"Find Watson loaded successfully!"
 );
