@@ -130,13 +130,13 @@ const newHighScore =
 
 const backgrounds = [
 
-    "background1.jpg",
-    "background2.jpg",
-    "background3.jpg",
-    "background4.jpg",
-    "background5.jpg",
-    "background6.jpg",
-    "background7.jpg"
+    "/Find-The-Watson-Game/background1.jpg",
+    "/Find-The-Watson-Game/background2.jpg",
+    "/Find-The-Watson-Game/background3.jpg",
+    "/Find-The-Watson-Game/background4.jpg",
+    "/Find-The-Watson-Game/background5.jpg",
+    "/Find-The-Watson-Game/background6.jpg",
+    "/Find-The-Watson-Game/background7.jpg"
 
 ];
 
