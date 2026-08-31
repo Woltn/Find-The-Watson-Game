@@ -1,7 +1,61 @@
 // ============================================================
 // FIND WATSON
-// Version 2
+// Version 3
+// Firebase Leaderboard Edition
 // ============================================================
+
+
+// ============================================================
+// FIREBASE
+// ============================================================
+
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+
+import {
+    getDatabase,
+    ref,
+    set,
+    get,
+    query,
+    orderByChild,
+    push
+} from "https://www.gstatic.com/firebasejs/12.4.0/firebase-database.js";
+
+
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyAvs8RGpxommOqs_5Xe5JgKZp5xcSsFlQw",
+
+    authDomain:
+        "find-the-watson-game.firebaseapp.com",
+
+    projectId:
+        "find-the-watson-game",
+
+    storageBucket:
+        "find-the-watson-game.firebasestorage.app",
+
+    messagingSenderId:
+        "642451332683",
+
+    appId:
+        "1:642451332683:web:125d0f0b1b7c825d5b37ce",
+
+    measurementId:
+        "G-L8CLXMKT2R"
+
+};
+
+
+const firebaseApp =
+    initializeApp(firebaseConfig);
+
+
+const database =
+    getDatabase(firebaseApp);
 
 
 // ============================================================
@@ -11,9 +65,11 @@
 const GAME_LENGTH = 61;
 
 const STARTING_WATSON_SIZE = 115;
+
 const MIN_WATSON_SIZE = 37;
 
 const STARTING_FIND_TIME = 20;
+
 const MIN_FIND_TIME = 2.5;
 
 const POINTS_PER_FIND = 12;
@@ -28,100 +84,261 @@ const WATSONS_PER_LEVEL = 4;
 // ============================================================
 
 const gameMusic =
-    document.getElementById("gameMusic");
+    document.getElementById(
+        "gameMusic"
+    );
 
-enuScreen =
-    document.getElementById("menuScreen");
+
+const menuScreen =
+    document.getElementById(
+        "menuScreen"
+    );
+
 
 const gameScreen =
-    document.getElementById("gameScreen");
+    document.getElementById(
+        "gameScreen"
+    );
+
 
 const gameOverScreen =
-    document.getElementById("gameOverScreen");
+    document.getElementById(
+        "gameOverScreen"
+    );
+
+
+const leaderboardScreen =
+    document.getElementById(
+        "leaderboardScreen"
+    );
+
+
+const leaderboardNameOverlay =
+    document.getElementById(
+        "leaderboardNameOverlay"
+    );
+
 
 const playButton =
-    document.getElementById("playButton");
+    document.getElementById(
+        "playButton"
+    );
+
 
 const playAgainButton =
-    document.getElementById("playAgainButton");
+    document.getElementById(
+        "playAgainButton"
+    );
+
 
 const menuButton =
-    document.getElementById("menuButton");
+    document.getElementById(
+        "menuButton"
+    );
+
 
 const highScoreButton =
-    document.getElementById("highScoreButton");
+    document.getElementById(
+        "highScoreButton"
+    );
+
 
 const highScoreModal =
-    document.getElementById("highScoreModal");
+    document.getElementById(
+        "highScoreModal"
+    );
+
 
 const closeHighScore =
-    document.getElementById("closeHighScore");
+    document.getElementById(
+        "closeHighScore"
+    );
+
 
 const modalPlayButton =
-    document.getElementById("modalPlayButton");
+    document.getElementById(
+        "modalPlayButton"
+    );
+
+
+const leaderboardButton =
+    document.getElementById(
+        "leaderboardButton"
+    );
+
+
+const leaderboardBackButton =
+    document.getElementById(
+        "leaderboardBackButton"
+    );
+
+
+const leaderboardList =
+    document.getElementById(
+        "leaderboardList"
+    );
+
+
+const addLeaderboardButton =
+    document.getElementById(
+        "addLeaderboardButton"
+    );
+
+
+const leaderboardNameInput =
+    document.getElementById(
+        "leaderboardNameInput"
+    );
+
+
+const leaderboardScore =
+    document.getElementById(
+        "leaderboardScore"
+    );
+
+
+const leaderboardNameError =
+    document.getElementById(
+        "leaderboardNameError"
+    );
+
+
+const submitLeaderboardButton =
+    document.getElementById(
+        "submitLeaderboardButton"
+    );
+
+
+const cancelLeaderboardButton =
+    document.getElementById(
+        "cancelLeaderboardButton"
+    );
+
 
 const watson =
-    document.getElementById("watson");
+    document.getElementById(
+        "watson"
+    );
+
 
 const gameArea =
-    document.getElementById("gameArea");
+    document.getElementById(
+        "gameArea"
+    );
+
 
 const scoreDisplay =
-    document.getElementById("score");
+    document.getElementById(
+        "score"
+    );
+
 
 const streakDisplay =
-    document.getElementById("streak");
+    document.getElementById(
+        "streak"
+    );
+
 
 const multiplierDisplay =
-    document.getElementById("multiplier");
+    document.getElementById(
+        "multiplier"
+    );
+
 
 const levelDisplay =
-    document.getElementById("level");
+    document.getElementById(
+        "level"
+    );
+
 
 const timerDisplay =
-    document.getElementById("timer");
+    document.getElementById(
+        "timer"
+    );
+
 
 const findTimerDisplay =
-    document.getElementById("findTimer");
+    document.getElementById(
+        "findTimer"
+    );
+
 
 const levelProgressBar =
-    document.getElementById("levelProgressBar");
+    document.getElementById(
+        "levelProgressBar"
+    );
+
 
 const levelMessage =
-    document.getElementById("levelMessage");
+    document.getElementById(
+        "levelMessage"
+    );
+
 
 const levelMessageSmall =
-    document.getElementById("levelMessageSmall");
+    document.getElementById(
+        "levelMessageSmall"
+    );
+
 
 const levelMessageBig =
-    document.getElementById("levelMessageBig");
+    document.getElementById(
+        "levelMessageBig"
+    );
+
 
 const feedback =
-    document.getElementById("feedback");
+    document.getElementById(
+        "feedback"
+    );
+
 
 const menuHighScore =
-    document.getElementById("menuHighScore");
+    document.getElementById(
+        "menuHighScore"
+    );
+
 
 const modalHighScore =
-    document.getElementById("modalHighScore");
+    document.getElementById(
+        "modalHighScore"
+    );
+
 
 const finalScore =
-    document.getElementById("finalScore");
+    document.getElementById(
+        "finalScore"
+    );
+
 
 const finalWatsons =
-    document.getElementById("finalWatsons");
+    document.getElementById(
+        "finalWatsons"
+    );
+
 
 const finalBestStreak =
-    document.getElementById("finalBestStreak");
+    document.getElementById(
+        "finalBestStreak"
+    );
+
 
 const finalAccuracy =
-    document.getElementById("finalAccuracy");
+    document.getElementById(
+        "finalAccuracy"
+    );
+
 
 const finalLevel =
-    document.getElementById("finalLevel");
+    document.getElementById(
+        "finalLevel"
+    );
+
 
 const newHighScore =
-    document.getElementById("newHighScore");
+    document.getElementById(
+        "newHighScore"
+    );
 
 
 // ============================================================
@@ -130,13 +347,19 @@ const newHighScore =
 
 const backgrounds = [
 
-    "/Find-The-Watson-Game/background1.jpg",
-    "/Find-The-Watson-Game/background2.jpg",
-    "/Find-The-Watson-Game/background3.jpg",
-    "/Find-The-Watson-Game/background4.jpg",
-    "/Find-The-Watson-Game/background5.jpg",
-    "/Find-The-Watson-Game/background6.jpg",
-    "/Find-The-Watson-Game/background7.jpg"
+    "assets/background1.jpg",
+
+    "assets/background2.jpg",
+
+    "assets/background3.jpg",
+
+    "assets/background4.jpg",
+
+    "assets/background5.jpg",
+
+    "assets/background6.jpg",
+
+    "assets/background7.jpg"
 
 ];
 
@@ -159,9 +382,8 @@ let level = 1;
 
 let gameTime = GAME_LENGTH;
 
-let findTime = STARTING_FIND_TIME;
-
-let currentFindTime = STARTING_FIND_TIME;
+let currentFindTime =
+    STARTING_FIND_TIME;
 
 let currentWatsonSize =
     STARTING_WATSON_SIZE;
@@ -179,10 +401,10 @@ let gameRunning = false;
 
 function startGame() {
 
-    console.log("Starting Find Watson...");
+    console.log(
+        "Starting Find Watson..."
+    );
 
-
-    // Reset
 
     score = 0;
 
@@ -204,23 +426,55 @@ function startGame() {
 
     gameRunning = true;
 
+
+    clearInterval(gameTimer);
+
+    clearInterval(findTimer);
+
+
+    // Music
+
     gameMusic.currentTime = 0;
+
     gameMusic.volume = 0.99;
 
-    gameMusic.play().catch(function(error) {
-    console.log("Music error:", error);
-    });
+    gameMusic.play().catch(
+        function(error) {
+
+            console.log(
+                "Music error:",
+                error
+            );
+
+        }
+    );
 
 
     // Screens
 
-    menuScreen.classList.add("hidden");
+    menuScreen.classList.add(
+        "hidden"
+    );
 
-    gameOverScreen.classList.add("hidden");
+    gameOverScreen.classList.add(
+        "hidden"
+    );
 
-    highScoreModal.classList.add("hidden");
+    leaderboardScreen.classList.add(
+        "hidden"
+    );
 
-    gameScreen.classList.remove("hidden");
+    highScoreModal.classList.add(
+        "hidden"
+    );
+
+    leaderboardNameOverlay.classList.add(
+        "hidden"
+    );
+
+    gameScreen.classList.remove(
+        "hidden"
+    );
 
 
     // Background
@@ -269,6 +523,7 @@ function spawnWatson() {
     const areaWidth =
         gameArea.clientWidth;
 
+
     const areaHeight =
         gameArea.clientHeight;
 
@@ -276,23 +531,27 @@ function spawnWatson() {
     const maxX =
         Math.max(
             0,
-            areaWidth - currentWatsonSize
+            areaWidth -
+            currentWatsonSize
         );
 
 
     const maxY =
         Math.max(
             0,
-            areaHeight - currentWatsonSize
+            areaHeight -
+            currentWatsonSize
         );
 
 
     const randomX =
-        Math.random() * maxX;
+        Math.random() *
+        maxX;
 
 
     const randomY =
-        Math.random() * maxY;
+        Math.random() *
+        maxY;
 
 
     watson.style.width =
@@ -310,8 +569,6 @@ function spawnWatson() {
     watson.style.display =
         "block";
 
-
-    // Random rotation
 
     const rotation =
         Math.random() * 12 - 6;
@@ -339,19 +596,18 @@ watson.addEventListener(
         }
 
 
-        // Found!
-
         watsonsFound++;
 
         streak++;
 
 
         if (streak > bestStreak) {
-            bestStreak = streak;
+
+            bestStreak =
+                streak;
+
         }
 
-
-        // Points
 
         const multiplier =
             getMultiplier();
@@ -367,8 +623,6 @@ watson.addEventListener(
         score += points;
 
 
-        // Feedback
-
         showFeedback(
             `+${points} 🔥`,
             event.clientX,
@@ -376,27 +630,17 @@ watson.addEventListener(
         );
 
 
-        // Difficulty
-
         increaseDifficulty();
 
-
-        // Level
 
         checkLevel();
 
 
-        // New Watson
-
         spawnWatson();
 
 
-        // Reset countdown
-
         resetFindTimer();
 
-
-        // Update
 
         updateDisplays();
 
@@ -420,7 +664,8 @@ gameArea.addEventListener(
         wrongClicks++;
 
 
-        score -= WRONG_CLICK_PENALTY;
+        score -=
+            WRONG_CLICK_PENALTY;
 
 
         if (score < 0) {
@@ -447,9 +692,17 @@ gameArea.addEventListener(
 
 function getMultiplier() {
 
+    const multiplierLevel =
+        Math.floor(
+            streak / 5
+        );
+
+
     return Math.min(
-        1 + (streak * 0.3),
-        5
+        1 +
+        multiplierLevel * 0.1,
+
+        1.5
     );
 
 }
@@ -562,7 +815,9 @@ function getFindTime() {
 function updateFindTimer() {
 
     findTimerDisplay.textContent =
-        currentFindTime;
+        Math.ceil(
+            currentFindTime
+        );
 
 
     if (
@@ -575,7 +830,9 @@ function updateFindTimer() {
         findTimerDisplay.style.transform =
             "scale(1.15)";
 
-    } else {
+    }
+
+    else {
 
         findTimerDisplay.style.color =
             "white";
@@ -670,8 +927,7 @@ function checkLevel() {
 
 
     if (
-        newLevel >
-        level
+        newLevel > level
     ) {
 
         level =
@@ -706,9 +962,10 @@ function updateLevelProgress() {
 
 
     const percentage =
-        (progress /
-        WATSONS_PER_LEVEL) *
-        100;
+        (
+            progress /
+            WATSONS_PER_LEVEL
+        ) * 100;
 
 
     levelProgressBar.style.width =
@@ -766,7 +1023,9 @@ function showLevelMessage(
 function changeBackground() {
 
     const index =
-        (level - 1) %
+        (
+            level - 1
+        ) %
         backgrounds.length;
 
 
@@ -848,7 +1107,9 @@ function updateTimer() {
         timerDisplay.style.color =
             "#ff3333";
 
-    } else {
+    }
+
+    else {
 
         timerDisplay.style.color =
             "white";
@@ -968,8 +1229,6 @@ function endGame() {
         "none";
 
 
-    // Accuracy
-
     const totalClicks =
         watsonsFound +
         wrongClicks;
@@ -993,8 +1252,6 @@ function endGame() {
     }
 
 
-    // Final screen
-
     finalScore.textContent =
         score.toLocaleString();
 
@@ -1015,8 +1272,6 @@ function endGame() {
         level;
 
 
-    // High score
-
     const oldHighScore =
         Number(
             localStorage.getItem(
@@ -1026,8 +1281,7 @@ function endGame() {
 
 
     if (
-        score >
-        oldHighScore
+        score > oldHighScore
     ) {
 
         localStorage.setItem(
@@ -1040,7 +1294,9 @@ function endGame() {
             "hidden"
         );
 
-    } else {
+    }
+
+    else {
 
         newHighScore.classList.add(
             "hidden"
@@ -1052,11 +1308,20 @@ function endGame() {
     updateHighScoreDisplays();
 
 
-    // Screens
-
     gameScreen.classList.add(
         "hidden"
     );
+
+
+    leaderboardNameOverlay.classList.add(
+        "hidden"
+    );
+
+
+    leaderboardScreen.classList.add(
+        "hidden"
+    );
+
 
     gameOverScreen.classList.remove(
         "hidden"
@@ -1106,6 +1371,7 @@ highScoreButton.addEventListener(
 
         updateHighScoreDisplays();
 
+
         highScoreModal.classList.remove(
             "hidden"
         );
@@ -1130,13 +1396,15 @@ modalPlayButton.addEventListener(
     "click",
     function() {
 
+        highScoreModal.classList.add(
+            "hidden"
+        );
+
         startGame();
 
     }
 );
 
-
-// Click outside modal
 
 highScoreModal.addEventListener(
     "click",
@@ -1158,7 +1426,7 @@ highScoreModal.addEventListener(
 
 
 // ============================================================
-// BUTTONS
+// MAIN MENU BUTTONS
 // ============================================================
 
 playButton.addEventListener(
@@ -1198,12 +1466,22 @@ menuButton.addEventListener(
         );
 
 
+        leaderboardNameOverlay.classList.add(
+            "hidden"
+        );
+
+
         gameOverScreen.classList.add(
             "hidden"
         );
 
 
         gameScreen.classList.add(
+            "hidden"
+        );
+
+
+        leaderboardScreen.classList.add(
             "hidden"
         );
 
@@ -1220,11 +1498,771 @@ menuButton.addEventListener(
 
 
 // ============================================================
+// LEADERBOARD MODERATION
+// ============================================================
+
+const blockedWords = [
+
+    "fuck",
+
+    "shit",
+
+    "cunt",
+
+    "bitch",
+
+    "asshole",
+
+    "nigger",
+
+    "nigga",
+
+    "faggot",
+
+    "whore",
+
+    "slut",
+
+    "porn",
+
+    "sex"
+
+];
+
+
+function namePassesModeration(
+    name
+) {
+
+    const cleaned =
+        name
+            .toLowerCase()
+            .replace(
+                /[^a-z0-9]/g,
+                ""
+            );
+
+
+    if (
+        cleaned.length < 2 ||
+        cleaned.length > 20
+    ) {
+
+        return false;
+
+    }
+
+
+    for (
+        const word of blockedWords
+    ) {
+
+        if (
+            cleaned.includes(
+                word
+            )
+        ) {
+
+            return false;
+
+        }
+
+    }
+
+
+    return true;
+
+}
+
+
+// ============================================================
+// DATE
+// ============================================================
+
+function getLeaderboardDate() {
+
+    const now =
+        new Date();
+
+
+    const day =
+        String(
+            now.getDate()
+        ).padStart(
+            2,
+            "0"
+        );
+
+
+    const month =
+        String(
+            now.getMonth() + 1
+        ).padStart(
+            2,
+            "0"
+        );
+
+
+    const year =
+        String(
+            now.getFullYear()
+        ).slice(-2);
+
+
+    return `${day}/${month}/${year}`;
+
+}
+
+
+// ============================================================
+// OPEN LEADERBOARD
+// ============================================================
+
+leaderboardButton.addEventListener(
+    "click",
+    function() {
+
+        // Make absolutely sure
+        // other screens are hidden.
+
+        gameRunning = false;
+
+
+        leaderboardNameOverlay.classList.add(
+            "hidden"
+        );
+
+
+        highScoreModal.classList.add(
+            "hidden"
+        );
+
+
+        gameScreen.classList.add(
+            "hidden"
+        );
+
+
+        gameOverScreen.classList.add(
+            "hidden"
+        );
+
+
+        menuScreen.classList.add(
+            "hidden"
+        );
+
+
+        leaderboardScreen.classList.remove(
+            "hidden"
+        );
+
+
+        loadLeaderboard();
+
+    }
+);
+
+
+// ============================================================
+// CLOSE LEADERBOARD
+// ============================================================
+
+leaderboardBackButton.addEventListener(
+    "click",
+    function() {
+
+        leaderboardScreen.classList.add(
+            "hidden"
+        );
+
+
+        menuScreen.classList.remove(
+            "hidden"
+        );
+
+
+        updateHighScoreDisplays();
+
+    }
+);
+
+
+// ============================================================
+// LOAD LEADERBOARD
+// ============================================================
+
+async function loadLeaderboard() {
+
+    leaderboardList.innerHTML = `
+
+        <div class="leaderboard-loading">
+
+            Loading leaderboard...
+
+        </div>
+
+    `;
+
+
+    try {
+
+        const leaderboardRef =
+            ref(
+                database,
+                "leaderboard"
+            );
+
+
+        const leaderboardQuery =
+            query(
+                leaderboardRef,
+                orderByChild(
+                    "score"
+                )
+            );
+
+
+        const snapshot =
+            await get(
+                leaderboardQuery
+            );
+
+
+        if (
+            !snapshot.exists()
+        ) {
+
+            leaderboardList.innerHTML = `
+
+                <div class="leaderboard-empty">
+
+                    No scores yet!<br><br>
+
+                    Be the first Watson Hunter!
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        const scores = [];
+
+
+        snapshot.forEach(
+            function(child) {
+
+                const data =
+                    child.val();
+
+
+                scores.push({
+
+                    id:
+                        child.key,
+
+                    name:
+                        data.name,
+
+                    score:
+                        Number(
+                            data.score
+                        ),
+
+                    date:
+                        data.date
+
+                });
+
+            }
+        );
+
+
+        scores.sort(
+            function(a, b) {
+
+                return b.score -
+                    a.score;
+
+            }
+        );
+
+
+        const topTen =
+            scores.slice(
+                0,
+                10
+            );
+
+
+        leaderboardList.innerHTML =
+            "";
+
+
+        topTen.forEach(
+            function(
+                player,
+                index
+            ) {
+
+                const row =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                row.className =
+                    "leaderboard-row";
+
+
+                let rankText =
+                    index + 1;
+
+
+                if (
+                    index === 0
+                ) {
+
+                    rankText =
+                        "🥇";
+
+                }
+
+                else if (
+                    index === 1
+                ) {
+
+                    rankText =
+                        "🥈";
+
+                }
+
+                else if (
+                    index === 2
+                ) {
+
+                    rankText =
+                        "🥉";
+
+                }
+
+
+                row.innerHTML = `
+
+                    <div
+                        class="leaderboard-rank">
+
+                        ${rankText}
+
+                    </div>
+
+
+                    <div
+                        class="leaderboard-name">
+
+                        ${escapeLeaderboardHTML(
+                            player.name
+                        )}
+
+                    </div>
+
+
+                    <div
+                        class="leaderboard-score">
+
+                        ${player.score.toLocaleString()}
+
+                    </div>
+
+
+                    <div
+                        class="leaderboard-date">
+
+                        ${escapeLeaderboardHTML(
+                            player.date
+                        )}
+
+                    </div>
+
+                `;
+
+
+                leaderboardList.appendChild(
+                    row
+                );
+
+            }
+        );
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Leaderboard error:",
+            error
+        );
+
+
+        leaderboardList.innerHTML = `
+
+            <div class="leaderboard-empty">
+
+                Couldn't load leaderboard.<br><br>
+
+                Please try again.
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+// ============================================================
+// HTML ESCAPE
+// ============================================================
+
+function escapeLeaderboardHTML(
+    text
+) {
+
+    return String(text)
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+// ============================================================
+// OPEN SCORE SUBMISSION
+// ============================================================
+
+addLeaderboardButton.addEventListener(
+    "click",
+    function() {
+
+        leaderboardScore.textContent =
+            score.toLocaleString();
+
+
+        leaderboardNameInput.value =
+            "";
+
+
+        leaderboardNameError.textContent =
+            "";
+
+
+        // Hide Game Over while
+        // the popup is open.
+
+        gameOverScreen.classList.add(
+            "hidden"
+        );
+
+
+        leaderboardScreen.classList.add(
+            "hidden"
+        );
+
+
+        leaderboardNameOverlay.classList.remove(
+            "hidden"
+        );
+
+
+        setTimeout(
+            function() {
+
+                leaderboardNameInput.focus();
+
+            },
+            100
+        );
+
+    }
+);
+
+
+// ============================================================
+// CANCEL SCORE SUBMISSION
+// ============================================================
+
+cancelLeaderboardButton.addEventListener(
+    "click",
+    function() {
+
+        leaderboardNameOverlay.classList.add(
+            "hidden"
+        );
+
+
+        // Return to Game Over.
+
+        gameOverScreen.classList.remove(
+            "hidden"
+        );
+
+    }
+);
+
+
+// ============================================================
+// ENTER KEY
+// ============================================================
+
+leaderboardNameInput.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key ===
+            "Enter"
+        ) {
+
+            submitLeaderboardScore();
+
+        }
+
+    }
+);
+
+
+// ============================================================
+// SUBMIT SCORE
+// ============================================================
+
+submitLeaderboardButton.addEventListener(
+    "click",
+    submitLeaderboardScore
+);
+
+
+async function submitLeaderboardScore() {
+
+    const name =
+        leaderboardNameInput.value.trim();
+
+
+    leaderboardNameError.textContent =
+        "";
+
+
+    // Moderation
+
+    if (
+        !namePassesModeration(
+            name
+        )
+    ) {
+
+        leaderboardNameError.textContent =
+            "Name Didn't Pass Moderation, Please Enter Another Name";
+
+
+        leaderboardNameInput.focus();
+
+        return;
+
+    }
+
+
+    submitLeaderboardButton.disabled =
+        true;
+
+
+    submitLeaderboardButton.textContent =
+        "SUBMITTING...";
+
+
+    try {
+
+        const leaderboardRef =
+            ref(
+                database,
+                "leaderboard"
+            );
+
+
+        const snapshot =
+            await get(
+                leaderboardRef
+            );
+
+
+        let nameAlreadyExists =
+            false;
+
+
+        if (
+            snapshot.exists()
+        ) {
+
+            snapshot.forEach(
+                function(child) {
+
+                    const data =
+                        child.val();
+
+
+                    const existingName =
+                        String(
+                            data.name
+                        ).trim()
+                        .toLowerCase();
+
+
+                    if (
+                        existingName ===
+                        name.toLowerCase()
+                    ) {
+
+                        nameAlreadyExists =
+                            true;
+
+                    }
+
+                }
+            );
+
+        }
+
+
+        if (
+            nameAlreadyExists
+        ) {
+
+            leaderboardNameError.textContent =
+                "That Name Is Already Taken, Please Choose Another Name";
+
+
+            submitLeaderboardButton.disabled =
+                false;
+
+
+            submitLeaderboardButton.textContent =
+                "SUBMIT SCORE";
+
+
+            leaderboardNameInput.focus();
+
+
+            return;
+
+        }
+
+
+        // Create unique Firebase entry
+
+        const newScoreRef =
+            push(
+                leaderboardRef
+            );
+
+
+        await set(
+            newScoreRef,
+            {
+
+                name:
+                    name,
+
+                score:
+                    Number(score),
+
+                date:
+                    getLeaderboardDate()
+
+            }
+        );
+
+
+        // Success
+
+        leaderboardNameOverlay.classList.add(
+            "hidden"
+        );
+
+
+        gameOverScreen.classList.add(
+            "hidden"
+        );
+
+
+        leaderboardScreen.classList.remove(
+            "hidden"
+        );
+
+
+        await loadLeaderboard();
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Score submission error:",
+            error
+        );
+
+
+        leaderboardNameError.textContent =
+            "Couldn't submit score. Please try again.";
+
+    }
+
+
+    submitLeaderboardButton.disabled =
+        false;
+
+
+    submitLeaderboardButton.textContent =
+        "SUBMIT SCORE";
+
+}
+
+
+// ============================================================
 // INITIALIZE
 // ============================================================
 
 updateHighScoreDisplays();
 
+
 console.log(
     "Find Watson loaded successfully!"
+);
+
+console.log(
+    "Firebase leaderboard connected."
 );
