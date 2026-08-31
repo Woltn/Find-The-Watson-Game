@@ -2,31 +2,75 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>FIND WATSON</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
 </head>
 
 <body>
 
+    <!-- =====================================================
+         DEBUG LOADING SCREEN
+    ====================================================== -->
+
+    <div id="loadingScreen">
+
+        <div class="loading-box">
+
+            <div class="loading-icon">
+                🎯
+            </div>
+
+            <div class="loading-title">
+                FIND WATSON
+            </div>
+
+            <div
+                id="loadingText"
+                class="loading-text"
+            >
+                Loading game...
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         BACKGROUND EFFECT
+    ====================================================== -->
+
     <div class="background-overlay"></div>
 
 
-    <!-- =========================
+    <!-- =====================================================
          MAIN MENU
-    ========================== -->
+    ====================================================== -->
 
-    <main id="menuScreen" class="screen">
+    <main
+        id="menuScreen"
+        class="screen"
+    >
 
         <div class="menu-container">
 
             <div class="logo-container">
 
                 <div class="logo-small">
-                    He has no waist
+                    HE HAS NO WAIST
                 </div>
 
                 <h1>
@@ -35,7 +79,7 @@
                 </h1>
 
                 <div class="logo-subtitle">
-                    He is in his skinny girl era
+                    HE IS IN HIS SKINNY GIRL ERA
                 </div>
 
             </div>
@@ -43,19 +87,51 @@
 
             <div class="menu-buttons">
 
-                <button id="playButton" class="play-button">
-                    <span class="play-icon">▶</span>
-                    <span>PLAY</span>
+                <button
+                    id="playButton"
+                    class="play-button"
+                >
+
+                    <span class="play-icon">
+                        ▶
+                    </span>
+
+                    <span>
+                        PLAY
+                    </span>
+
                 </button>
 
-                <button id="highScoreButton" class="menu-button">
-                    <span>🏆</span>
-                    <span>HIGH SCORE</span>
+
+                <button
+                    id="highScoreButton"
+                    class="menu-button"
+                >
+
+                    <span>
+                        🏆
+                    </span>
+
+                    <span>
+                        HIGH SCORE
+                    </span>
+
                 </button>
 
-                <button id="leaderboardButton" class="menu-button">
-                    <span>🌎</span>
-                    <span>LEADERBOARD</span>
+
+                <button
+                    id="leaderboardButton"
+                    class="menu-button"
+                >
+
+                    <span>
+                        🌎
+                    </span>
+
+                    <span>
+                        LEADERBOARD
+                    </span>
+
                 </button>
 
             </div>
@@ -64,13 +140,28 @@
             <div class="menu-stats">
 
                 <div>
-                    <span>HIGH SCORE</span>
-                    <strong id="menuHighScore">0</strong>
+
+                    <span>
+                        HIGH SCORE
+                    </span>
+
+                    <strong id="menuHighScore">
+                        0
+                    </strong>
+
                 </div>
 
+
                 <div>
-                    <span>TIME</span>
-                    <strong>1:00</strong>
+
+                    <span>
+                        TIME
+                    </span>
+
+                    <strong>
+                        1:00
+                    </strong>
+
                 </div>
 
             </div>
@@ -78,11 +169,15 @@
 
             <div class="instructions">
 
-                <span>🎯</span>
+                <span>
+                    🎯
+                </span>
 
                 FIND WATSON AS MANY TIMES AS POSSIBLE
 
-                <span>🎯</span>
+                <span>
+                    🎯
+                </span>
 
             </div>
 
@@ -91,15 +186,21 @@
     </main>
 
 
-    <!-- =========================
+    <!-- =====================================================
          HIGH SCORE MODAL
-    ========================== -->
+    ====================================================== -->
 
-    <div id="highScoreModal" class="modal hidden">
+    <div
+        id="highScoreModal"
+        class="modal hidden"
+    >
 
         <div class="modal-box">
 
-            <button id="closeHighScore" class="close-button">
+            <button
+                id="closeHighScore"
+                class="close-button"
+            >
                 ×
             </button>
 
@@ -107,9 +208,14 @@
                 🏆
             </div>
 
-            <h2>HIGH SCORE</h2>
+            <h2>
+                HIGH SCORE
+            </h2>
 
-            <div id="modalHighScore" class="big-score">
+            <div
+                id="modalHighScore"
+                class="big-score"
+            >
                 0
             </div>
 
@@ -117,7 +223,10 @@
                 Can you beat it?
             </p>
 
-            <button id="modalPlayButton" class="play-button small">
+            <button
+                id="modalPlayButton"
+                class="play-button small"
+            >
                 PLAY
             </button>
 
@@ -126,11 +235,16 @@
     </div>
 
 
-    <!-- =========================
+    <!-- =====================================================
          GAME
-    ========================== -->
+    ====================================================== -->
 
-    <main id="gameScreen" class="screen hidden">
+    <main
+        id="gameScreen"
+        class="screen hidden"
+    >
+
+        <!-- TOP BAR -->
 
         <header id="topBar">
 
@@ -191,8 +305,8 @@
 
                     <div
                         id="levelProgressBar"
-                        class="level-progress-fill">
-                    </div>
+                        class="level-progress-fill"
+                    ></div>
 
                 </div>
 
@@ -206,13 +320,26 @@
                 </span>
 
                 <strong id="timer">
-                    1:01
+                    1:00
                 </strong>
 
             </div>
 
         </header>
 
+
+        <!-- PAUSE BUTTON -->
+
+        <button
+            id="pauseButton"
+            class="pause-button"
+            aria-label="Pause game"
+        >
+            ⏸
+        </button>
+
+
+        <!-- GAME AREA -->
 
         <section id="gameArea">
 
@@ -223,7 +350,7 @@
 
             <img
                 id="watson"
-                src="assets/watson.png"
+                src="watson.png"
                 draggable="false"
                 alt="Watson"
             >
@@ -262,70 +389,56 @@
     </main>
 
 
-    <!-- =========================
-         LEADERBOARD
-    ========================== -->
+    <!-- =====================================================
+         PAUSE OVERLAY
+    ====================================================== -->
 
-    <main id="leaderboardScreen" class="screen hidden">
+    <div
+        id="pauseOverlay"
+        class="pause-overlay hidden"
+    >
 
-        <div class="leaderboard-container">
+        <div class="pause-box">
+
+            <div class="pause-icon">
+                ⏸
+            </div>
+
+            <div class="pause-small">
+                GAME PAUSED
+            </div>
+
+            <h2>
+                TAKE A BREAK
+            </h2>
 
             <button
-                id="leaderboardBackButton"
-                class="back-button">
-                ← BACK
+                id="resumeButton"
+                class="play-button"
+            >
+                ▶ RESUME
             </button>
 
-
-            <div class="leaderboard-header">
-
-                <div class="leaderboard-icon">
-                    🏆
-                </div>
-
-                <div class="leaderboard-small">
-                    GLOBAL RANKINGS
-                </div>
-
-                <h1>
-                    LEADERBOARD
-                </h1>
-
-                <p>
-                    The Top 10 Watson Hunters
-                </p>
-
-            </div>
-
-
-            <div class="leaderboard-table-header">
-
-                <span>RANK</span>
-                <span>NAME</span>
-                <span>SCORE</span>
-                <span>DATE</span>
-
-            </div>
-
-
-            <div id="leaderboardList">
-
-                <div class="leaderboard-loading">
-                    Loading leaderboard...
-                </div>
-
-            </div>
+            <button
+                id="pauseMenuButton"
+                class="menu-button"
+            >
+                MAIN MENU
+            </button>
 
         </div>
 
-    </main>
+    </div>
 
 
-    <!-- =========================
+    <!-- =====================================================
          GAME OVER
-    ========================== -->
+    ====================================================== -->
 
-    <main id="gameOverScreen" class="screen hidden">
+    <main
+        id="gameOverScreen"
+        class="screen hidden"
+    >
 
         <div class="game-over-container">
 
@@ -351,7 +464,10 @@
             </div>
 
 
-            <div id="newHighScore" class="new-high-score hidden">
+            <div
+                id="newHighScore"
+                class="new-high-score hidden"
+            >
                 🏆 NEW HIGH SCORE 🏆
             </div>
 
@@ -360,7 +476,9 @@
 
                 <div class="result-card">
 
-                    <span>🎯 WATSONS</span>
+                    <span>
+                        🎯 WATSONS
+                    </span>
 
                     <strong id="finalWatsons">
                         0
@@ -371,7 +489,9 @@
 
                 <div class="result-card">
 
-                    <span>🔥 BEST STREAK</span>
+                    <span>
+                        🔥 BEST STREAK
+                    </span>
 
                     <strong id="finalBestStreak">
                         0
@@ -382,7 +502,9 @@
 
                 <div class="result-card">
 
-                    <span>🎯 ACCURACY</span>
+                    <span>
+                        🎯 ACCURACY
+                    </span>
 
                     <strong id="finalAccuracy">
                         0%
@@ -393,7 +515,9 @@
 
                 <div class="result-card">
 
-                    <span>📈 LEVEL</span>
+                    <span>
+                        📈 LEVEL
+                    </span>
 
                     <strong id="finalLevel">
                         1
@@ -408,21 +532,24 @@
 
                 <button
                     id="playAgainButton"
-                    class="play-button">
+                    class="play-button"
+                >
                     PLAY AGAIN
                 </button>
 
 
                 <button
                     id="addLeaderboardButton"
-                    class="play-button">
+                    class="play-button leaderboard-submit-gameover"
+                >
                     🏆 ADD TO LEADERBOARD
                 </button>
 
 
                 <button
                     id="menuButton"
-                    class="menu-button">
+                    class="menu-button"
+                >
                     MAIN MENU
                 </button>
 
@@ -433,13 +560,92 @@
     </main>
 
 
-    <!-- =========================
-         LEADERBOARD NAME POPUP
-    ========================== -->
+    <!-- =====================================================
+         LEADERBOARD
+    ====================================================== -->
+
+    <main
+        id="leaderboardScreen"
+        class="screen hidden"
+    >
+
+        <div class="leaderboard-container">
+
+            <button
+                id="leaderboardBackButton"
+                class="back-button"
+            >
+                ← BACK
+            </button>
+
+
+            <div class="leaderboard-header">
+
+                <div class="leaderboard-icon">
+                    🏆
+                </div>
+
+                <div class="leaderboard-small">
+                    GLOBAL RANKINGS
+                </div>
+
+                <h1>
+                    LEADERBOARD
+                </h1>
+
+                <p>
+                    THE TOP 10 WATSON HUNTERS
+                </p>
+
+            </div>
+
+
+            <div class="leaderboard-table">
+
+                <div class="leaderboard-table-header">
+
+                    <div>
+                        RANK
+                    </div>
+
+                    <div>
+                        NAME
+                    </div>
+
+                    <div>
+                        SCORE
+                    </div>
+
+                    <div>
+                        DATE
+                    </div>
+
+                </div>
+
+
+                <div id="leaderboardList">
+
+                    <div class="leaderboard-loading">
+                        Loading leaderboard...
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- =====================================================
+         LEADERBOARD NAME MODAL
+    ====================================================== -->
 
     <div
         id="leaderboardNameOverlay"
-        class="pause-overlay hidden">
+        class="pause-overlay hidden"
+    >
 
         <div class="pause-box leaderboard-name-box">
 
@@ -456,39 +662,45 @@
             </h2>
 
 
-            <p>
-                Score:
-                <strong id="leaderboardScore">
-                    0
-                </strong>
-            </p>
+            <div class="leaderboard-score-label">
+                YOUR SCORE
+            </div>
+
+            <div
+                id="leaderboardScore"
+                class="leaderboard-big-score"
+            >
+                0
+            </div>
 
 
             <input
                 id="leaderboardNameInput"
                 type="text"
                 maxlength="20"
-                placeholder="Enter your name"
+                placeholder="ENTER YOUR NAME"
                 autocomplete="off"
             >
 
 
             <p
                 id="leaderboardNameError"
-                class="leaderboard-error">
-            </p>
+                class="leaderboard-error"
+            ></p>
 
 
             <button
                 id="submitLeaderboardButton"
-                class="play-button">
+                class="play-button"
+            >
                 SUBMIT SCORE
             </button>
 
 
             <button
                 id="cancelLeaderboardButton"
-                class="menu-button">
+                class="menu-button"
+            >
                 CANCEL
             </button>
 
@@ -497,121 +709,26 @@
     </div>
 
 
-    <!-- =========================
+    <!-- =====================================================
          MUSIC
-    ========================== -->
+    ====================================================== -->
 
     <audio
         id="gameMusic"
-        src="assets/music.mp3"
+        src="music.mp3"
         loop
-        preload="auto">
-    </audio>
+        preload="auto"
+    ></audio>
 
 
-    <!-- =========================
-         FIREBASE
-         THIS IS THE ONLY FIREBASE
-         INITIALIZATION
-    ========================== -->
+    <!-- =====================================================
+         ONLY ONE SCRIPT
+    ====================================================== -->
 
-    <script type="module">
-
-        import {
-            initializeApp
-        } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
-
-
-        import {
-            getDatabase,
-            ref,
-            set,
-            get,
-            query,
-            orderByChild
-        } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-database.js";
-
-
-        const firebaseConfig = {
-
-            apiKey:
-                "AIzaSyAvs8RGpxommOqs_5Xe5JgKZp5xcSsFlQw",
-
-            authDomain:
-                "find-the-watson-game.firebaseapp.com",
-
-            projectId:
-                "find-the-watson-game",
-
-            storageBucket:
-                "find-the-watson-game.firebasestorage.app",
-
-            messagingSenderId:
-                "642451332683",
-
-            appId:
-                "1:642451332683:web:125d0f0b1b7c825d5b37ce",
-
-            measurementId:
-                "G-L8CLXMKT2R"
-
-        };
-
-
-        console.log(
-            "[FIREBASE] Initializing..."
-        );
-
-
-        const app =
-            initializeApp(firebaseConfig);
-
-
-        const database =
-            getDatabase(app);
-
-
-        window.firebaseDatabase =
-            database;
-
-
-        window.firebaseRef =
-            ref;
-
-
-        window.firebaseSet =
-            set;
-
-
-        window.firebaseGet =
-            get;
-
-
-        window.firebaseQuery =
-            query;
-
-
-        window.firebaseOrderByChild =
-            orderByChild;
-
-
-        window.firebaseReady =
-            true;
-
-
-        console.log(
-            "[FIREBASE] Firebase initialized successfully!"
-        );
-
-    </script>
-
-
-    <!-- =========================
-         GAME SCRIPT
-    ========================== -->
-
-    <script src="script.js"></script>
-
+    <script
+        type="module"
+        src="script.js"
+    ></script>
 
 </body>
 
