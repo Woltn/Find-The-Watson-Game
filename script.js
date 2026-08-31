@@ -8,7 +8,7 @@
 // SETTINGS
 // ============================================================
 
-const GAME_LENGTH = 61;
+const GAME_LENGTH = 5;
 
 const STARTING_WATSON_SIZE = 115;
 const MIN_WATSON_SIZE = 37;
@@ -1290,5 +1290,140 @@ if (leaderboardBackButton) {
 } else {
 
     console.error("❌ leaderboardBackButton NOT FOUND");
+
+}
+
+// ============================================================
+// LEADERBOARD NAME PROMPT
+// ============================================================
+
+const addLeaderboardButton =
+    document.getElementById("addLeaderboardButton");
+
+const leaderboardNameOverlay =
+    document.getElementById("leaderboardNameOverlay");
+
+const leaderboardNameInput =
+    document.getElementById("leaderboardNameInput");
+
+const leaderboardNameError =
+    document.getElementById("leaderboardNameError");
+
+const submitLeaderboardButton =
+    document.getElementById("submitLeaderboardButton");
+
+const cancelLeaderboardButton =
+    document.getElementById("cancelLeaderboardButton");
+
+
+console.log("🏆 Leaderboard name prompt loaded");
+
+
+// ------------------------------------------------------------
+// OPEN NAME PROMPT
+// ------------------------------------------------------------
+
+if (addLeaderboardButton) {
+
+    addLeaderboardButton.addEventListener("click", function() {
+
+        console.log("🏆 ADD TO LEADERBOARD CLICKED");
+
+        leaderboardNameInput.value = "";
+        leaderboardNameError.textContent = "";
+
+        leaderboardNameOverlay.classList.remove("hidden");
+
+        setTimeout(function() {
+
+            leaderboardNameInput.focus();
+
+        }, 100);
+
+    });
+
+}
+
+
+// ------------------------------------------------------------
+// CANCEL
+// ------------------------------------------------------------
+
+if (cancelLeaderboardButton) {
+
+    cancelLeaderboardButton.addEventListener("click", function() {
+
+        console.log("❌ Name prompt cancelled");
+
+        leaderboardNameOverlay.classList.add("hidden");
+
+    });
+
+}
+
+
+// ------------------------------------------------------------
+// CONTINUE
+// ------------------------------------------------------------
+
+if (submitLeaderboardButton) {
+
+    submitLeaderboardButton.addEventListener("click", function() {
+
+        const name =
+            leaderboardNameInput.value.trim();
+
+        console.log("👤 Entered name:", name);
+
+
+        if (name.length === 0) {
+
+            leaderboardNameError.textContent =
+                "Please enter a name.";
+
+            return;
+
+        }
+
+
+        console.log(
+            "✅ Name accepted:",
+            name
+        );
+
+        console.log(
+            "📊 Score that will eventually be submitted:",
+            score
+        );
+
+
+        // For now, just close the prompt.
+        // We will connect this to Firebase later.
+
+        leaderboardNameOverlay.classList.add("hidden");
+
+    });
+
+}
+
+
+// ------------------------------------------------------------
+// ENTER KEY
+// ------------------------------------------------------------
+
+if (leaderboardNameInput) {
+
+    leaderboardNameInput.addEventListener(
+        "keydown",
+        function(event) {
+
+            if (event.key === "Enter") {
+
+                submitLeaderboardButton.click();
+
+            }
+
+        }
+    );
 
 }
