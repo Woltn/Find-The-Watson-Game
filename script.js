@@ -1,3 +1,30 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+
+import {
+    getDatabase,
+    ref,
+    set,
+    get,
+    query,
+    orderByChild
+} from "https://www.gstatic.com/firebasejs/12.4.0/firebase-database.js";
+
+
+const firebaseConfig = {
+    apiKey: "AIzaSyAvs8RGpxommOqs_5Xe5JgKZp5xcSsFlQw",
+    authDomain: "find-the-watson-game.firebaseapp.com",
+    projectId: "find-the-watson-game",
+    storageBucket: "find-the-watson-game.firebasestorage.app",
+    messagingSenderId: "642451332683",
+    appId: "1:642451332683:web:125d0f0b1b7c825d5b37ce",
+    measurementId: "G-L8CLXMKT2R"
+};
+
+
+const app = initializeApp(firebaseConfig);
+
+const database = getDatabase(app);
+
 // ============================================================
 // FIND WATSON
 // Version 3
