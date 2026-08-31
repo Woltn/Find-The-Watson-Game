@@ -1,3 +1,98 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+
+import {
+    getDatabase,
+    ref,
+    get,
+    set,
+    query,
+    orderByChild
+} from "https://www.gstatic.com/firebasejs/12.4.0/firebase-database.js";
+
+console.log("======================================");
+console.log("🔥 FIREBASE LEADERBOARD MODULE LOADED");
+console.log("======================================");
+
+// ============================================================
+// FIREBASE CONFIG
+// ============================================================
+
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyAvs8RGpxommOqs_5Xe5JgKZp5xcSsFlQw",
+
+    authDomain:
+        "find-the-watson-game.firebaseapp.com",
+
+    projectId:
+        "find-the-watson-game",
+
+    storageBucket:
+        "find-the-watson-game.firebasestorage.app",
+
+    messagingSenderId:
+        "642451332683",
+
+    appId:
+        "1:642451332683:web:125d0f0b1b7c825d5b37ce",
+
+    measurementId:
+        "G-L8CLXMKT2R"
+
+};
+
+console.log("🔥 Firebase config loaded");
+
+
+// ============================================================
+// FIREBASE INITIALIZATION
+// ============================================================
+
+let firebaseApp = null;
+let database = null;
+let firebaseReady = false;
+
+try {
+
+    console.log("🔥 Initializing Firebase...");
+
+    firebaseApp =
+        initializeApp(firebaseConfig);
+
+    console.log(
+        "✅ Firebase app initialized:",
+        firebaseApp
+    );
+
+    database =
+        getDatabase(firebaseApp);
+
+    console.log(
+        "✅ Firebase database initialized:",
+        database
+    );
+
+    firebaseReady = true;
+
+    console.log(
+        "🟢 Firebase leaderboard is READY"
+    );
+
+}
+
+catch (error) {
+
+    console.error(
+        "🔴 FIREBASE INITIALIZATION FAILED"
+    );
+
+    console.error(error);
+
+    firebaseReady = false;
+
+}
+
 // ============================================================
 // FIND WATSON
 // Version 2
@@ -30,7 +125,8 @@ const WATSONS_PER_LEVEL = 4;
 const gameMusic =
     document.getElementById("gameMusic");
 
-enuScreen =
+const menuScreen =
+    document.getElementById("menuScreen");
     document.getElementById("menuScreen");
 
 const gameScreen =
@@ -1230,68 +1326,897 @@ console.log(
 );
 
 // ============================================================
-// LEADERBOARD BUTTON TEST
+// FIREBASE LEADERBOARD
 // ============================================================
 
-console.log("🏆 Leaderboard button system loading...");
-
-const leaderboardButton = document.getElementById("leaderboardButton");
-const leaderboardScreen = document.getElementById("leaderboardScreen");
-const leaderboardBackButton = document.getElementById("leaderboardBackButton");
-
-console.log("Leaderboard button:", leaderboardButton);
-console.log("Leaderboard screen:", leaderboardScreen);
-console.log("Leaderboard back button:", leaderboardBackButton);
+console.log("");
+console.log("======================================");
+console.log("🏆 LEADERBOARD SYSTEM STARTING");
+console.log("======================================");
 
 
+const leaderboardButton =
+    document.getElementById("leaderboardButton");
+
+const leaderboardScreen =
+    document.getElementById("leaderboardScreen");
+
+const leaderboardBackButton =
+    document.getElementById("leaderboardBackButton");
+
+const leaderboardList =
+    document.getElementById("leaderboardList");
+
+const addLeaderboardButton =
+    document.getElementById("addLeaderboardButton");
+
+const leaderboardNameOverlay =
+    document.getElementById("leaderboardNameOverlay");
+
+const leaderboardNameInput =
+    document.getElementById("leaderboardNameInput");
+
+const leaderboardScore =
+    document.getElementById("leaderboardScore");
+
+const leaderboardNameError =
+    document.getElementById("leaderboardNameError");
+
+const submitLeaderboardButton =
+    document.getElementById("submitLeaderboardButton");
+
+const cancelLeaderboardButton =
+    document.getElementById("cancelLeaderboardButton");
+
+
+console.log(
+    "🏆 Leaderboard elements:"
+);
+
+console.log(
+    "Button:",
+    leaderboardButton
+);
+
+console.log(
+    "Screen:",
+    leaderboardScreen
+);
+
+console.log(
+    "Back:",
+    leaderboardBackButton
+);
+
+console.log(
+    "List:",
+    leaderboardList
+);
+
+console.log(
+    "Add:",
+    addLeaderboardButton
+);
+
+console.log(
+    "Name overlay:",
+    leaderboardNameOverlay
+);
+
+console.log(
+    "Name input:",
+    leaderboardNameInput
+);
+
+console.log(
+    "Score:",
+    leaderboardScore
+);
+
+console.log(
+    "Submit:",
+    submitLeaderboardButton
+);
+
+console.log(
+    "Cancel:",
+    cancelLeaderboardButton
+);
+
+
+// ============================================================
 // OPEN LEADERBOARD
+// ============================================================
+
 if (leaderboardButton) {
 
-    leaderboardButton.addEventListener("click", function () {
+    leaderboardButton.addEventListener(
+        "click",
+        function() {
 
-        console.log("🏆 LEADERBOARD BUTTON CLICKED");
+            console.log("");
+            console.log(
+                "🏆 LEADERBOARD BUTTON CLICKED"
+            );
 
-        // Hide all screens
-        document.querySelectorAll(".screen").forEach(function(screen) {
-            screen.classList.add("hidden");
-        });
+            document
+                .querySelectorAll(".screen")
+                .forEach(function(screen) {
 
-        // Show leaderboard
-        leaderboardScreen.classList.remove("hidden");
+                    screen.classList.add(
+                        "hidden"
+                    );
 
-        console.log("✅ Leaderboard screen opened");
+                });
 
-    });
 
-} else {
+            if (leaderboardScreen) {
 
-    console.error("❌ leaderboardButton NOT FOUND");
+                leaderboardScreen.classList.remove(
+                    "hidden"
+                );
+
+                console.log(
+                    "✅ Leaderboard screen opened"
+                );
+
+            }
+
+
+            loadLeaderboard();
+
+        }
+    );
+
+    console.log(
+        "✅ Leaderboard button listener attached"
+    );
+
+}
+
+else {
+
+    console.error(
+        "❌ leaderboardButton NOT FOUND"
+    );
 
 }
 
 
+// ============================================================
 // BACK BUTTON
+// ============================================================
+
 if (leaderboardBackButton) {
 
-    leaderboardBackButton.addEventListener("click", function () {
+    leaderboardBackButton.addEventListener(
+        "click",
+        function() {
 
-        console.log("← LEADERBOARD BACK BUTTON CLICKED");
+            console.log(
+                "← LEADERBOARD BACK CLICKED"
+            );
 
-        // Hide leaderboard
-        leaderboardScreen.classList.add("hidden");
 
-        // Show menu
-        document.getElementById("menuScreen").classList.remove("hidden");
+            if (leaderboardScreen) {
 
-        console.log("✅ Returned to menu");
+                leaderboardScreen.classList.add(
+                    "hidden"
+                );
 
-    });
+            }
 
-} else {
 
-    console.error("❌ leaderboardBackButton NOT FOUND");
+            if (menuScreen) {
+
+                menuScreen.classList.remove(
+                    "hidden"
+                );
+
+            }
+
+
+            console.log(
+                "✅ Returned to menu"
+            );
+
+        }
+    );
 
 }
+
+else {
+
+    console.error(
+        "❌ leaderboardBackButton NOT FOUND"
+    );
+
+}
+
+
+// ============================================================
+// LOAD LEADERBOARD
+// ============================================================
+
+async function loadLeaderboard() {
+
+    console.log("");
+    console.log(
+        "📡 LOADING FIREBASE LEADERBOARD..."
+    );
+
+
+    if (!leaderboardList) {
+
+        console.error(
+            "❌ leaderboardList missing"
+        );
+
+        return;
+
+    }
+
+
+    leaderboardList.innerHTML =
+        "<p>LOADING LEADERBOARD...</p>";
+
+
+    if (!firebaseReady || !database) {
+
+        console.error(
+            "❌ Firebase is not ready"
+        );
+
+        leaderboardList.innerHTML =
+            "<p>LEADERBOARD UNAVAILABLE</p>";
+
+        return;
+
+    }
+
+
+    try {
+
+        console.log(
+            "📡 Reading database path: leaderboard"
+        );
+
+
+        const leaderboardRef =
+            ref(
+                database,
+                "leaderboard"
+            );
+
+
+        const leaderboardQuery =
+            query(
+                leaderboardRef,
+                orderByChild("score")
+            );
+
+
+        const snapshot =
+            await get(
+                leaderboardQuery
+            );
+
+
+        console.log(
+            "📦 Firebase snapshot:",
+            snapshot
+        );
+
+
+        if (!snapshot.exists()) {
+
+            console.log(
+                "ℹ️ No leaderboard scores yet"
+            );
+
+            leaderboardList.innerHTML =
+                "<p>NO SCORES YET!</p>";
+
+            return;
+
+        }
+
+
+        const scores = [];
+
+
+        snapshot.forEach(
+            function(child) {
+
+                const data =
+                    child.val();
+
+
+                console.log(
+                    "📦 Score found:",
+                    data
+                );
+
+
+                scores.push({
+
+                    name:
+                        data.name || "Unknown",
+
+                    date:
+                        data.date || "--/--/--",
+
+                    score:
+                        Number(
+                            data.score || 0
+                        )
+
+                });
+
+            }
+        );
+
+
+        // Highest score first
+
+        scores.sort(
+            function(a, b) {
+
+                return b.score - a.score;
+
+            }
+        );
+
+
+        console.log(
+            "🏆 SORTED SCORES:",
+            scores
+        );
+
+
+        leaderboardList.innerHTML = "";
+
+
+        scores
+            .slice(0, 10)
+            .forEach(
+                function(player, index) {
+
+                    const row =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    row.className =
+                        "leaderboard-row";
+
+
+                    const rank =
+                        index + 1;
+
+
+                    row.innerHTML = `
+
+                        <div class="leaderboard-rank">
+                            #${rank}
+                        </div>
+
+                        <div class="leaderboard-name">
+                            ${escapeLeaderboardHTML(
+                                player.name
+                            )}
+                        </div>
+
+                        <div class="leaderboard-date">
+                            ${escapeLeaderboardHTML(
+                                player.date
+                            )}
+                        </div>
+
+                        <div class="leaderboard-score">
+                            ${player.score.toLocaleString()}
+                        </div>
+
+                    `;
+
+
+                    leaderboardList.appendChild(
+                        row
+                    );
+
+                }
+            );
+
+
+        console.log(
+            "✅ LEADERBOARD DISPLAYED"
+        );
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "🔴 FAILED TO LOAD LEADERBOARD"
+        );
+
+        console.error(
+            error
+        );
+
+
+        leaderboardList.innerHTML =
+            "<p>FAILED TO LOAD LEADERBOARD</p>";
+
+    }
+
+}
+
+
+// ============================================================
+// ESCAPE HTML
+// ============================================================
+
+function escapeLeaderboardHTML(text) {
+
+    return String(text)
+
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
+
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
+
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
+
+        .replaceAll(
+            '"',
+            "&quot;"
+        )
+
+        .replaceAll(
+            "'",
+            "&#039;"
+        );
+
+}
+
+
+// ============================================================
+// ADD TO LEADERBOARD
+// ============================================================
+
+if (addLeaderboardButton) {
+
+    addLeaderboardButton.addEventListener(
+        "click",
+        function() {
+
+            console.log("");
+            console.log(
+                "🏆 ADD TO LEADERBOARD CLICKED"
+            );
+
+
+            console.log(
+                "Current score:",
+                score
+            );
+
+
+            if (leaderboardScore) {
+
+                leaderboardScore.textContent =
+                    score.toLocaleString();
+
+            }
+
+
+            if (leaderboardNameInput) {
+
+                leaderboardNameInput.value = "";
+
+            }
+
+
+            if (leaderboardNameError) {
+
+                leaderboardNameError.textContent =
+                    "";
+
+            }
+
+
+            if (leaderboardNameOverlay) {
+
+                leaderboardNameOverlay.classList.remove(
+                    "hidden"
+                );
+
+            }
+
+
+            setTimeout(
+                function() {
+
+                    if (leaderboardNameInput) {
+
+                        leaderboardNameInput.focus();
+
+                    }
+
+                },
+                100
+            );
+
+        }
+    );
+
+
+    console.log(
+        "✅ Add leaderboard listener attached"
+    );
+
+}
+
+else {
+
+    console.error(
+        "❌ addLeaderboardButton NOT FOUND"
+    );
+
+}
+
+
+// ============================================================
+// CANCEL
+// ============================================================
+
+if (cancelLeaderboardButton) {
+
+    cancelLeaderboardButton.addEventListener(
+        "click",
+        function() {
+
+            console.log(
+                "❌ LEADERBOARD NAME CANCELLED"
+            );
+
+
+            leaderboardNameOverlay.classList.add(
+                "hidden"
+            );
+
+        }
+    );
+
+}
+
+
+// ============================================================
+// SUBMIT
+// ============================================================
+
+if (submitLeaderboardButton) {
+
+    submitLeaderboardButton.addEventListener(
+        "click",
+        submitLeaderboardScore
+    );
+
+}
+
+
+// ============================================================
+// ENTER KEY
+// ============================================================
+
+if (leaderboardNameInput) {
+
+    leaderboardNameInput.addEventListener(
+        "keydown",
+        function(event) {
+
+            if (
+                event.key === "Enter"
+            ) {
+
+                submitLeaderboardScore();
+
+            }
+
+        }
+    );
+
+}
+
+
+// ============================================================
+// SUBMIT SCORE
+// ============================================================
+
+async function submitLeaderboardScore() {
+
+    console.log("");
+    console.log(
+        "======================================"
+    );
+
+    console.log(
+        "🏆 SUBMITTING SCORE"
+    );
+
+    console.log(
+        "======================================"
+    );
+
+
+    if (!firebaseReady || !database) {
+
+        console.error(
+            "❌ Firebase NOT READY"
+        );
+
+        leaderboardNameError.textContent =
+            "Leaderboard unavailable.";
+
+        return;
+
+    }
+
+
+    const name =
+        leaderboardNameInput.value.trim();
+
+
+    console.log(
+        "👤 Name:",
+        name
+    );
+
+    console.log(
+        "🎯 Score:",
+        score
+    );
+
+
+    if (name.length < 2) {
+
+        console.warn(
+            "❌ Name too short"
+        );
+
+        leaderboardNameError.textContent =
+            "Please enter at least 2 characters.";
+
+        return;
+
+    }
+
+
+    if (name.length > 20) {
+
+        console.warn(
+            "❌ Name too long"
+        );
+
+        leaderboardNameError.textContent =
+            "Name must be 20 characters or less.";
+
+        return;
+
+    }
+
+
+    submitLeaderboardButton.disabled =
+        true;
+
+
+    submitLeaderboardButton.textContent =
+        "SAVING...";
+
+
+    try {
+
+        const cleanName =
+            name
+                .toLowerCase()
+                .replace(
+                    /[^a-z0-9_-]/g,
+                    "_"
+                );
+
+
+        console.log(
+            "🔑 Database key:",
+            cleanName
+        );
+
+
+        const scoreRef =
+            ref(
+                database,
+                "leaderboard/" +
+                cleanName
+            );
+
+
+        console.log(
+            "📡 Checking existing player..."
+        );
+
+
+        const existing =
+            await get(scoreRef);
+
+
+        if (existing.exists()) {
+
+            const existingData =
+                existing.val();
+
+
+            const existingScore =
+                Number(
+                    existingData.score || 0
+                );
+
+
+            console.log(
+                "📦 Existing score:",
+                existingScore
+            );
+
+
+            if (
+                score <=
+                existingScore
+            ) {
+
+                console.log(
+                    "ℹ️ Existing score is higher"
+                );
+
+
+                leaderboardNameError.textContent =
+                    `Your existing score is ${existingScore}.`;
+
+                return;
+
+            }
+
+        }
+
+
+        const now =
+            new Date();
+
+
+        const date =
+            `${String(
+                now.getDate()
+            ).padStart(2, "0")}/` +
+
+            `${String(
+                now.getMonth() + 1
+            ).padStart(2, "0")}/` +
+
+            `${now.getFullYear()}`;
+
+
+        const scoreData = {
+
+            name:
+                name,
+
+            date:
+                date,
+
+            score:
+                Number(score)
+
+        };
+
+
+        console.log(
+            "📤 SAVING:",
+            scoreData
+        );
+
+
+        await set(
+            scoreRef,
+            scoreData
+        );
+
+
+        console.log(
+            "✅ SCORE SAVED TO FIREBASE!"
+        );
+
+
+        leaderboardNameOverlay.classList.add(
+            "hidden"
+        );
+
+
+        // Show leaderboard
+
+        document
+            .querySelectorAll(".screen")
+            .forEach(function(screen) {
+
+                screen.classList.add(
+                    "hidden"
+                );
+
+            });
+
+
+        leaderboardScreen.classList.remove(
+            "hidden"
+        );
+
+
+        await loadLeaderboard();
+
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "🔴 SCORE SAVE FAILED"
+        );
+
+        console.error(
+            error
+        );
+
+
+        leaderboardNameError.textContent =
+            "Failed to save score.";
+
+    }
+
+    finally {
+
+        submitLeaderboardButton.disabled =
+            false;
+
+
+        submitLeaderboardButton.textContent =
+            "SUBMIT SCORE";
+
+    }
+
+}
+
+console.log("");
+console.log(
+    "======================================"
+);
+
+console.log(
+    "✅ LEADERBOARD SYSTEM READY"
+);
+
+console.log(
+    "Firebase ready:",
+    firebaseReady
+);
+
+console.log(
+    "======================================"
+);
 
 // ============================================================
 // LEADERBOARD NAME PROMPT
