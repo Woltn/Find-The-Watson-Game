@@ -1,1848 +1,1970 @@
-// ============================================================
-// FIND WATSON
-// ============================================================
+/* ============================================================
+   FIND WATSON
+   COMPLETE STYLESHEET
+============================================================ */
 
 
-// ============================================================
-// SETTINGS
-// ============================================================
+/* ============================================================
+   RESET
+============================================================ */
 
-const GAME_LENGTH = 61;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-const STARTING_WATSON_SIZE = 115;
-const MIN_WATSON_SIZE = 37;
 
-const STARTING_FIND_TIME = 20;
-const MIN_FIND_TIME = 2.5;
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
 
-const POINTS_PER_FIND = 12;
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
 
-const WRONG_CLICK_PENALTY = 10;
+    background: #080808;
+    color: white;
+}
 
-const WATSONS_PER_LEVEL = 4;
 
+button,
+input {
+    font-family: inherit;
+}
 
-// ============================================================
-// ELEMENTS
-// ============================================================
 
-const gameMusic =
-    document.getElementById("gameMusic");
+button {
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
 
-const menuScreen =
-    document.getElementById("menuScreen");
 
-const gameScreen =
-    document.getElementById("gameScreen");
+.hidden {
+    display: none !important;
+}
 
-const gameOverScreen =
-    document.getElementById("gameOverScreen");
 
-const leaderboardScreen =
-    document.getElementById("leaderboardScreen");
+/* ============================================================
+   SCREENS
+============================================================ */
 
-const playButton =
-    document.getElementById("playButton");
+.screen {
+    position: fixed;
+    inset: 0;
 
-const playAgainButton =
-    document.getElementById("playAgainButton");
+    width: 100%;
+    height: 100%;
 
-const menuButton =
-    document.getElementById("menuButton");
+    z-index: 1;
+}
 
-const highScoreButton =
-    document.getElementById("highScoreButton");
 
-const leaderboardButton =
-    document.getElementById("leaderboardButton");
+/* ============================================================
+   LOADING SCREEN
+============================================================ */
 
-const leaderboardBackButton =
-    document.getElementById("leaderboardBackButton");
+#loadingScreen {
+    position: fixed;
+    inset: 0;
 
-const highScoreModal =
-    document.getElementById("highScoreModal");
+    z-index: 10000;
 
-const closeHighScore =
-    document.getElementById("closeHighScore");
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-const modalPlayButton =
-    document.getElementById("modalPlayButton");
-
-const watson =
-    document.getElementById("watson");
-
-const gameArea =
-    document.getElementById("gameArea");
-
-const scoreDisplay =
-    document.getElementById("score");
-
-const streakDisplay =
-    document.getElementById("streak");
-
-const multiplierDisplay =
-    document.getElementById("multiplier");
-
-const levelDisplay =
-    document.getElementById("level");
-
-const timerDisplay =
-    document.getElementById("timer");
-
-const findTimerDisplay =
-    document.getElementById("findTimer");
-
-const levelProgressBar =
-    document.getElementById("levelProgressBar");
-
-const levelMessage =
-    document.getElementById("levelMessage");
-
-const levelMessageSmall =
-    document.getElementById("levelMessageSmall");
-
-const levelMessageBig =
-    document.getElementById("levelMessageBig");
-
-const feedback =
-    document.getElementById("feedback");
-
-const menuHighScore =
-    document.getElementById("menuHighScore");
-
-const modalHighScore =
-    document.getElementById("modalHighScore");
-
-const finalScore =
-    document.getElementById("finalScore");
-
-const finalWatsons =
-    document.getElementById("finalWatsons");
-
-const finalBestStreak =
-    document.getElementById("finalBestStreak");
-
-const finalAccuracy =
-    document.getElementById("finalAccuracy");
-
-const finalLevel =
-    document.getElementById("finalLevel");
-
-const newHighScore =
-    document.getElementById("newHighScore");
-
-const leaderboardList =
-    document.getElementById("leaderboardList");
-
-const addLeaderboardButton =
-    document.getElementById("addLeaderboardButton");
-
-const leaderboardNameOverlay =
-    document.getElementById("leaderboardNameOverlay");
-
-const leaderboardNameInput =
-    document.getElementById("leaderboardNameInput");
-
-const leaderboardScore =
-    document.getElementById("leaderboardScore");
-
-const leaderboardNameError =
-    document.getElementById("leaderboardNameError");
-
-const submitLeaderboardButton =
-    document.getElementById("submitLeaderboardButton");
-
-const cancelLeaderboardButton =
-    document.getElementById("cancelLeaderboardButton");
-
-
-// ============================================================
-// BACKGROUNDS
-// ============================================================
-
-const backgrounds = [
-
-    "background1.jpg",
-    "background2.jpg",
-    "background3.jpg",
-    "background4.jpg",
-    "background5.jpg",
-    "background6.jpg",
-    "background7.jpg"
-
-];
-
-
-// ============================================================
-// GAME VARIABLES
-// ============================================================
-
-let score = 0;
-
-let streak = 0;
-
-let bestStreak = 0;
-
-let watsonsFound = 0;
-
-let wrongClicks = 0;
-
-let level = 1;
-
-let gameTime = GAME_LENGTH;
-
-let currentFindTime =
-    STARTING_FIND_TIME;
-
-let currentWatsonSize =
-    STARTING_WATSON_SIZE;
-
-let gameTimer = null;
-
-let findTimer = null;
-
-let gameRunning = false;
-
-
-// ============================================================
-// START GAME
-// ============================================================
-
-function startGame() {
-
-    score = 0;
-
-    streak = 0;
-
-    bestStreak = 0;
-
-    watsonsFound = 0;
-
-    wrongClicks = 0;
-
-    level = 1;
-
-    gameTime = GAME_LENGTH;
-
-    currentFindTime =
-        STARTING_FIND_TIME;
-
-    currentWatsonSize =
-        STARTING_WATSON_SIZE;
-
-    gameRunning = true;
-
-
-    clearInterval(gameTimer);
-    clearInterval(findTimer);
-
-
-    if (gameMusic) {
-
-        gameMusic.currentTime = 0;
-        gameMusic.volume = 0.35;
-
-        gameMusic.play().catch(
-            error => {
-                console.log(
-                    "Music could not autoplay:",
-                    error
-                );
-            }
+    background:
+        radial-gradient(
+            circle at center,
+            #202020,
+            #050505 70%
         );
 
+    transition:
+        opacity 0.4s ease;
+}
+
+
+.loading-box {
+    text-align: center;
+}
+
+
+.loading-icon {
+    font-size: 65px;
+
+    animation:
+        loadingPulse 1s infinite;
+}
+
+
+.loading-title {
+    margin-top: 15px;
+
+    font-size: 35px;
+    font-weight: 1000;
+
+    letter-spacing: 3px;
+}
+
+
+.loading-text {
+    margin-top: 10px;
+
+    color:
+        rgba(255,255,255,0.5);
+
+    font-size: 13px;
+
+    letter-spacing: 2px;
+}
+
+
+@keyframes loadingPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
     }
 
-
-    menuScreen.classList.add("hidden");
-    gameOverScreen.classList.add("hidden");
-    leaderboardScreen.classList.add("hidden");
-    highScoreModal.classList.add("hidden");
-
-
-    gameScreen.classList.remove("hidden");
-
-
-    changeBackground();
-
-    updateDisplays();
-
-    spawnWatson();
-
-    startGameTimer();
-
-    startFindTimer();
-
-
-    showLevelMessage(
-        "GET READY",
-        "LEVEL 1"
-    );
+    50% {
+        transform: scale(1.15);
+    }
 
 }
 
 
-// ============================================================
-// SPAWN WATSON
-// ============================================================
+/* ============================================================
+   BACKGROUND EFFECT
+============================================================ */
 
-function spawnWatson() {
+.background-overlay {
+    position: fixed;
+    inset: 0;
 
-    if (!gameRunning) {
-        return;
-    }
+    pointer-events: none;
 
+    z-index: 0;
 
-    const areaWidth =
-        gameArea.clientWidth;
-
-    const areaHeight =
-        gameArea.clientHeight;
-
-
-    const maxX =
-        Math.max(
-            0,
-            areaWidth - currentWatsonSize
+    background:
+        radial-gradient(
+            circle at 50% 20%,
+            rgba(255,255,255,0.08),
+            transparent 40%
         );
-
-
-    const maxY =
-        Math.max(
-            0,
-            areaHeight - currentWatsonSize
-        );
-
-
-    const randomX =
-        Math.random() * maxX;
-
-    const randomY =
-        Math.random() * maxY;
-
-
-    watson.style.width =
-        `${currentWatsonSize}px`;
-
-    watson.style.left =
-        `${randomX}px`;
-
-    watson.style.top =
-        `${randomY}px`;
-
-    watson.style.display =
-        "block";
-
-
-    const rotation =
-        Math.random() * 12 - 6;
-
-
-    watson.style.transform =
-        `rotate(${rotation}deg)`;
-
 }
 
 
-// ============================================================
-// WATSON CLICK
-// ============================================================
+/* ============================================================
+   MAIN MENU
+============================================================ */
 
-watson.addEventListener(
-    "click",
-    function(event) {
+#menuScreen {
+    display: flex;
 
-        event.stopPropagation();
+    justify-content: center;
+    align-items: center;
 
+    overflow-y: auto;
 
-        if (!gameRunning) {
-            return;
-        }
-
-
-        watsonsFound++;
-
-        streak++;
-
-
-        if (streak > bestStreak) {
-            bestStreak = streak;
-        }
-
-
-        const multiplier =
-            getMultiplier();
-
-
-        const points =
-            Math.round(
-                POINTS_PER_FIND *
-                multiplier
-            );
-
-
-        score += points;
-
-
-        showFeedback(
-            `+${points} 🔥`,
-            event.clientX,
-            event.clientY
-        );
-
-
-        increaseDifficulty();
-
-        checkLevel();
-
-        spawnWatson();
-
-        resetFindTimer();
-
-        updateDisplays();
-
-    }
-);
-
-
-// ============================================================
-// WRONG CLICK
-// ============================================================
-
-gameArea.addEventListener(
-    "click",
-    function(event) {
-
-        if (!gameRunning) {
-            return;
-        }
-
-
-        wrongClicks++;
-
-        score -= WRONG_CLICK_PENALTY;
-
-
-        if (score < 0) {
-            score = 0;
-        }
-
-
-        showFeedback(
-            `-${WRONG_CLICK_PENALTY} ❌`,
-            event.clientX,
-            event.clientY
-        );
-
-
-        updateDisplays();
-
-    }
-);
-
-
-// ============================================================
-// MULTIPLIER
-// ============================================================
-
-function getMultiplier() {
-
-    const multiplierLevel =
-        Math.floor(streak / 1);
-
-
-    return Math.min(
-        1 +
-        multiplierLevel * 0.15,
-        5
-    );
-
-}
-
-
-// ============================================================
-// DIFFICULTY
-// ============================================================
-
-function increaseDifficulty() {
-
-    currentWatsonSize -= 3;
-
-
-    if (
-        currentWatsonSize <
-        MIN_WATSON_SIZE
-    ) {
-
-        currentWatsonSize =
-            MIN_WATSON_SIZE;
-
-    }
-
-}
-
-
-// ============================================================
-// FIND TIMER
-// ============================================================
-
-function startFindTimer() {
-
-    clearInterval(findTimer);
-
-
-    currentFindTime =
-        getFindTime();
-
-
-    updateFindTimer();
-
-
-    findTimer =
-        setInterval(
-            function() {
-
-                if (!gameRunning) {
-                    return;
-                }
-
-
-                currentFindTime -= 1;
-
-
-                updateFindTimer();
-
-
-                if (
-                    currentFindTime <= 0
-                ) {
-
-                    watsonExplodes();
-
-                }
-
-            },
-            1000
-        );
-
-}
-
-
-// ============================================================
-// RESET FIND TIMER
-// ============================================================
-
-function resetFindTimer() {
-
-    currentFindTime =
-        getFindTime();
-
-    updateFindTimer();
-
-}
-
-
-// ============================================================
-// FIND TIME
-// ============================================================
-
-function getFindTime() {
-
-    const reduction =
-        (level - 1) * 3;
-
-
-    return Math.max(
-        STARTING_FIND_TIME -
-        reduction,
-        MIN_FIND_TIME
-    );
-
-}
-
-
-// ============================================================
-// FIND TIMER DISPLAY
-// ============================================================
-
-function updateFindTimer() {
-
-    if (!findTimerDisplay) {
-        return;
-    }
-
-
-    findTimerDisplay.textContent =
-        Math.ceil(currentFindTime);
-
-
-    if (
-        currentFindTime <= 5
-    ) {
-
-        findTimerDisplay.style.color =
-            "#ff4444";
-
-        findTimerDisplay.style.transform =
-            "scale(1.15)";
-
-    } else {
-
-        findTimerDisplay.style.color =
-            "white";
-
-        findTimerDisplay.style.transform =
-            "scale(1)";
-
-    }
-
-}
-
-
-// ============================================================
-// EXPLOSION
-// ============================================================
-
-function watsonExplodes() {
-
-    if (!gameRunning) {
-        return;
-    }
-
-
-    watson.style.display =
-        "none";
-
-
-    streak = 0;
-
-
-    gameScreen.classList.add(
-        "screen-shake"
-    );
-
-
-    setTimeout(
-        function() {
-
-            gameScreen.classList.remove(
-                "screen-shake"
-            );
-
-        },
-        500
-    );
-
-
-    showLevelMessage(
-        "TOO SLOW 💥",
-        "WATSON EXPLODED"
-    );
-
-
-    setTimeout(
-        function() {
-
-            if (!gameRunning) {
-                return;
-            }
-
-
-            spawnWatson();
-
-            resetFindTimer();
-
-        },
-        700
-    );
-
-
-    updateDisplays();
-
-}
-
-
-// ============================================================
-// LEVEL SYSTEM
-// ============================================================
-
-function checkLevel() {
-
-    const newLevel =
-        Math.floor(
-            watsonsFound /
-            WATSONS_PER_LEVEL
-        ) + 1;
-
-
-    if (
-        newLevel >
-        level
-    ) {
-
-        level =
-            newLevel;
-
-
-        showLevelMessage(
-            "LEVEL UP!",
-            `LEVEL ${level}`
-        );
-
-
-        changeBackground();
-
-    }
-
-
-    updateLevelProgress();
-
-}
-
-
-// ============================================================
-// LEVEL PROGRESS
-// ============================================================
-
-function updateLevelProgress() {
-
-    const progress =
-        watsonsFound %
-        WATSONS_PER_LEVEL;
-
-
-    const percentage =
-        (
-            progress /
-            WATSONS_PER_LEVEL
-        ) * 100;
-
-
-    levelProgressBar.style.width =
-        `${percentage}%`;
-
-}
-
-
-// ============================================================
-// LEVEL MESSAGE
-// ============================================================
-
-function showLevelMessage(
-    smallText,
-    bigText
-) {
-
-    levelMessageSmall.textContent =
-        smallText;
-
-    levelMessageBig.textContent =
-        bigText;
-
-
-    levelMessage.style.opacity =
-        "1";
-
-
-    levelMessage.style.transform =
-        "translate(-50%, -50%) scale(1.05)";
-
-
-    setTimeout(
-        function() {
-
-            levelMessage.style.opacity =
-                "0";
-
-            levelMessage.style.transform =
-                "translate(-50%, -50%) scale(0.8)";
-
-        },
-        1000
-    );
-
-}
-
-
-// ============================================================
-// BACKGROUND
-// ============================================================
-
-function changeBackground() {
-
-    const index =
-        (level - 1) %
-        backgrounds.length;
-
-
-    gameScreen.style.backgroundImage =
-        `linear-gradient(
-            rgba(0,0,0,0.25),
-            rgba(0,0,0,0.25)
+    background:
+        linear-gradient(
+            rgba(0,0,0,0.45),
+            rgba(0,0,0,0.82)
         ),
-        url("${backgrounds[index]}")`;
+        url("background1.jpg");
 
+    background-size: cover;
+    background-position: center;
 }
 
 
-// ============================================================
-// GAME TIMER
-// ============================================================
+.menu-container {
+    width: min(650px, 92%);
 
-function startGameTimer() {
+    padding: 50px 45px;
 
-    clearInterval(gameTimer);
+    text-align: center;
 
-
-    gameTimer =
-        setInterval(
-            function() {
-
-                if (!gameRunning) {
-                    return;
-                }
-
-
-                gameTime--;
-
-                updateTimer();
-
-
-                if (
-                    gameTime <= 0
-                ) {
-
-                    endGame();
-
-                }
-
-            },
-            1000
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,0.13),
+            rgba(255,255,255,0.035)
         );
 
+    border:
+        1px solid
+        rgba(255,255,255,0.23);
+
+    border-radius: 32px;
+
+    backdrop-filter: blur(20px);
+
+    box-shadow:
+        0 30px 80px
+        rgba(0,0,0,0.65),
+
+        inset 0 1px 0
+        rgba(255,255,255,0.16);
+
+    animation:
+        menuAppear 0.7s ease;
 }
 
 
-// ============================================================
-// TIMER
-// ============================================================
+@keyframes menuAppear {
 
-function updateTimer() {
+    from {
+        opacity: 0;
 
-    const minutes =
-        Math.floor(
-            gameTime / 60
-        );
+        transform:
+            translateY(30px)
+            scale(0.96);
+    }
 
+    to {
+        opacity: 1;
 
-    const seconds =
-        gameTime % 60;
-
-
-    timerDisplay.textContent =
-        `${minutes}:${seconds
-            .toString()
-            .padStart(2, "0")}`;
-
-
-    if (
-        gameTime <= 10
-    ) {
-
-        timerDisplay.style.color =
-            "#ff3333";
-
-    } else {
-
-        timerDisplay.style.color =
-            "white";
-
+        transform:
+            translateY(0)
+            scale(1);
     }
 
 }
 
 
-// ============================================================
-// UI
-// ============================================================
+/* ============================================================
+   LOGO
+============================================================ */
 
-function updateDisplays() {
+.logo-small {
+    font-size: 12px;
 
-    scoreDisplay.textContent =
-        score.toLocaleString();
+    font-weight: 900;
 
-    streakDisplay.textContent =
-        streak;
+    letter-spacing: 5px;
 
-    multiplierDisplay.textContent =
-        `${getMultiplier().toFixed(1)}x`;
+    color:
+        rgba(255,255,255,0.55);
 
-    levelDisplay.textContent =
-        level;
-
-    updateTimer();
-
-    updateFindTimer();
-
-    updateLevelProgress();
-
+    margin-bottom: 12px;
 }
 
 
-// ============================================================
-// FEEDBACK
-// ============================================================
+.logo-container h1 {
+    font-size:
+        clamp(65px, 11vw, 115px);
 
-function showFeedback(
-    text,
-    x,
-    y
-) {
+    line-height: 0.82;
 
-    const rect =
-        gameArea.getBoundingClientRect();
+    font-weight: 1000;
 
+    letter-spacing: -6px;
 
-    feedback.textContent =
-        text;
-
-
-    feedback.style.left =
-        `${x - rect.left}px`;
-
-    feedback.style.top =
-        `${y - rect.top}px`;
-
-    feedback.style.opacity =
-        "1";
-
-    feedback.style.transform =
-        "translate(-50%, -50%) scale(1.3)";
-
-
-    setTimeout(
-        function() {
-
-            feedback.style.opacity =
-                "0";
-
-            feedback.style.transform =
-                "translate(-50%, -50%) scale(1)";
-
-        },
-        400
-    );
-
+    text-shadow:
+        5px 5px 0
+        rgba(0,0,0,0.55);
 }
 
 
-// ============================================================
-// END GAME
-// ============================================================
+.logo-container h1 span {
+    display: block;
 
-function endGame() {
-
-    if (!gameRunning) {
-        return;
-    }
-
-
-    gameRunning = false;
-
-
-    clearInterval(gameTimer);
-    clearInterval(findTimer);
-
-
-    watson.style.display =
-        "none";
-
-
-    if (gameMusic) {
-
-        gameMusic.pause();
-
-    }
-
-
-    const totalClicks =
-        watsonsFound +
-        wrongClicks;
-
-
-    let accuracy = 0;
-
-
-    if (
-        totalClicks > 0
-    ) {
-
-        accuracy =
-            Math.round(
-                (
-                    watsonsFound /
-                    totalClicks
-                ) * 100
-            );
-
-    }
-
-
-    finalScore.textContent =
-        score.toLocaleString();
-
-    finalWatsons.textContent =
-        watsonsFound;
-
-    finalBestStreak.textContent =
-        bestStreak;
-
-    finalAccuracy.textContent =
-        `${accuracy}%`;
-
-    finalLevel.textContent =
-        level;
-
-
-    const oldHighScore =
-        Number(
-            localStorage.getItem(
-                "watsonHighScore"
-            ) || 0
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff,
+            #a9a9a9
         );
 
+    -webkit-background-clip: text;
+    background-clip: text;
 
-    if (
-        score >
-        oldHighScore
-    ) {
-
-        localStorage.setItem(
-            "watsonHighScore",
-            score
-        );
-
-        newHighScore.classList.remove(
-            "hidden"
-        );
-
-    } else {
-
-        newHighScore.classList.add(
-            "hidden"
-        );
-
-    }
-
-
-    updateHighScoreDisplays();
-
-
-    gameScreen.classList.add(
-        "hidden"
-    );
-
-    gameOverScreen.classList.remove(
-        "hidden"
-    );
-
+    color: transparent;
 }
 
 
-// ============================================================
-// HIGH SCORE
-// ============================================================
+.logo-subtitle {
+    margin-top: 25px;
 
-function getHighScore() {
+    font-size: 14px;
 
-    return Number(
-        localStorage.getItem(
-            "watsonHighScore"
-        ) || 0
-    );
+    font-weight: 800;
 
+    letter-spacing: 3px;
+
+    color:
+        rgba(255,255,255,0.62);
 }
 
 
-function updateHighScoreDisplays() {
+/* ============================================================
+   MENU BUTTONS
+============================================================ */
 
-    const highScore =
-        getHighScore();
+.menu-buttons {
+    margin-top: 42px;
 
+    display: flex;
 
-    menuHighScore.textContent =
-        highScore.toLocaleString();
+    flex-direction: column;
 
-    modalHighScore.textContent =
-        highScore.toLocaleString();
-
+    gap: 13px;
 }
 
 
-// ============================================================
-// HIGH SCORE MODAL
-// ============================================================
+.play-button,
+.menu-button {
+    width: 100%;
 
-highScoreButton.addEventListener(
-    "click",
-    function() {
+    min-height: 66px;
 
-        updateHighScoreDisplays();
+    border-radius: 16px;
 
-        highScoreModal.classList.remove(
-            "hidden"
-        );
+    font-size: 19px;
 
-    }
-);
+    font-weight: 1000;
 
+    letter-spacing: 2px;
 
-closeHighScore.addEventListener(
-    "click",
-    function() {
+    transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease,
+        background 0.18s ease;
+}
 
-        highScoreModal.classList.add(
-            "hidden"
-        );
 
-    }
-);
+.play-button {
+    background: white;
 
+    color: black;
 
-modalPlayButton.addEventListener(
-    "click",
-    function() {
+    box-shadow:
+        0 10px 35px
+        rgba(255,255,255,0.14);
+}
 
-        startGame();
 
-    }
-);
+.play-button:hover {
+    transform:
+        translateY(-4px)
+        scale(1.015);
 
+    box-shadow:
+        0 18px 45px
+        rgba(255,255,255,0.25);
+}
 
-highScoreModal.addEventListener(
-    "click",
-    function(event) {
 
-        if (
-            event.target ===
-            highScoreModal
-        ) {
+.play-button:active {
+    transform:
+        translateY(2px)
+        scale(0.98);
+}
 
-            highScoreModal.classList.add(
-                "hidden"
-            );
 
-        }
+.play-icon {
+    margin-right: 10px;
+}
 
-    }
-);
 
+.menu-button {
+    display: flex;
 
-// ============================================================
-// MAIN BUTTONS
-// ============================================================
+    align-items: center;
+    justify-content: center;
 
-playButton.addEventListener(
-    "click",
-    startGame
-);
+    gap: 10px;
 
+    background:
+        rgba(255,255,255,0.08);
 
-playAgainButton.addEventListener(
-    "click",
-    startGame
-);
+    color: white;
 
+    border:
+        1px solid
+        rgba(255,255,255,0.18);
+}
 
-menuButton.addEventListener(
-    "click",
-    function() {
 
-        gameRunning = false;
+.menu-button:hover {
+    background:
+        rgba(255,255,255,0.16);
 
-        clearInterval(gameTimer);
-        clearInterval(findTimer);
+    transform:
+        translateY(-3px);
+}
 
 
-        if (gameMusic) {
-            gameMusic.pause();
-        }
+/* ============================================================
+   MENU STATS
+============================================================ */
 
+.menu-stats {
+    display: flex;
 
-        gameOverScreen.classList.add(
-            "hidden"
-        );
+    justify-content: center;
 
-        gameScreen.classList.add(
-            "hidden"
-        );
+    gap: 80px;
 
-        leaderboardScreen.classList.add(
-            "hidden"
-        );
+    margin-top: 32px;
+}
 
-        menuScreen.classList.remove(
-            "hidden"
-        );
 
+.menu-stats div {
+    display: flex;
 
-        updateHighScoreDisplays();
+    flex-direction: column;
 
-    }
-);
+    gap: 5px;
+}
 
 
-// ============================================================
-// LEADERBOARD
-// ============================================================
+.menu-stats span {
+    font-size: 10px;
 
-leaderboardButton.addEventListener(
-    "click",
-    function() {
+    letter-spacing: 2px;
 
-        gameRunning = false;
+    color:
+        rgba(255,255,255,0.42);
 
-        clearInterval(gameTimer);
-        clearInterval(findTimer);
+    font-weight: 900;
+}
 
 
-        menuScreen.classList.add(
-            "hidden"
-        );
+.menu-stats strong {
+    font-size: 25px;
+}
 
-        gameOverScreen.classList.add(
-            "hidden"
-        );
 
-        leaderboardScreen.classList.remove(
-            "hidden"
-        );
+/* ============================================================
+   INSTRUCTIONS
+============================================================ */
 
+.instructions {
+    margin-top: 28px;
 
-        loadLeaderboard();
+    padding-top: 19px;
 
-    }
-);
+    border-top:
+        1px solid
+        rgba(255,255,255,0.1);
 
+    color:
+        rgba(255,255,255,0.5);
 
-leaderboardBackButton.addEventListener(
-    "click",
-    function() {
+    font-size: 10px;
 
-        leaderboardScreen.classList.add(
-            "hidden"
-        );
+    font-weight: 900;
 
-        menuScreen.classList.remove(
-            "hidden"
-        );
+    letter-spacing: 1px;
+}
 
-    }
-);
 
+/* ============================================================
+   MODAL
+============================================================ */
 
-// ============================================================
-// LEADERBOARD LOADING
-// ============================================================
+.modal {
+    position: fixed;
+    inset: 0;
 
-async function loadLeaderboard() {
+    z-index: 500;
 
-    leaderboardList.innerHTML = `
-        <div class="leaderboard-loading">
-            Loading leaderboard...
-        </div>
-    `;
+    display: flex;
 
+    justify-content: center;
+    align-items: center;
 
-    try {
+    background:
+        rgba(0,0,0,0.72);
 
-        if (
-            !window.firebaseDatabase
-        ) {
+    backdrop-filter: blur(12px);
+}
 
-            throw new Error(
-                "Firebase has not loaded yet."
-            );
 
-        }
+.modal-box {
+    position: relative;
 
+    width: min(450px, 90%);
 
-        const database =
-            window.firebaseDatabase;
+    padding: 50px;
 
+    text-align: center;
 
-        const leaderboardRef =
-            window.firebaseRef(
-                database,
-                "leaderboard"
-            );
+    background:
+        rgba(22,22,22,0.96);
 
+    border:
+        1px solid
+        rgba(255,255,255,0.2);
 
-        const leaderboardQuery =
-            window.firebaseQuery(
-                leaderboardRef,
-                window.firebaseOrderByChild(
-                    "score"
-                )
-            );
+    border-radius: 28px;
 
+    box-shadow:
+        0 30px 80px
+        rgba(0,0,0,0.7);
 
-        const snapshot =
-            await window.firebaseGet(
-                leaderboardQuery
-            );
+    animation:
+        modalAppear 0.3s ease;
+}
 
 
-        if (
-            !snapshot.exists()
-        ) {
+@keyframes modalAppear {
 
-            leaderboardList.innerHTML = `
-                <div class="leaderboard-empty">
-                    No scores yet!<br>
-                    Be the first Watson Hunter!
-                </div>
-            `;
-
-            return;
-
-        }
-
-
-        const scores = [];
-
-
-        snapshot.forEach(
-            function(child) {
-
-                const data =
-                    child.val();
-
-
-                scores.push({
-
-                    name:
-                        data.name || "Unknown",
-
-                    score:
-                        Number(
-                            data.score || 0
-                        ),
-
-                    date:
-                        data.date || "--/--/--"
-
-                });
-
-            }
-        );
-
-
-        scores.sort(
-            function(a, b) {
-
-                return b.score - a.score;
-
-            }
-        );
-
-
-        const topTen =
-            scores.slice(0, 10);
-
-
-        leaderboardList.innerHTML =
-            "";
-
-
-        topTen.forEach(
-            function(player, index) {
-
-                const row =
-                    document.createElement(
-                        "div"
-                    );
-
-
-                row.className =
-                    "leaderboard-row";
-
-
-                let rankText =
-                    index + 1;
-
-
-                if (index === 0) {
-                    rankText = "🥇";
-                }
-
-                else if (index === 1) {
-                    rankText = "🥈";
-                }
-
-                else if (index === 2) {
-                    rankText = "🥉";
-                }
-
-
-                row.innerHTML = `
-
-                    <div class="leaderboard-rank">
-                        ${rankText}
-                    </div>
-
-                    <div class="leaderboard-name">
-                        ${escapeLeaderboardHTML(
-                            player.name
-                        )}
-                    </div>
-
-                    <div class="leaderboard-score">
-                        ${player.score.toLocaleString()}
-                    </div>
-
-                    <div class="leaderboard-date">
-                        ${escapeLeaderboardHTML(
-                            player.date
-                        )}
-                    </div>
-
-                `;
-
-
-                leaderboardList.appendChild(
-                    row
-                );
-
-            }
-        );
-
+    from {
+        opacity: 0;
+        transform: scale(0.8);
     }
 
-    catch (error) {
-
-        console.error(
-            "Leaderboard error:",
-            error
-        );
-
-
-        leaderboardList.innerHTML = `
-            <div class="leaderboard-empty">
-                Couldn't load leaderboard.<br>
-                Please try again.
-            </div>
-        `;
-
+    to {
+        opacity: 1;
+        transform: scale(1);
     }
 
 }
 
 
-// ============================================================
-// HTML ESCAPE
-// ============================================================
+.close-button {
+    position: absolute;
 
-function escapeLeaderboardHTML(
-    text
-) {
+    top: 15px;
+    right: 20px;
 
-    return String(text)
+    width: 40px;
+    height: 40px;
 
-        .replace(
-            /&/g,
-            "&amp;"
-        )
+    border-radius: 50%;
 
-        .replace(
-            /</g,
-            "&lt;"
-        )
+    background:
+        rgba(255,255,255,0.08);
 
-        .replace(
-            />/g,
-            "&gt;"
-        )
+    color: white;
 
-        .replace(
-            /"/g,
-            "&quot;"
-        )
+    font-size: 28px;
+}
 
-        .replace(
-            /'/g,
-            "&#039;"
+
+.modal-icon {
+    font-size: 60px;
+}
+
+
+.modal-box h2 {
+    margin-top: 10px;
+
+    font-size: 35px;
+}
+
+
+.big-score {
+    margin-top: 20px;
+
+    font-size: 70px;
+
+    font-weight: 1000;
+}
+
+
+.modal-box p {
+    color:
+        rgba(255,255,255,0.5);
+}
+
+
+.play-button.small {
+    margin-top: 25px;
+
+    min-height: 55px;
+}
+
+
+/* ============================================================
+   GAME
+============================================================ */
+
+#gameScreen {
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    transition:
+        background-image 0.7s ease;
+}
+
+
+/* ============================================================
+   TOP BAR
+============================================================ */
+
+#topBar {
+    position: absolute;
+
+    top: 15px;
+    left: 15px;
+    right: 15px;
+
+    min-height: 82px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 25px;
+
+    padding: 14px 25px;
+
+    background:
+        rgba(0,0,0,0.72);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.16);
+
+    border-radius: 20px;
+
+    backdrop-filter: blur(15px);
+
+    z-index: 50;
+
+    box-shadow:
+        0 10px 35px
+        rgba(0,0,0,0.3);
+}
+
+
+.top-stat {
+    min-width: 100px;
+}
+
+
+.stat-label {
+    display: block;
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+
+    color:
+        rgba(255,255,255,0.45);
+
+    font-weight: 900;
+}
+
+
+.top-stat strong,
+.combo-container strong {
+    font-size: 28px;
+
+    font-weight: 1000;
+}
+
+
+.combo-container strong {
+    color: #ffd700;
+}
+
+
+.level-container {
+    flex: 1;
+
+    max-width: 230px;
+}
+
+
+.level-info {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 7px;
+}
+
+
+.level-info span {
+    font-size: 10px;
+
+    font-weight: 900;
+
+    letter-spacing: 2px;
+
+    color:
+        rgba(255,255,255,0.45);
+}
+
+
+.level-info strong {
+    font-size: 17px;
+}
+
+
+.level-progress {
+    height: 6px;
+
+    background:
+        rgba(255,255,255,0.12);
+
+    border-radius: 20px;
+
+    overflow: hidden;
+}
+
+
+.level-progress-fill {
+    height: 100%;
+
+    width: 0%;
+
+    background: white;
+
+    border-radius: inherit;
+
+    transition:
+        width 0.3s ease;
+}
+
+
+.timer-container {
+    text-align: right;
+}
+
+
+.timer-container strong {
+    font-size: 32px;
+
+    font-weight: 1000;
+}
+
+
+/* ============================================================
+   PAUSE BUTTON
+============================================================ */
+
+.pause-button {
+    position: absolute;
+
+    top: 112px;
+    right: 22px;
+
+    z-index: 100;
+
+    width: 52px;
+    height: 52px;
+
+    border-radius: 16px;
+
+    background:
+        rgba(0,0,0,0.65);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.2);
+
+    color: white;
+
+    font-size: 20px;
+
+    backdrop-filter: blur(10px);
+
+    transition:
+        transform 0.15s ease,
+        background 0.15s ease;
+}
+
+
+.pause-button:hover {
+    transform: scale(1.08);
+
+    background:
+        rgba(255,255,255,0.16);
+}
+
+
+.pause-button:active {
+    transform: scale(0.94);
+}
+
+
+/* ============================================================
+   GAME AREA
+============================================================ */
+
+#gameArea {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+    cursor: crosshair;
+}
+
+
+/* ============================================================
+   GAME HINT
+============================================================ */
+
+#gameHint {
+    position: absolute;
+
+    top: 115px;
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    padding: 8px 18px;
+
+    background:
+        rgba(0,0,0,0.45);
+
+    border-radius: 30px;
+
+    color:
+        rgba(255,255,255,0.7);
+
+    font-size: 11px;
+
+    font-weight: 900;
+
+    letter-spacing: 3px;
+
+    pointer-events: none;
+
+    z-index: 20;
+}
+
+
+/* ============================================================
+   WATSON
+============================================================ */
+
+#watson {
+    position: absolute;
+
+    width: 115px;
+    height: auto;
+
+    user-select: none;
+
+    cursor: pointer;
+
+    z-index: 30;
+
+    filter:
+        drop-shadow(
+            0 8px 8px
+            rgba(0,0,0,0.55)
         );
+
+    transition:
+        width 0.25s ease,
+        transform 0.12s ease;
+
+    transform-origin: center;
+}
+
+
+#watson:hover {
+    filter:
+        drop-shadow(
+            0 10px 12px
+            rgba(0,0,0,0.65)
+        );
+
+    transform:
+        scale(1.1)
+        rotate(3deg);
+}
+
+
+#watson:active {
+    transform:
+        scale(0.9)
+        rotate(-4deg);
+}
+
+
+/* ============================================================
+   EXPLOSION
+============================================================ */
+
+.watson-explosion {
+    animation:
+        watsonExplosion 0.65s ease-out forwards !important;
+}
+
+
+@keyframes watsonExplosion {
+
+    0% {
+        opacity: 1;
+
+        transform:
+            scale(1)
+            rotate(0deg);
+    }
+
+    35% {
+        opacity: 1;
+
+        transform:
+            scale(1.45)
+            rotate(8deg);
+    }
+
+    65% {
+        opacity: 0.8;
+
+        transform:
+            scale(2.1)
+            rotate(-10deg);
+    }
+
+    100% {
+        opacity: 0;
+
+        transform:
+            scale(3)
+            rotate(20deg);
+    }
 
 }
 
 
-// ============================================================
-// NAME MODERATION
-// ============================================================
+/* ============================================================
+   FIND TIMER
+============================================================ */
 
-const blockedWords = [
+#findTimerContainer {
+    position: absolute;
 
-    "fuck",
-    "shit",
-    "cunt",
-    "bitch",
-    "asshole",
-    "nigger",
-    "nigga",
-    "faggot",
-    "whore",
-    "slut",
-    "porn",
-    "sex"
+    bottom: 30px;
+    left: 50%;
 
-];
+    transform:
+        translateX(-50%);
 
+    display: flex;
 
-function namePassesModeration(name) {
+    align-items: center;
 
-    const cleaned =
-        name
-            .toLowerCase()
-            .replace(
-                /[^a-z0-9]/g,
-                ""
-            );
+    gap: 12px;
+
+    padding: 10px 18px;
+
+    background:
+        rgba(0,0,0,0.6);
+
+    border-radius: 50px;
+
+    pointer-events: none;
+
+    z-index: 40;
+}
 
 
-    if (
-        cleaned.length < 2 ||
-        cleaned.length > 20
-    ) {
+.find-timer-label {
+    font-size: 10px;
 
-        return false;
+    font-weight: 900;
 
+    letter-spacing: 2px;
+
+    color:
+        rgba(255,255,255,0.55);
+}
+
+
+#findTimer {
+    min-width: 35px;
+
+    font-size: 20px;
+
+    font-weight: 1000;
+
+    text-align: center;
+
+    transition:
+        transform 0.15s ease,
+        color 0.15s ease;
+}
+
+
+/* ============================================================
+   FEEDBACK
+============================================================ */
+
+#feedback {
+    position: absolute;
+
+    z-index: 200;
+
+    pointer-events: none;
+
+    font-size: 35px;
+
+    font-weight: 1000;
+
+    text-shadow:
+        3px 3px 0 #000;
+
+    opacity: 0;
+
+    transform:
+        translate(-50%, -50%);
+
+    transition:
+        opacity 0.35s ease,
+        transform 0.35s ease;
+}
+
+
+/* ============================================================
+   LEVEL MESSAGE
+============================================================ */
+
+#levelMessage {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    transform:
+        translate(-50%, -50%)
+        scale(0.8);
+
+    text-align: center;
+
+    pointer-events: none;
+
+    opacity: 0;
+
+    z-index: 150;
+
+    transition:
+        opacity 0.3s ease,
+        transform 0.3s ease;
+}
+
+
+#levelMessageSmall {
+    font-size: 14px;
+
+    letter-spacing: 5px;
+
+    font-weight: 900;
+
+    color:
+        rgba(255,255,255,0.65);
+}
+
+
+#levelMessageBig {
+    margin-top: 5px;
+
+    font-size:
+        clamp(55px, 9vw, 110px);
+
+    font-weight: 1000;
+
+    text-shadow:
+        6px 6px 0 #000;
+}
+
+
+/* ============================================================
+   SCREEN SHAKE
+============================================================ */
+
+.screen-shake {
+    animation:
+        screenShake 0.5s;
+}
+
+
+@keyframes screenShake {
+
+    0% {
+        transform: translate(0,0);
     }
 
-
-    for (
-        const word of blockedWords
-    ) {
-
-        if (
-            cleaned.includes(word)
-        ) {
-
-            return false;
-
-        }
-
+    15% {
+        transform: translate(-15px,8px);
     }
 
+    30% {
+        transform: translate(12px,-10px);
+    }
 
-    return true;
+    45% {
+        transform: translate(-10px,-7px);
+    }
+
+    60% {
+        transform: translate(8px,10px);
+    }
+
+    75% {
+        transform: translate(-5px,-5px);
+    }
+
+    100% {
+        transform: translate(0,0);
+    }
 
 }
 
 
-// ============================================================
-// DATE
-// ============================================================
+/* ============================================================
+   PAUSE OVERLAY
+============================================================ */
 
-function getLeaderboardDate() {
+.pause-overlay {
+    position: fixed;
 
-    const now =
-        new Date();
+    inset: 0;
 
+    z-index: 1000;
 
-    const day =
-        String(
-            now.getDate()
-        ).padStart(2, "0");
+    display: flex;
 
+    justify-content: center;
+    align-items: center;
 
-    const month =
-        String(
-            now.getMonth() + 1
-        ).padStart(2, "0");
+    background:
+        rgba(0,0,0,0.72);
 
-
-    const year =
-        String(
-            now.getFullYear()
-        ).slice(-2);
+    backdrop-filter: blur(12px);
+}
 
 
-    return `${day}/${month}/${year}`;
+.pause-box {
+    width: min(500px, 90%);
+
+    padding: 45px;
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(30,30,30,0.97),
+            rgba(12,12,12,0.97)
+        );
+
+    border:
+        1px solid
+        rgba(255,255,255,0.18);
+
+    border-radius: 28px;
+
+    box-shadow:
+        0 30px 90px
+        rgba(0,0,0,0.8);
+
+    animation:
+        modalAppear 0.25s ease;
+}
+
+
+.pause-icon {
+    font-size: 60px;
+}
+
+
+.pause-small {
+    margin-top: 10px;
+
+    font-size: 11px;
+
+    letter-spacing: 4px;
+
+    font-weight: 900;
+
+    color:
+        rgba(255,255,255,0.45);
+}
+
+
+.pause-box h2 {
+    margin-top: 8px;
+
+    font-size: 38px;
+}
+
+
+.pause-box .play-button {
+    margin-top: 30px;
+}
+
+
+.pause-box .menu-button {
+    margin-top: 10px;
+}
+
+
+/* ============================================================
+   GAME OVER
+============================================================ */
+
+#gameOverScreen {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    overflow-y: auto;
+
+    background:
+        linear-gradient(
+            rgba(0,0,0,0.65),
+            rgba(0,0,0,0.9)
+        ),
+        url("background7.jpg");
+
+    background-size: cover;
+
+    background-position: center;
+}
+
+
+.game-over-container {
+    width:
+        min(650px, 92%);
+
+    max-height: 95vh;
+
+    overflow-y: auto;
+
+    padding: 45px;
+
+    text-align: center;
+
+    background:
+        rgba(15,15,15,0.86);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.18);
+
+    border-radius: 30px;
+
+    backdrop-filter: blur(20px);
+
+    box-shadow:
+        0 30px 90px
+        rgba(0,0,0,0.7);
+}
+
+
+.game-over-small {
+    font-size: 12px;
+
+    letter-spacing: 5px;
+
+    color:
+        rgba(255,255,255,0.5);
+
+    font-weight: 900;
+}
+
+
+.game-over-container h1 {
+    margin-top: 5px;
+
+    font-size:
+        clamp(45px, 8vw, 80px);
+
+    font-weight: 1000;
+}
+
+
+.final-score {
+    margin-top: 20px;
+}
+
+
+.final-score span {
+    font-size: 11px;
+
+    letter-spacing: 3px;
+
+    color:
+        rgba(255,255,255,0.5);
+
+    font-weight: 900;
+}
+
+
+.final-score strong {
+    display: block;
+
+    margin-top: 5px;
+
+    font-size: 65px;
+
+    font-weight: 1000;
+}
+
+
+.new-high-score {
+    margin-top: 10px;
+
+    font-size: 18px;
+
+    font-weight: 1000;
+
+    animation:
+        highScorePulse 0.7s infinite alternate;
+}
+
+
+@keyframes highScorePulse {
+
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.08);
+    }
 
 }
 
 
-// ============================================================
-// OPEN LEADERBOARD SUBMISSION
-// ============================================================
+/* ============================================================
+   RESULTS
+============================================================ */
 
-addLeaderboardButton.addEventListener(
-    "click",
-    function() {
+.results-grid {
+    display: grid;
 
-        leaderboardScore.textContent =
-            score.toLocaleString();
+    grid-template-columns:
+        repeat(4, 1fr);
 
+    gap: 10px;
 
-        leaderboardNameInput.value =
-            "";
-
-
-        leaderboardNameError.textContent =
-            "";
+    margin-top: 30px;
+}
 
 
-        leaderboardNameOverlay.classList.remove(
-            "hidden"
+.result-card {
+    padding: 18px 10px;
+
+    background:
+        rgba(255,255,255,0.06);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.08);
+
+    border-radius: 15px;
+}
+
+
+.result-card span {
+    display: block;
+
+    font-size: 9px;
+
+    letter-spacing: 1px;
+
+    color:
+        rgba(255,255,255,0.45);
+
+    font-weight: 900;
+}
+
+
+.result-card strong {
+    display: block;
+
+    margin-top: 7px;
+
+    font-size: 25px;
+}
+
+
+/* ============================================================
+   GAME OVER BUTTONS
+============================================================ */
+
+.game-over-buttons {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+
+    margin-top: 30px;
+}
+
+
+/* ============================================================
+   LEADERBOARD
+============================================================ */
+
+#leaderboardScreen {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    overflow-y: auto;
+
+    padding: 30px;
+
+    background:
+        linear-gradient(
+            rgba(0,0,0,0.58),
+            rgba(0,0,0,0.88)
+        ),
+        url("background1.jpg");
+
+    background-size: cover;
+
+    background-position: center;
+}
+
+
+.leaderboard-container {
+    position: relative;
+
+    width: min(900px, 95%);
+
+    max-height: 90vh;
+
+    padding: 45px;
+
+    overflow-y: auto;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,0.12),
+            rgba(255,255,255,0.035)
         );
 
+    border:
+        1px solid
+        rgba(255,255,255,0.22);
 
-        setTimeout(
-            function() {
+    border-radius: 30px;
 
-                leaderboardNameInput.focus();
+    backdrop-filter: blur(20px);
 
-            },
-            50
-        );
+    box-shadow:
+        0 30px 90px
+        rgba(0,0,0,0.7);
+}
 
+
+.back-button {
+    position: absolute;
+
+    top: 22px;
+    left: 25px;
+
+    padding: 10px 17px;
+
+    border-radius: 12px;
+
+    background:
+        rgba(255,255,255,0.08);
+
+    color: white;
+
+    border:
+        1px solid
+        rgba(255,255,255,0.15);
+
+    font-size: 12px;
+
+    font-weight: 900;
+
+    letter-spacing: 1px;
+
+    transition:
+        background 0.15s ease,
+        transform 0.15s ease;
+}
+
+
+.back-button:hover {
+    background:
+        rgba(255,255,255,0.16);
+
+    transform:
+        translateX(-3px);
+}
+
+
+.leaderboard-header {
+    text-align: center;
+
+    padding-top: 15px;
+
+    margin-bottom: 30px;
+}
+
+
+.leaderboard-icon {
+    font-size: 55px;
+}
+
+
+.leaderboard-small {
+    margin-top: 5px;
+
+    font-size: 10px;
+
+    font-weight: 900;
+
+    letter-spacing: 4px;
+
+    color:
+        rgba(255,255,255,0.45);
+}
+
+
+.leaderboard-header h1 {
+    margin-top: 5px;
+
+    font-size:
+        clamp(45px, 7vw, 75px);
+
+    line-height: 1;
+
+    font-weight: 1000;
+
+    letter-spacing: -3px;
+}
+
+
+.leaderboard-header p {
+    margin-top: 10px;
+
+    color:
+        rgba(255,255,255,0.48);
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+}
+
+
+/* ============================================================
+   LEADERBOARD TABLE
+============================================================ */
+
+.leaderboard-table {
+    width: 100%;
+}
+
+
+.leaderboard-table-header,
+.leaderboard-row {
+    display: grid;
+
+    grid-template-columns:
+        80px
+        1fr
+        150px
+        110px;
+
+    align-items: center;
+
+    gap: 15px;
+}
+
+
+.leaderboard-table-header {
+    padding:
+        0 20px
+        10px;
+
+    color:
+        rgba(255,255,255,0.38);
+
+    font-size: 9px;
+
+    font-weight: 900;
+
+    letter-spacing: 2px;
+}
+
+
+.leaderboard-list {
+    width: 100%;
+}
+
+
+.leaderboard-row {
+    min-height: 66px;
+
+    margin-bottom: 8px;
+
+    padding:
+        8px 20px;
+
+    background:
+        rgba(255,255,255,0.055);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.08);
+
+    border-radius: 15px;
+
+    transition:
+        transform 0.15s ease,
+        background 0.15s ease;
+}
+
+
+.leaderboard-row:hover {
+    transform:
+        translateX(4px);
+
+    background:
+        rgba(255,255,255,0.09);
+}
+
+
+.leaderboard-rank {
+    font-size: 22px;
+
+    font-weight: 1000;
+
+    text-align: center;
+}
+
+
+.leaderboard-name {
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+
+    font-size: 17px;
+
+    font-weight: 900;
+}
+
+
+.leaderboard-score {
+    text-align: right;
+
+    font-size: 18px;
+
+    font-weight: 1000;
+}
+
+
+.leaderboard-date {
+    text-align: right;
+
+    font-size: 12px;
+
+    color:
+        rgba(255,255,255,0.45);
+
+    font-weight: 700;
+}
+
+
+.leaderboard-loading,
+.leaderboard-empty {
+    padding: 40px;
+
+    text-align: center;
+
+    color:
+        rgba(255,255,255,0.5);
+
+    font-size: 14px;
+
+    font-weight: 700;
+}
+
+
+/* ============================================================
+   LEADERBOARD NAME MODAL
+============================================================ */
+
+.leaderboard-name-box {
+    width: min(500px, 92%);
+}
+
+
+.leaderboard-name-box h2 {
+    margin-top: 8px;
+
+    font-size: 34px;
+}
+
+
+.leaderboard-score-label {
+    margin-top: 25px;
+
+    font-size: 9px;
+
+    letter-spacing: 3px;
+
+    color:
+        rgba(255,255,255,0.4);
+
+    font-weight: 900;
+}
+
+
+.leaderboard-big-score {
+    margin-top: 2px;
+
+    font-size: 50px;
+
+    font-weight: 1000;
+}
+
+
+#leaderboardNameInput {
+    width: 100%;
+
+    height: 60px;
+
+    margin-top: 20px;
+
+    padding:
+        0 18px;
+
+    border-radius: 14px;
+
+    border:
+        1px solid
+        rgba(255,255,255,0.18);
+
+    outline: none;
+
+    background:
+        rgba(255,255,255,0.08);
+
+    color: white;
+
+    text-align: center;
+
+    font-size: 18px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+    transition:
+        border 0.15s ease,
+        background 0.15s ease;
+}
+
+
+#leaderboardNameInput::placeholder {
+    color:
+        rgba(255,255,255,0.3);
+}
+
+
+#leaderboardNameInput:focus {
+    border:
+        1px solid
+        rgba(255,255,255,0.5);
+
+    background:
+        rgba(255,255,255,0.12);
+}
+
+
+.leaderboard-error {
+    min-height: 20px;
+
+    margin-top: 10px;
+
+    color:
+        #ff5555;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    line-height: 1.4;
+}
+
+
+.leaderboard-name-box .play-button {
+    margin-top: 10px;
+}
+
+
+.leaderboard-name-box .menu-button {
+    margin-top: 10px;
+}
+
+
+/* ============================================================
+   DISABLED
+============================================================ */
+
+button:disabled {
+    cursor: not-allowed;
+
+    opacity: 0.6;
+}
+
+
+/* ============================================================
+   MOBILE
+============================================================ */
+
+@media (max-width: 800px) {
+
+    #topBar {
+        gap: 12px;
+
+        padding:
+            10px 15px;
     }
-);
 
 
-// ============================================================
-// CANCEL LEADERBOARD SUBMISSION
-// ============================================================
-
-cancelLeaderboardButton.addEventListener(
-    "click",
-    function() {
-
-        leaderboardNameOverlay.classList.add(
-            "hidden"
-        );
-
-    }
-);
-
-
-// ============================================================
-// SUBMIT LEADERBOARD SCORE
-// ============================================================
-
-submitLeaderboardButton.addEventListener(
-    "click",
-    submitLeaderboardScore
-);
-
-
-leaderboardNameInput.addEventListener(
-    "keydown",
-    function(event) {
-
-        if (
-            event.key === "Enter"
-        ) {
-
-            submitLeaderboardScore();
-
-        }
-
-    }
-);
-
-
-async function submitLeaderboardScore() {
-
-    const name =
-        leaderboardNameInput.value.trim();
-
-
-    leaderboardNameError.textContent =
-        "";
-
-
-    if (
-        !namePassesModeration(name)
-    ) {
-
-        leaderboardNameError.textContent =
-            "Name Didn't Pass Moderation, Please Enter Another Name";
-
-        return;
-
+    .top-stat {
+        min-width: 60px;
     }
 
 
-    submitLeaderboardButton.disabled =
-        true;
-
-
-    submitLeaderboardButton.textContent =
-        "SUBMITTING...";
-
-
-    try {
-
-        const database =
-            window.firebaseDatabase;
-
-
-        if (!database) {
-
-            throw new Error(
-                "Firebase is not ready."
-            );
-
-        }
-
-
-        const leaderboardRef =
-            window.firebaseRef(
-                database,
-                "leaderboard"
-            );
-
-
-        const snapshot =
-            await window.firebaseGet(
-                leaderboardRef
-            );
-
-
-        let nameAlreadyExists =
-            false;
-
-
-        if (
-            snapshot.exists()
-        ) {
-
-            snapshot.forEach(
-                function(child) {
-
-                    const existingName =
-                        String(
-                            child.val().name || ""
-                        ).toLowerCase();
-
-
-                    if (
-                        existingName ===
-                        name.toLowerCase()
-                    ) {
-
-                        nameAlreadyExists =
-                            true;
-
-                    }
-
-                }
-            );
-
-        }
-
-
-        if (
-            nameAlreadyExists
-        ) {
-
-            leaderboardNameError.textContent =
-                "That Name Is Already Taken, Please Choose Another Name";
-
-
-            submitLeaderboardButton.disabled =
-                false;
-
-
-            submitLeaderboardButton.textContent =
-                "SUBMIT SCORE";
-
-
-            return;
-
-        }
-
-
-        const newScoreRef =
-            window.firebaseRef(
-                database,
-                "leaderboard/" +
-                Date.now() +
-                "_" +
-                Math.random()
-                    .toString(36)
-                    .substring(2, 8)
-            );
-
-
-        await window.firebaseSet(
-            newScoreRef,
-            {
-
-                name:
-                    name,
-
-                score:
-                    Number(score),
-
-                date:
-                    getLeaderboardDate()
-
-            }
-        );
-
-
-        leaderboardNameOverlay.classList.add(
-            "hidden"
-        );
-
-
-        gameOverScreen.classList.add(
-            "hidden"
-        );
-
-
-        leaderboardScreen.classList.remove(
-            "hidden"
-        );
-
-
-        await loadLeaderboard();
-
-    }
-
-    catch (error) {
-
-        console.error(
-            "Score submission error:",
-            error
-        );
-
-
-        leaderboardNameError.textContent =
-            "Couldn't submit score. Please try again.";
-
+    .top-stat strong,
+    .combo-container strong {
+        font-size: 21px;
     }
 
 
-    submitLeaderboardButton.disabled =
-        false;
+    .level-container {
+        display: none;
+    }
 
 
-    submitLeaderboardButton.textContent =
-        "SUBMIT SCORE";
+    .timer-container strong {
+        font-size: 25px;
+    }
+
+
+    .results-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+
+    .leaderboard-table-header,
+    .leaderboard-row {
+        grid-template-columns:
+            55px
+            1fr
+            100px
+            80px;
+
+        gap: 8px;
+    }
+
+
+    .leaderboard-container {
+        padding:
+            40px 18px 25px;
+    }
+
+
+    .leaderboard-table-header {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+
+    .leaderboard-row {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
 
 }
 
 
-// ============================================================
-// INITIALIZE
-// ============================================================
+@media (max-width: 550px) {
 
-updateHighScoreDisplays();
+    .menu-container {
+        padding:
+            38px 24px;
+    }
 
-console.log(
-    "Find Watson loaded successfully!"
-);
+
+    .logo-container h1 {
+        font-size: 65px;
+    }
+
+
+    .menu-stats {
+        gap: 35px;
+    }
+
+
+    .top-stat:nth-child(2) {
+        display: none;
+    }
+
+
+    .pause-button {
+        top: 105px;
+        right: 12px;
+    }
+
+
+    .leaderboard-table-header,
+    .leaderboard-row {
+        grid-template-columns:
+            45px
+            1fr
+            85px;
+    }
+
+
+    .leaderboard-table-header div:nth-child(4),
+    .leaderboard-date {
+        display: none;
+    }
+
+
+    .leaderboard-score {
+        font-size: 15px;
+    }
+
+
+    .leaderboard-name {
+        font-size: 14px;
+    }
+
+
+    .game-over-container {
+        padding:
+            35px 22px;
+    }
+
+}
