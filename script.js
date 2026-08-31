@@ -447,14 +447,8 @@ gameArea.addEventListener(
 
 function getMultiplier() {
 
-    const multiplierLevel =
-        Math.floor(streak / 1);
-
-
     return Math.min(
-        1 +
-        multiplierLevel * 0.15,
-
+        1 + (streak * 0.15),
         5
     );
 
