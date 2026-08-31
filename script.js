@@ -30,7 +30,7 @@ const WATSONS_PER_LEVEL = 4;
 const gameMusic =
     document.getElementById("gameMusic");
 
-const menuScreen =
+enuScreen =
     document.getElementById("menuScreen");
 
 const gameScreen =
@@ -448,14 +448,14 @@ gameArea.addEventListener(
 function getMultiplier() {
 
     const multiplierLevel =
-        Math.floor(streak / 5);
+        Math.floor(streak / 1);
 
 
     return Math.min(
         1 +
-        multiplierLevel * 0.1,
+        multiplierLevel * 0.15,
 
-        1.5
+        5
     );
 
 }
