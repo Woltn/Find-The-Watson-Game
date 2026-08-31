@@ -1,0 +1,1335 @@
+/* =========================================
+   RESET
+========================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background: #080808;
+    color: white;
+}
+
+
+/* =========================================
+   GENERAL
+========================================= */
+
+button {
+    font-family: inherit;
+    border: none;
+    outline: none;
+
+    cursor: pointer;
+}
+
+.screen {
+    position: fixed;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+}
+
+.hidden {
+    display: none !important;
+}
+
+
+/* =========================================
+   BACKGROUND
+========================================= */
+
+.background-overlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    z-index: -1;
+
+    background:
+        radial-gradient(
+            circle at 50% 20%,
+            rgba(255,255,255,0.08),
+            transparent 40%
+        );
+
+}
+
+
+/* =========================================
+   MAIN MENU
+========================================= */
+
+#menuScreen {
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    background:
+
+        linear-gradient(
+            rgba(0,0,0,0.55),
+            rgba(0,0,0,0.8)
+        ),
+
+        url("assets/background1.jpg");
+
+    background-size: cover;
+    background-position: center;
+
+}
+
+
+.menu-container {
+
+    width: min(650px, 92%);
+
+    padding: 55px 45px;
+
+    text-align: center;
+
+    background:
+
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,0.12),
+            rgba(255,255,255,0.035)
+        );
+
+    border:
+
+        1px solid
+        rgba(255,255,255,0.25);
+
+    border-radius: 32px;
+
+    backdrop-filter: blur(18px);
+
+    box-shadow:
+
+        0 30px 80px
+        rgba(0,0,0,0.6),
+
+        inset 0 1px 0
+        rgba(255,255,255,0.15);
+
+    animation:
+        menuAppear 0.7s ease;
+
+}
+
+
+@keyframes menuAppear {
+
+    from {
+        opacity: 0;
+        transform:
+            translateY(30px)
+            scale(0.96);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+}
+
+
+/* =========================================
+   LOGO
+========================================= */
+
+.logo-small {
+
+    font-size: 13px;
+
+    font-weight: 900;
+
+    letter-spacing: 5px;
+
+    color: rgba(255,255,255,0.6);
+
+    margin-bottom: 10px;
+
+}
+
+
+.logo-container h1 {
+
+    font-size:
+        clamp(65px, 11vw, 115px);
+
+    line-height: 0.82;
+
+    font-weight: 1000;
+
+    letter-spacing: -6px;
+
+    text-shadow:
+        5px 5px 0 rgba(0,0,0,0.5);
+
+}
+
+
+.logo-container h1 span {
+
+    display: block;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff,
+            #bdbdbd
+        );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    color: transparent;
+
+}
+
+
+.logo-subtitle {
+
+    margin-top: 25px;
+
+    font-size: 15px;
+
+    font-weight: 800;
+
+    letter-spacing: 3px;
+
+    color: rgba(255,255,255,0.65);
+
+}
+
+
+/* =========================================
+   MENU BUTTONS
+========================================= */
+
+.menu-buttons {
+
+    margin-top: 45px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 14px;
+
+}
+
+
+.play-button,
+.menu-button {
+
+    width: 100%;
+
+    min-height: 70px;
+
+    border-radius: 16px;
+
+    font-size: 21px;
+
+    font-weight: 1000;
+
+    letter-spacing: 2px;
+
+    transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease,
+        background 0.18s ease;
+
+}
+
+
+.play-button {
+
+    background: white;
+
+    color: black;
+
+    box-shadow:
+        0 10px 35px
+        rgba(255,255,255,0.15);
+
+}
+
+
+.play-button:hover {
+
+    transform:
+        translateY(-4px)
+        scale(1.02);
+
+    box-shadow:
+        0 18px 45px
+        rgba(255,255,255,0.25);
+
+}
+
+
+.play-button:active {
+
+    transform:
+        translateY(2px)
+        scale(0.98);
+
+}
+
+
+.play-icon {
+
+    margin-right: 12px;
+
+}
+
+
+.menu-button {
+
+    background:
+        rgba(255,255,255,0.09);
+
+    color: white;
+
+    border:
+        1px solid
+        rgba(255,255,255,0.18);
+
+}
+
+
+.menu-button:hover {
+
+    background:
+        rgba(255,255,255,0.16);
+
+    transform:
+        translateY(-3px);
+
+}
+
+
+/* =========================================
+   MENU STATS
+========================================= */
+
+.menu-stats {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 70px;
+
+    margin-top: 35px;
+
+}
+
+
+.menu-stats div {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+
+}
+
+
+.menu-stats span {
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+
+    color: rgba(255,255,255,0.45);
+
+    font-weight: 900;
+
+}
+
+
+.menu-stats strong {
+
+    font-size: 25px;
+
+}
+
+
+.instructions {
+
+    margin-top: 30px;
+
+    padding-top: 20px;
+
+    border-top:
+        1px solid
+        rgba(255,255,255,0.1);
+
+    color: rgba(255,255,255,0.5);
+
+    font-size: 11px;
+
+    font-weight: 900;
+
+    letter-spacing: 1px;
+
+}
+
+
+/* =========================================
+   HIGH SCORE MODAL
+========================================= */
+
+.modal {
+
+    position: fixed;
+
+    inset: 0;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    background:
+        rgba(0,0,0,0.7);
+
+    backdrop-filter: blur(10px);
+
+    z-index: 100;
+
+}
+
+
+.modal-box {
+
+    position: relative;
+
+    width: min(450px, 90%);
+
+    padding: 50px;
+
+    text-align: center;
+
+    background:
+        rgba(25,25,25,0.95);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.2);
+
+    border-radius: 28px;
+
+    box-shadow:
+        0 30px 80px
+        rgba(0,0,0,0.7);
+
+    animation:
+        modalAppear 0.3s ease;
+
+}
+
+
+@keyframes modalAppear {
+
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+}
+
+
+.close-button {
+
+    position: absolute;
+
+    top: 15px;
+    right: 20px;
+
+    width: 40px;
+    height: 40px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,0.08);
+
+    color: white;
+
+    font-size: 28px;
+
+}
+
+
+.modal-icon {
+
+    font-size: 60px;
+
+}
+
+
+.modal-box h2 {
+
+    margin-top: 10px;
+
+    font-size: 35px;
+
+}
+
+
+.big-score {
+
+    margin-top: 20px;
+
+    font-size: 70px;
+
+    font-weight: 1000;
+
+}
+
+
+.modal-box p {
+
+    color:
+        rgba(255,255,255,0.5);
+
+}
+
+
+.play-button.small {
+
+    margin-top: 25px;
+
+    min-height: 55px;
+
+}
+
+
+/* =========================================
+   GAME
+========================================= */
+
+#gameScreen {
+
+    background-size: cover;
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    transition:
+        background-image 0.7s ease;
+
+}
+
+
+/* =========================================
+   TOP BAR
+========================================= */
+
+#topBar {
+
+    position: absolute;
+
+    top: 15px;
+    left: 15px;
+    right: 15px;
+
+    min-height: 82px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 25px;
+
+    padding: 14px 25px;
+
+    background:
+        rgba(0,0,0,0.72);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.16);
+
+    border-radius: 20px;
+
+    backdrop-filter: blur(15px);
+
+    z-index: 50;
+
+    box-shadow:
+        0 10px 35px
+        rgba(0,0,0,0.3);
+
+}
+
+
+.top-stat {
+
+    min-width: 100px;
+
+}
+
+
+.stat-label {
+
+    display: block;
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+
+    color:
+        rgba(255,255,255,0.45);
+
+    font-weight: 900;
+
+}
+
+
+.top-stat strong,
+.combo-container strong {
+
+    font-size: 28px;
+
+    font-weight: 1000;
+
+}
+
+
+.combo-container strong {
+
+    color: #ffd700;
+
+}
+
+
+.level-container {
+
+    flex: 1;
+
+    max-width: 230px;
+
+}
+
+
+.level-info {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 7px;
+
+}
+
+
+.level-info span {
+
+    font-size: 10px;
+
+    font-weight: 900;
+
+    letter-spacing: 2px;
+
+    color:
+        rgba(255,255,255,0.45);
+
+}
+
+
+.level-info strong {
+
+    font-size: 17px;
+
+}
+
+
+.level-progress {
+
+    height: 6px;
+
+    background:
+        rgba(255,255,255,0.12);
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+}
+
+
+.level-progress-fill {
+
+    height: 100%;
+
+    width: 0%;
+
+    background: white;
+
+    border-radius: inherit;
+
+    transition:
+        width 0.3s ease;
+
+}
+
+
+.timer-container {
+
+    text-align: right;
+
+}
+
+
+.timer-container strong {
+
+    font-size: 32px;
+
+    font-weight: 1000;
+
+}
+
+
+/* =========================================
+   GAME AREA
+========================================= */
+
+#gameArea {
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+    cursor: crosshair;
+
+}
+
+
+/* =========================================
+   GAME HINT
+========================================= */
+
+#gameHint {
+
+    position: absolute;
+
+    top: 115px;
+
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    padding: 8px 18px;
+
+    background:
+        rgba(0,0,0,0.45);
+
+    border-radius: 30px;
+
+    color:
+        rgba(255,255,255,0.7);
+
+    font-size: 11px;
+
+    font-weight: 900;
+
+    letter-spacing: 3px;
+
+    pointer-events: none;
+
+}
+
+
+/* =========================================
+   WATSON
+========================================= */
+
+#watson {
+
+    position: absolute;
+
+    width: 130px;
+
+    height: auto;
+
+    user-select: none;
+
+    cursor: pointer;
+
+    z-index: 10;
+
+    filter:
+        drop-shadow(
+            0 8px 8px
+            rgba(0,0,0,0.55)
+        );
+
+    transition:
+        width 0.25s ease,
+        transform 0.12s ease;
+
+}
+
+
+#watson:hover {
+
+    transform:
+        scale(1.12)
+        rotate(3deg);
+
+}
+
+
+#watson:active {
+
+    transform:
+        scale(0.9)
+        rotate(-4deg);
+
+}
+
+
+/* =========================================
+   FIND TIMER
+========================================= */
+
+#findTimerContainer {
+
+    position: absolute;
+
+    bottom: 30px;
+
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 10px 18px;
+
+    background:
+        rgba(0,0,0,0.6);
+
+    border-radius: 50px;
+
+    pointer-events: none;
+
+}
+
+
+.find-timer-label {
+
+    font-size: 10px;
+
+    font-weight: 900;
+
+    letter-spacing: 2px;
+
+    color:
+        rgba(255,255,255,0.55);
+
+}
+
+
+#findTimer {
+
+    min-width: 35px;
+
+    font-size: 20px;
+
+    font-weight: 1000;
+
+    text-align: center;
+
+}
+
+
+/* =========================================
+   FEEDBACK
+========================================= */
+
+#feedback {
+
+    position: absolute;
+
+    z-index: 100;
+
+    pointer-events: none;
+
+    font-size: 35px;
+
+    font-weight: 1000;
+
+    text-shadow:
+        3px 3px 0 #000;
+
+    opacity: 0;
+
+    transform:
+        translate(-50%, -50%);
+
+    transition:
+        opacity 0.35s ease,
+        transform 0.35s ease;
+
+}
+
+
+/* =========================================
+   LEVEL MESSAGE
+========================================= */
+
+#levelMessage {
+
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    transform:
+        translate(-50%, -50%)
+        scale(0.8);
+
+    text-align: center;
+
+    pointer-events: none;
+
+    opacity: 0;
+
+    z-index: 90;
+
+    transition:
+        opacity 0.3s ease,
+        transform 0.3s ease;
+
+}
+
+
+#levelMessageSmall {
+
+    font-size: 14px;
+
+    letter-spacing: 5px;
+
+    font-weight: 900;
+
+    color:
+        rgba(255,255,255,0.65);
+
+}
+
+
+#levelMessageBig {
+
+    margin-top: 5px;
+
+    font-size:
+        clamp(55px, 9vw, 110px);
+
+    font-weight: 1000;
+
+    text-shadow:
+        6px 6px 0 #000;
+
+}
+
+
+/* =========================================
+   SCREEN SHAKE
+========================================= */
+
+.screen-shake {
+
+    animation:
+        screenShake 0.5s;
+
+}
+
+
+@keyframes screenShake {
+
+    0% {
+        transform: translate(0,0);
+    }
+
+    15% {
+        transform: translate(-15px,8px);
+    }
+
+    30% {
+        transform: translate(12px,-10px);
+    }
+
+    45% {
+        transform: translate(-10px,-7px);
+    }
+
+    60% {
+        transform: translate(8px,10px);
+    }
+
+    75% {
+        transform: translate(-5px,-5px);
+    }
+
+    100% {
+        transform: translate(0,0);
+    }
+
+}
+
+
+/* =========================================
+   GAME OVER
+========================================= */
+
+#gameOverScreen {
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    background:
+
+        linear-gradient(
+            rgba(0,0,0,0.65),
+            rgba(0,0,0,0.9)
+        ),
+
+        url("assets/background7.jpg");
+
+    background-size: cover;
+    background-position: center;
+
+}
+
+
+.game-over-container {
+
+    width:
+        min(650px, 92%);
+
+    padding: 45px;
+
+    text-align: center;
+
+    background:
+        rgba(15,15,15,0.85);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.18);
+
+    border-radius: 30px;
+
+    backdrop-filter: blur(20px);
+
+    box-shadow:
+        0 30px 90px
+        rgba(0,0,0,0.7);
+
+}
+
+
+.game-over-small {
+
+    font-size: 12px;
+
+    letter-spacing: 5px;
+
+    color:
+        rgba(255,255,255,0.5);
+
+    font-weight: 900;
+
+}
+
+
+.game-over-container h1 {
+
+    margin-top: 5px;
+
+    font-size:
+        clamp(45px, 8vw, 80px);
+
+    font-weight: 1000;
+
+}
+
+
+.final-score {
+
+    margin-top: 20px;
+
+}
+
+
+.final-score span {
+
+    font-size: 11px;
+
+    letter-spacing: 3px;
+
+    color:
+        rgba(255,255,255,0.5);
+
+    font-weight: 900;
+
+}
+
+
+.final-score strong {
+
+    display: block;
+
+    margin-top: 5px;
+
+    font-size: 65px;
+
+    font-weight: 1000;
+
+}
+
+
+.new-high-score {
+
+    margin-top: 10px;
+
+    font-size: 18px;
+
+    font-weight: 1000;
+
+    animation:
+        highScorePulse 0.7s infinite alternate;
+
+}
+
+
+@keyframes highScorePulse {
+
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.08);
+    }
+
+}
+
+
+/* =========================================
+   RESULT CARDS
+========================================= */
+
+.results-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 10px;
+
+    margin-top: 30px;
+
+}
+
+
+.result-card {
+
+    padding: 18px 10px;
+
+    background:
+        rgba(255,255,255,0.06);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.08);
+
+    border-radius: 15px;
+
+}
+
+
+.result-card span {
+
+    display: block;
+
+    font-size: 9px;
+
+    letter-spacing: 1px;
+
+    color:
+        rgba(255,255,255,0.45);
+
+    font-weight: 900;
+
+}
+
+
+.result-card strong {
+
+    display: block;
+
+    margin-top: 7px;
+
+    font-size: 25px;
+
+}
+
+
+/* =========================================
+   GAME OVER BUTTONS
+========================================= */
+
+.game-over-buttons {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+
+    margin-top: 30px;
+
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 800px) {
+
+    #topBar {
+
+        gap: 12px;
+
+        padding:
+            10px 15px;
+
+    }
+
+
+    .top-stat {
+
+        min-width: 60px;
+
+    }
+
+
+    .top-stat strong,
+    .combo-container strong {
+
+        font-size: 21px;
+
+    }
+
+
+    .level-container {
+
+        display: none;
+
+    }
+
+
+    .timer-container strong {
+
+        font-size: 25px;
+
+    }
+
+
+    .results-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .menu-container {
+
+        padding:
+            40px 25px;
+
+    }
+
+
+    .logo-container h1 {
+
+        font-size: 65px;
+
+    }
+
+
+    .menu-stats {
+
+        gap: 35px;
+
+    }
+
+
+    .top-stat:nth-child(2) {
+
+        display: none;
+
+    }
+
+}
