@@ -1,12 +1,6 @@
-/* ============================================================
-   FIND WATSON
-   COMPLETE STYLESHEET
-============================================================ */
-
-
-/* ============================================================
+/* =========================================
    RESET
-============================================================ */
+========================================= */
 
 * {
     box-sizing: border-box;
@@ -14,11 +8,11 @@
     padding: 0;
 }
 
-
 html,
 body {
     width: 100%;
     height: 100%;
+
     overflow: hidden;
 
     font-family:
@@ -31,125 +25,45 @@ body {
 }
 
 
-button,
-input {
-    font-family: inherit;
-}
-
+/* =========================================
+   GENERAL
+========================================= */
 
 button {
+    font-family: inherit;
     border: none;
     outline: none;
+
     cursor: pointer;
 }
 
+.screen {
+    position: fixed;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+}
 
 .hidden {
     display: none !important;
 }
 
 
-/* ============================================================
-   SCREENS
-============================================================ */
-
-.screen {
-    position: fixed;
-    inset: 0;
-
-    width: 100%;
-    height: 100%;
-
-    z-index: 1;
-}
-
-
-/* ============================================================
-   LOADING SCREEN
-============================================================ */
-
-#loadingScreen {
-    position: fixed;
-    inset: 0;
-
-    z-index: 10000;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    background:
-        radial-gradient(
-            circle at center,
-            #202020,
-            #050505 70%
-        );
-
-    transition:
-        opacity 0.4s ease;
-}
-
-
-.loading-box {
-    text-align: center;
-}
-
-
-.loading-icon {
-    font-size: 65px;
-
-    animation:
-        loadingPulse 1s infinite;
-}
-
-
-.loading-title {
-    margin-top: 15px;
-
-    font-size: 35px;
-    font-weight: 1000;
-
-    letter-spacing: 3px;
-}
-
-
-.loading-text {
-    margin-top: 10px;
-
-    color:
-        rgba(255,255,255,0.5);
-
-    font-size: 13px;
-
-    letter-spacing: 2px;
-}
-
-
-@keyframes loadingPulse {
-
-    0%,
-    100% {
-        transform: scale(1);
-    }
-
-    50% {
-        transform: scale(1.15);
-    }
-
-}
-
-
-/* ============================================================
-   BACKGROUND EFFECT
-============================================================ */
+/* =========================================
+   BACKGROUND
+========================================= */
 
 .background-overlay {
+
     position: fixed;
+
     inset: 0;
 
     pointer-events: none;
 
-    z-index: 0;
+    z-index: -1;
 
     background:
         radial-gradient(
@@ -157,64 +71,72 @@ button {
             rgba(255,255,255,0.08),
             transparent 40%
         );
+
 }
 
 
-/* ============================================================
+/* =========================================
    MAIN MENU
-============================================================ */
+========================================= */
 
 #menuScreen {
+
     display: flex;
 
     justify-content: center;
     align-items: center;
 
-    overflow-y: auto;
-
     background:
+
         linear-gradient(
-            rgba(0,0,0,0.45),
-            rgba(0,0,0,0.82)
+            rgba(0,0,0,0.55),
+            rgba(0,0,0,0.8)
         ),
+
         url("background1.jpg");
 
     background-size: cover;
     background-position: center;
+
 }
 
 
 .menu-container {
+
     width: min(650px, 92%);
 
-    padding: 50px 45px;
+    padding: 55px 45px;
 
     text-align: center;
 
     background:
+
         linear-gradient(
             145deg,
-            rgba(255,255,255,0.13),
+            rgba(255,255,255,0.12),
             rgba(255,255,255,0.035)
         );
 
     border:
+
         1px solid
-        rgba(255,255,255,0.23);
+        rgba(255,255,255,0.25);
 
     border-radius: 32px;
 
-    backdrop-filter: blur(20px);
+    backdrop-filter: blur(18px);
 
     box-shadow:
+
         0 30px 80px
-        rgba(0,0,0,0.65),
+        rgba(0,0,0,0.6),
 
         inset 0 1px 0
-        rgba(255,255,255,0.16);
+        rgba(255,255,255,0.15);
 
     animation:
         menuAppear 0.7s ease;
+
 }
 
 
@@ -222,7 +144,6 @@ button {
 
     from {
         opacity: 0;
-
         transform:
             translateY(30px)
             scale(0.96);
@@ -230,7 +151,6 @@ button {
 
     to {
         opacity: 1;
-
         transform:
             translateY(0)
             scale(1);
@@ -239,25 +159,27 @@ button {
 }
 
 
-/* ============================================================
+/* =========================================
    LOGO
-============================================================ */
+========================================= */
 
 .logo-small {
-    font-size: 12px;
+
+    font-size: 13px;
 
     font-weight: 900;
 
     letter-spacing: 5px;
 
-    color:
-        rgba(255,255,255,0.55);
+    color: rgba(255,255,255,0.6);
 
-    margin-bottom: 12px;
+    margin-bottom: 10px;
+
 }
 
 
 .logo-container h1 {
+
     font-size:
         clamp(65px, 11vw, 115px);
 
@@ -268,66 +190,72 @@ button {
     letter-spacing: -6px;
 
     text-shadow:
-        5px 5px 0
-        rgba(0,0,0,0.55);
+        5px 5px 0 rgba(0,0,0,0.5);
+
 }
 
 
 .logo-container h1 span {
+
     display: block;
 
     background:
         linear-gradient(
             135deg,
             #ffffff,
-            #a9a9a9
+            #bdbdbd
         );
 
     -webkit-background-clip: text;
     background-clip: text;
 
     color: transparent;
+
 }
 
 
 .logo-subtitle {
+
     margin-top: 25px;
 
-    font-size: 14px;
+    font-size: 15px;
 
     font-weight: 800;
 
     letter-spacing: 3px;
 
-    color:
-        rgba(255,255,255,0.62);
+    color: rgba(255,255,255,0.65);
+
 }
 
 
-/* ============================================================
+/* =========================================
    MENU BUTTONS
-============================================================ */
+========================================= */
 
 .menu-buttons {
-    margin-top: 42px;
+
+    margin-top: 45px;
 
     display: flex;
 
     flex-direction: column;
 
-    gap: 13px;
+    gap: 14px;
+
 }
 
 
 .play-button,
 .menu-button {
+
     width: 100%;
 
-    min-height: 66px;
+    min-height: 70px;
 
     border-radius: 16px;
 
-    font-size: 19px;
+    font-size: 21px;
 
     font-weight: 1000;
 
@@ -337,145 +265,155 @@ button {
         transform 0.18s ease,
         box-shadow 0.18s ease,
         background 0.18s ease;
+
 }
 
 
 .play-button {
+
     background: white;
 
     color: black;
 
     box-shadow:
         0 10px 35px
-        rgba(255,255,255,0.14);
+        rgba(255,255,255,0.15);
+
 }
 
 
 .play-button:hover {
+
     transform:
         translateY(-4px)
-        scale(1.015);
+        scale(1.02);
 
     box-shadow:
         0 18px 45px
         rgba(255,255,255,0.25);
+
 }
 
 
 .play-button:active {
+
     transform:
         translateY(2px)
         scale(0.98);
+
 }
 
 
 .play-icon {
-    margin-right: 10px;
+
+    margin-right: 12px;
+
 }
 
 
 .menu-button {
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    gap: 10px;
 
     background:
-        rgba(255,255,255,0.08);
+        rgba(255,255,255,0.09);
 
     color: white;
 
     border:
         1px solid
         rgba(255,255,255,0.18);
+
 }
 
 
 .menu-button:hover {
+
     background:
         rgba(255,255,255,0.16);
 
     transform:
         translateY(-3px);
+
 }
 
 
-/* ============================================================
+/* =========================================
    MENU STATS
-============================================================ */
+========================================= */
 
 .menu-stats {
+
     display: flex;
 
     justify-content: center;
 
-    gap: 80px;
+    gap: 70px;
 
-    margin-top: 32px;
+    margin-top: 35px;
+
 }
 
 
 .menu-stats div {
+
     display: flex;
 
     flex-direction: column;
 
     gap: 5px;
+
 }
 
 
 .menu-stats span {
+
     font-size: 10px;
 
     letter-spacing: 2px;
 
-    color:
-        rgba(255,255,255,0.42);
+    color: rgba(255,255,255,0.45);
 
     font-weight: 900;
+
 }
 
 
 .menu-stats strong {
+
     font-size: 25px;
+
 }
 
 
-/* ============================================================
-   INSTRUCTIONS
-============================================================ */
-
 .instructions {
-    margin-top: 28px;
 
-    padding-top: 19px;
+    margin-top: 30px;
+
+    padding-top: 20px;
 
     border-top:
         1px solid
         rgba(255,255,255,0.1);
 
-    color:
-        rgba(255,255,255,0.5);
+    color: rgba(255,255,255,0.5);
 
-    font-size: 10px;
+    font-size: 11px;
 
     font-weight: 900;
 
     letter-spacing: 1px;
+
 }
 
 
-/* ============================================================
-   MODAL
-============================================================ */
+/* =========================================
+   HIGH SCORE MODAL
+========================================= */
 
 .modal {
-    position: fixed;
-    inset: 0;
 
-    z-index: 500;
+    position: fixed;
+
+    inset: 0;
 
     display: flex;
 
@@ -483,13 +421,17 @@ button {
     align-items: center;
 
     background:
-        rgba(0,0,0,0.72);
+        rgba(0,0,0,0.7);
 
-    backdrop-filter: blur(12px);
+    backdrop-filter: blur(10px);
+
+    z-index: 100;
+
 }
 
 
 .modal-box {
+
     position: relative;
 
     width: min(450px, 90%);
@@ -499,7 +441,7 @@ button {
     text-align: center;
 
     background:
-        rgba(22,22,22,0.96);
+        rgba(25,25,25,0.95);
 
     border:
         1px solid
@@ -513,6 +455,7 @@ button {
 
     animation:
         modalAppear 0.3s ease;
+
 }
 
 
@@ -532,6 +475,7 @@ button {
 
 
 .close-button {
+
     position: absolute;
 
     top: 15px;
@@ -548,64 +492,77 @@ button {
     color: white;
 
     font-size: 28px;
+
 }
 
 
 .modal-icon {
+
     font-size: 60px;
+
 }
 
 
 .modal-box h2 {
+
     margin-top: 10px;
 
     font-size: 35px;
+
 }
 
 
 .big-score {
+
     margin-top: 20px;
 
     font-size: 70px;
 
     font-weight: 1000;
+
 }
 
 
 .modal-box p {
+
     color:
         rgba(255,255,255,0.5);
+
 }
 
 
 .play-button.small {
+
     margin-top: 25px;
 
     min-height: 55px;
+
 }
 
 
-/* ============================================================
+/* =========================================
    GAME
-============================================================ */
+========================================= */
 
 #gameScreen {
-    background-size: cover;
 
+    background-size: cover;
     background-position: center;
 
     background-repeat: no-repeat;
 
     transition:
         background-image 0.7s ease;
+
 }
 
 
-/* ============================================================
+/* =========================================
    TOP BAR
-============================================================ */
+========================================= */
 
 #topBar {
+
     position: absolute;
 
     top: 15px;
@@ -638,15 +595,19 @@ button {
     box-shadow:
         0 10px 35px
         rgba(0,0,0,0.3);
+
 }
 
 
 .top-stat {
+
     min-width: 100px;
+
 }
 
 
 .stat-label {
+
     display: block;
 
     font-size: 10px;
@@ -657,30 +618,38 @@ button {
         rgba(255,255,255,0.45);
 
     font-weight: 900;
+
 }
 
 
 .top-stat strong,
 .combo-container strong {
+
     font-size: 28px;
 
     font-weight: 1000;
+
 }
 
 
 .combo-container strong {
+
     color: #ffd700;
+
 }
 
 
 .level-container {
+
     flex: 1;
 
     max-width: 230px;
+
 }
 
 
 .level-info {
+
     display: flex;
 
     justify-content: space-between;
@@ -688,10 +657,12 @@ button {
     align-items: center;
 
     margin-bottom: 7px;
+
 }
 
 
 .level-info span {
+
     font-size: 10px;
 
     font-weight: 900;
@@ -700,15 +671,19 @@ button {
 
     color:
         rgba(255,255,255,0.45);
+
 }
 
 
 .level-info strong {
+
     font-size: 17px;
+
 }
 
 
 .level-progress {
+
     height: 6px;
 
     background:
@@ -717,10 +692,12 @@ button {
     border-radius: 20px;
 
     overflow: hidden;
+
 }
 
 
 .level-progress-fill {
+
     height: 100%;
 
     width: 0%;
@@ -731,75 +708,32 @@ button {
 
     transition:
         width 0.3s ease;
+
 }
 
 
 .timer-container {
+
     text-align: right;
+
 }
 
 
 .timer-container strong {
+
     font-size: 32px;
 
     font-weight: 1000;
+
 }
 
 
-/* ============================================================
-   PAUSE BUTTON
-============================================================ */
-
-.pause-button {
-    position: absolute;
-
-    top: 112px;
-    right: 22px;
-
-    z-index: 100;
-
-    width: 52px;
-    height: 52px;
-
-    border-radius: 16px;
-
-    background:
-        rgba(0,0,0,0.65);
-
-    border:
-        1px solid
-        rgba(255,255,255,0.2);
-
-    color: white;
-
-    font-size: 20px;
-
-    backdrop-filter: blur(10px);
-
-    transition:
-        transform 0.15s ease,
-        background 0.15s ease;
-}
-
-
-.pause-button:hover {
-    transform: scale(1.08);
-
-    background:
-        rgba(255,255,255,0.16);
-}
-
-
-.pause-button:active {
-    transform: scale(0.94);
-}
-
-
-/* ============================================================
+/* =========================================
    GAME AREA
-============================================================ */
+========================================= */
 
 #gameArea {
+
     position: absolute;
 
     top: 0;
@@ -811,17 +745,20 @@ button {
     overflow: hidden;
 
     cursor: crosshair;
+
 }
 
 
-/* ============================================================
+/* =========================================
    GAME HINT
-============================================================ */
+========================================= */
 
 #gameHint {
+
     position: absolute;
 
     top: 115px;
+
     left: 50%;
 
     transform:
@@ -845,25 +782,26 @@ button {
 
     pointer-events: none;
 
-    z-index: 20;
 }
 
 
-/* ============================================================
+/* =========================================
    WATSON
-============================================================ */
+========================================= */
 
 #watson {
+
     position: absolute;
 
-    width: 115px;
+    width: 130px;
+
     height: auto;
 
     user-select: none;
 
     cursor: pointer;
 
-    z-index: 30;
+    z-index: 10;
 
     filter:
         drop-shadow(
@@ -875,85 +813,37 @@ button {
         width 0.25s ease,
         transform 0.12s ease;
 
-    transform-origin: center;
 }
 
 
 #watson:hover {
-    filter:
-        drop-shadow(
-            0 10px 12px
-            rgba(0,0,0,0.65)
-        );
 
     transform:
-        scale(1.1)
+        scale(1.12)
         rotate(3deg);
+
 }
 
 
 #watson:active {
+
     transform:
         scale(0.9)
         rotate(-4deg);
-}
-
-
-/* ============================================================
-   EXPLOSION
-============================================================ */
-
-.watson-explosion {
-    animation:
-        watsonExplosion 0.65s ease-out forwards !important;
-}
-
-
-@keyframes watsonExplosion {
-
-    0% {
-        opacity: 1;
-
-        transform:
-            scale(1)
-            rotate(0deg);
-    }
-
-    35% {
-        opacity: 1;
-
-        transform:
-            scale(1.45)
-            rotate(8deg);
-    }
-
-    65% {
-        opacity: 0.8;
-
-        transform:
-            scale(2.1)
-            rotate(-10deg);
-    }
-
-    100% {
-        opacity: 0;
-
-        transform:
-            scale(3)
-            rotate(20deg);
-    }
 
 }
 
 
-/* ============================================================
+/* =========================================
    FIND TIMER
-============================================================ */
+========================================= */
 
 #findTimerContainer {
+
     position: absolute;
 
     bottom: 30px;
+
     left: 50%;
 
     transform:
@@ -974,11 +864,11 @@ button {
 
     pointer-events: none;
 
-    z-index: 40;
 }
 
 
 .find-timer-label {
+
     font-size: 10px;
 
     font-weight: 900;
@@ -987,10 +877,12 @@ button {
 
     color:
         rgba(255,255,255,0.55);
+
 }
 
 
 #findTimer {
+
     min-width: 35px;
 
     font-size: 20px;
@@ -999,20 +891,18 @@ button {
 
     text-align: center;
 
-    transition:
-        transform 0.15s ease,
-        color 0.15s ease;
 }
 
 
-/* ============================================================
+/* =========================================
    FEEDBACK
-============================================================ */
+========================================= */
 
 #feedback {
+
     position: absolute;
 
-    z-index: 200;
+    z-index: 100;
 
     pointer-events: none;
 
@@ -1031,14 +921,16 @@ button {
     transition:
         opacity 0.35s ease,
         transform 0.35s ease;
+
 }
 
 
-/* ============================================================
+/* =========================================
    LEVEL MESSAGE
-============================================================ */
+========================================= */
 
 #levelMessage {
+
     position: absolute;
 
     top: 50%;
@@ -1054,15 +946,17 @@ button {
 
     opacity: 0;
 
-    z-index: 150;
+    z-index: 90;
 
     transition:
         opacity 0.3s ease,
         transform 0.3s ease;
+
 }
 
 
 #levelMessageSmall {
+
     font-size: 14px;
 
     letter-spacing: 5px;
@@ -1071,10 +965,12 @@ button {
 
     color:
         rgba(255,255,255,0.65);
+
 }
 
 
 #levelMessageBig {
+
     margin-top: 5px;
 
     font-size:
@@ -1084,16 +980,19 @@ button {
 
     text-shadow:
         6px 6px 0 #000;
+
 }
 
 
-/* ============================================================
+/* =========================================
    SCREEN SHAKE
-============================================================ */
+========================================= */
 
 .screen-shake {
+
     animation:
         screenShake 0.5s;
+
 }
 
 
@@ -1130,133 +1029,43 @@ button {
 }
 
 
-/* ============================================================
-   PAUSE OVERLAY
-============================================================ */
-
-.pause-overlay {
-    position: fixed;
-
-    inset: 0;
-
-    z-index: 1000;
-
-    display: flex;
-
-    justify-content: center;
-    align-items: center;
-
-    background:
-        rgba(0,0,0,0.72);
-
-    backdrop-filter: blur(12px);
-}
-
-
-.pause-box {
-    width: min(500px, 90%);
-
-    padding: 45px;
-
-    text-align: center;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(30,30,30,0.97),
-            rgba(12,12,12,0.97)
-        );
-
-    border:
-        1px solid
-        rgba(255,255,255,0.18);
-
-    border-radius: 28px;
-
-    box-shadow:
-        0 30px 90px
-        rgba(0,0,0,0.8);
-
-    animation:
-        modalAppear 0.25s ease;
-}
-
-
-.pause-icon {
-    font-size: 60px;
-}
-
-
-.pause-small {
-    margin-top: 10px;
-
-    font-size: 11px;
-
-    letter-spacing: 4px;
-
-    font-weight: 900;
-
-    color:
-        rgba(255,255,255,0.45);
-}
-
-
-.pause-box h2 {
-    margin-top: 8px;
-
-    font-size: 38px;
-}
-
-
-.pause-box .play-button {
-    margin-top: 30px;
-}
-
-
-.pause-box .menu-button {
-    margin-top: 10px;
-}
-
-
-/* ============================================================
+/* =========================================
    GAME OVER
-============================================================ */
+========================================= */
 
 #gameOverScreen {
+
     display: flex;
 
     justify-content: center;
     align-items: center;
 
-    overflow-y: auto;
-
     background:
+
         linear-gradient(
             rgba(0,0,0,0.65),
             rgba(0,0,0,0.9)
         ),
+
         url("background7.jpg");
 
     background-size: cover;
-
     background-position: center;
+
 }
 
 
 .game-over-container {
+
     width:
         min(650px, 92%);
-
-    max-height: 95vh;
-
-    overflow-y: auto;
 
     padding: 45px;
 
     text-align: center;
 
     background:
-        rgba(15,15,15,0.86);
+        rgba(15,15,15,0.85);
 
     border:
         1px solid
@@ -1269,10 +1078,12 @@ button {
     box-shadow:
         0 30px 90px
         rgba(0,0,0,0.7);
+
 }
 
 
 .game-over-small {
+
     font-size: 12px;
 
     letter-spacing: 5px;
@@ -1281,25 +1092,31 @@ button {
         rgba(255,255,255,0.5);
 
     font-weight: 900;
+
 }
 
 
 .game-over-container h1 {
+
     margin-top: 5px;
 
     font-size:
         clamp(45px, 8vw, 80px);
 
     font-weight: 1000;
+
 }
 
 
 .final-score {
+
     margin-top: 20px;
+
 }
 
 
 .final-score span {
+
     font-size: 11px;
 
     letter-spacing: 3px;
@@ -1308,10 +1125,12 @@ button {
         rgba(255,255,255,0.5);
 
     font-weight: 900;
+
 }
 
 
 .final-score strong {
+
     display: block;
 
     margin-top: 5px;
@@ -1319,10 +1138,12 @@ button {
     font-size: 65px;
 
     font-weight: 1000;
+
 }
 
 
 .new-high-score {
+
     margin-top: 10px;
 
     font-size: 18px;
@@ -1331,6 +1152,7 @@ button {
 
     animation:
         highScorePulse 0.7s infinite alternate;
+
 }
 
 
@@ -1347,11 +1169,12 @@ button {
 }
 
 
-/* ============================================================
-   RESULTS
-============================================================ */
+/* =========================================
+   RESULT CARDS
+========================================= */
 
 .results-grid {
+
     display: grid;
 
     grid-template-columns:
@@ -1360,10 +1183,12 @@ button {
     gap: 10px;
 
     margin-top: 30px;
+
 }
 
 
 .result-card {
+
     padding: 18px 10px;
 
     background:
@@ -1374,10 +1199,12 @@ button {
         rgba(255,255,255,0.08);
 
     border-radius: 15px;
+
 }
 
 
 .result-card span {
+
     display: block;
 
     font-size: 9px;
@@ -1388,23 +1215,27 @@ button {
         rgba(255,255,255,0.45);
 
     font-weight: 900;
+
 }
 
 
 .result-card strong {
+
     display: block;
 
     margin-top: 7px;
 
     font-size: 25px;
+
 }
 
 
-/* ============================================================
+/* =========================================
    GAME OVER BUTTONS
-============================================================ */
+========================================= */
 
 .game-over-buttons {
+
     display: flex;
 
     flex-direction: column;
@@ -1412,559 +1243,93 @@ button {
     gap: 10px;
 
     margin-top: 30px;
+
 }
 
 
-/* ============================================================
-   LEADERBOARD
-============================================================ */
-
-#leaderboardScreen {
-    display: flex;
-
-    justify-content: center;
-    align-items: center;
-
-    overflow-y: auto;
-
-    padding: 30px;
-
-    background:
-        linear-gradient(
-            rgba(0,0,0,0.58),
-            rgba(0,0,0,0.88)
-        ),
-        url("background1.jpg");
-
-    background-size: cover;
-
-    background-position: center;
-}
-
-
-.leaderboard-container {
-    position: relative;
-
-    width: min(900px, 95%);
-
-    max-height: 90vh;
-
-    padding: 45px;
-
-    overflow-y: auto;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,0.12),
-            rgba(255,255,255,0.035)
-        );
-
-    border:
-        1px solid
-        rgba(255,255,255,0.22);
-
-    border-radius: 30px;
-
-    backdrop-filter: blur(20px);
-
-    box-shadow:
-        0 30px 90px
-        rgba(0,0,0,0.7);
-}
-
-
-.back-button {
-    position: absolute;
-
-    top: 22px;
-    left: 25px;
-
-    padding: 10px 17px;
-
-    border-radius: 12px;
-
-    background:
-        rgba(255,255,255,0.08);
-
-    color: white;
-
-    border:
-        1px solid
-        rgba(255,255,255,0.15);
-
-    font-size: 12px;
-
-    font-weight: 900;
-
-    letter-spacing: 1px;
-
-    transition:
-        background 0.15s ease,
-        transform 0.15s ease;
-}
-
-
-.back-button:hover {
-    background:
-        rgba(255,255,255,0.16);
-
-    transform:
-        translateX(-3px);
-}
-
-
-.leaderboard-header {
-    text-align: center;
-
-    padding-top: 15px;
-
-    margin-bottom: 30px;
-}
-
-
-.leaderboard-icon {
-    font-size: 55px;
-}
-
-
-.leaderboard-small {
-    margin-top: 5px;
-
-    font-size: 10px;
-
-    font-weight: 900;
-
-    letter-spacing: 4px;
-
-    color:
-        rgba(255,255,255,0.45);
-}
-
-
-.leaderboard-header h1 {
-    margin-top: 5px;
-
-    font-size:
-        clamp(45px, 7vw, 75px);
-
-    line-height: 1;
-
-    font-weight: 1000;
-
-    letter-spacing: -3px;
-}
-
-
-.leaderboard-header p {
-    margin-top: 10px;
-
-    color:
-        rgba(255,255,255,0.48);
-
-    font-size: 12px;
-
-    font-weight: 700;
-
-    letter-spacing: 1px;
-}
-
-
-/* ============================================================
-   LEADERBOARD TABLE
-============================================================ */
-
-.leaderboard-table {
-    width: 100%;
-}
-
-
-.leaderboard-table-header,
-.leaderboard-row {
-    display: grid;
-
-    grid-template-columns:
-        80px
-        1fr
-        150px
-        110px;
-
-    align-items: center;
-
-    gap: 15px;
-}
-
-
-.leaderboard-table-header {
-    padding:
-        0 20px
-        10px;
-
-    color:
-        rgba(255,255,255,0.38);
-
-    font-size: 9px;
-
-    font-weight: 900;
-
-    letter-spacing: 2px;
-}
-
-
-.leaderboard-list {
-    width: 100%;
-}
-
-
-.leaderboard-row {
-    min-height: 66px;
-
-    margin-bottom: 8px;
-
-    padding:
-        8px 20px;
-
-    background:
-        rgba(255,255,255,0.055);
-
-    border:
-        1px solid
-        rgba(255,255,255,0.08);
-
-    border-radius: 15px;
-
-    transition:
-        transform 0.15s ease,
-        background 0.15s ease;
-}
-
-
-.leaderboard-row:hover {
-    transform:
-        translateX(4px);
-
-    background:
-        rgba(255,255,255,0.09);
-}
-
-
-.leaderboard-rank {
-    font-size: 22px;
-
-    font-weight: 1000;
-
-    text-align: center;
-}
-
-
-.leaderboard-name {
-    overflow: hidden;
-
-    text-overflow: ellipsis;
-
-    white-space: nowrap;
-
-    font-size: 17px;
-
-    font-weight: 900;
-}
-
-
-.leaderboard-score {
-    text-align: right;
-
-    font-size: 18px;
-
-    font-weight: 1000;
-}
-
-
-.leaderboard-date {
-    text-align: right;
-
-    font-size: 12px;
-
-    color:
-        rgba(255,255,255,0.45);
-
-    font-weight: 700;
-}
-
-
-.leaderboard-loading,
-.leaderboard-empty {
-    padding: 40px;
-
-    text-align: center;
-
-    color:
-        rgba(255,255,255,0.5);
-
-    font-size: 14px;
-
-    font-weight: 700;
-}
-
-
-/* ============================================================
-   LEADERBOARD NAME MODAL
-============================================================ */
-
-.leaderboard-name-box {
-    width: min(500px, 92%);
-}
-
-
-.leaderboard-name-box h2 {
-    margin-top: 8px;
-
-    font-size: 34px;
-}
-
-
-.leaderboard-score-label {
-    margin-top: 25px;
-
-    font-size: 9px;
-
-    letter-spacing: 3px;
-
-    color:
-        rgba(255,255,255,0.4);
-
-    font-weight: 900;
-}
-
-
-.leaderboard-big-score {
-    margin-top: 2px;
-
-    font-size: 50px;
-
-    font-weight: 1000;
-}
-
-
-#leaderboardNameInput {
-    width: 100%;
-
-    height: 60px;
-
-    margin-top: 20px;
-
-    padding:
-        0 18px;
-
-    border-radius: 14px;
-
-    border:
-        1px solid
-        rgba(255,255,255,0.18);
-
-    outline: none;
-
-    background:
-        rgba(255,255,255,0.08);
-
-    color: white;
-
-    text-align: center;
-
-    font-size: 18px;
-
-    font-weight: 800;
-
-    letter-spacing: 1px;
-
-    transition:
-        border 0.15s ease,
-        background 0.15s ease;
-}
-
-
-#leaderboardNameInput::placeholder {
-    color:
-        rgba(255,255,255,0.3);
-}
-
-
-#leaderboardNameInput:focus {
-    border:
-        1px solid
-        rgba(255,255,255,0.5);
-
-    background:
-        rgba(255,255,255,0.12);
-}
-
-
-.leaderboard-error {
-    min-height: 20px;
-
-    margin-top: 10px;
-
-    color:
-        #ff5555;
-
-    font-size: 11px;
-
-    font-weight: 800;
-
-    line-height: 1.4;
-}
-
-
-.leaderboard-name-box .play-button {
-    margin-top: 10px;
-}
-
-
-.leaderboard-name-box .menu-button {
-    margin-top: 10px;
-}
-
-
-/* ============================================================
-   DISABLED
-============================================================ */
-
-button:disabled {
-    cursor: not-allowed;
-
-    opacity: 0.6;
-}
-
-
-/* ============================================================
-   MOBILE
-============================================================ */
+/* =========================================
+   RESPONSIVE
+========================================= */
 
 @media (max-width: 800px) {
 
     #topBar {
+
         gap: 12px;
 
         padding:
             10px 15px;
+
     }
 
 
     .top-stat {
+
         min-width: 60px;
+
     }
 
 
     .top-stat strong,
     .combo-container strong {
+
         font-size: 21px;
+
     }
 
 
     .level-container {
+
         display: none;
+
     }
 
 
     .timer-container strong {
+
         font-size: 25px;
+
     }
 
 
     .results-grid {
+
         grid-template-columns:
             repeat(2, 1fr);
-    }
 
-
-    .leaderboard-table-header,
-    .leaderboard-row {
-        grid-template-columns:
-            55px
-            1fr
-            100px
-            80px;
-
-        gap: 8px;
-    }
-
-
-    .leaderboard-container {
-        padding:
-            40px 18px 25px;
-    }
-
-
-    .leaderboard-table-header {
-        padding-left: 10px;
-        padding-right: 10px;
-    }
-
-
-    .leaderboard-row {
-        padding-left: 10px;
-        padding-right: 10px;
     }
 
 }
 
 
-@media (max-width: 550px) {
+@media (max-width: 500px) {
 
     .menu-container {
+
         padding:
-            38px 24px;
+            40px 25px;
+
     }
 
 
     .logo-container h1 {
+
         font-size: 65px;
+
     }
 
 
     .menu-stats {
+
         gap: 35px;
+
     }
 
 
     .top-stat:nth-child(2) {
+
         display: none;
-    }
 
-
-    .pause-button {
-        top: 105px;
-        right: 12px;
-    }
-
-
-    .leaderboard-table-header,
-    .leaderboard-row {
-        grid-template-columns:
-            45px
-            1fr
-            85px;
-    }
-
-
-    .leaderboard-table-header div:nth-child(4),
-    .leaderboard-date {
-        display: none;
-    }
-
-
-    .leaderboard-score {
-        font-size: 15px;
-    }
-
-
-    .leaderboard-name {
-        font-size: 14px;
-    }
-
-
-    .game-over-container {
-        padding:
-            35px 22px;
     }
 
 }
