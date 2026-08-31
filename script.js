@@ -1228,3 +1228,67 @@ updateHighScoreDisplays();
 console.log(
     "Find Watson loaded successfully!"
 );
+
+// ============================================================
+// LEADERBOARD BUTTON TEST
+// ============================================================
+
+console.log("🏆 Leaderboard button system loading...");
+
+const leaderboardButton = document.getElementById("leaderboardButton");
+const leaderboardScreen = document.getElementById("leaderboardScreen");
+const leaderboardBackButton = document.getElementById("leaderboardBackButton");
+
+console.log("Leaderboard button:", leaderboardButton);
+console.log("Leaderboard screen:", leaderboardScreen);
+console.log("Leaderboard back button:", leaderboardBackButton);
+
+
+// OPEN LEADERBOARD
+if (leaderboardButton) {
+
+    leaderboardButton.addEventListener("click", function () {
+
+        console.log("🏆 LEADERBOARD BUTTON CLICKED");
+
+        // Hide all screens
+        document.querySelectorAll(".screen").forEach(function(screen) {
+            screen.classList.add("hidden");
+        });
+
+        // Show leaderboard
+        leaderboardScreen.classList.remove("hidden");
+
+        console.log("✅ Leaderboard screen opened");
+
+    });
+
+} else {
+
+    console.error("❌ leaderboardButton NOT FOUND");
+
+}
+
+
+// BACK BUTTON
+if (leaderboardBackButton) {
+
+    leaderboardBackButton.addEventListener("click", function () {
+
+        console.log("← LEADERBOARD BACK BUTTON CLICKED");
+
+        // Hide leaderboard
+        leaderboardScreen.classList.add("hidden");
+
+        // Show menu
+        document.getElementById("menuScreen").classList.remove("hidden");
+
+        console.log("✅ Returned to menu");
+
+    });
+
+} else {
+
+    console.error("❌ leaderboardBackButton NOT FOUND");
+
+}
