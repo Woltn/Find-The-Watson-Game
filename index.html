@@ -7,11 +7,13 @@
     <title>FIND WATSON</title>
 
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="watson.png">
 </head>
 
 <body>
 
     <div class="background-overlay"></div>
+
 
     <!-- =========================
          MAIN MENU
@@ -38,6 +40,7 @@
 
             </div>
 
+
             <div class="menu-buttons">
 
                 <button id="playButton" class="play-button">
@@ -57,6 +60,7 @@
 
             </div>
 
+
             <div class="menu-stats">
 
                 <div>
@@ -70,6 +74,7 @@
                 </div>
 
             </div>
+
 
             <div class="instructions">
                 <span>🎯</span>
@@ -126,65 +131,39 @@
         <header id="topBar">
 
             <div class="top-stat">
-
-                <span class="stat-label">
-                    SCORE
-                </span>
-
-                <strong id="score">
-                    0
-                </strong>
-
+                <span class="stat-label">SCORE</span>
+                <strong id="score">0</strong>
             </div>
+
 
             <div class="top-stat">
-
-                <span class="stat-label">
-                    STREAK
-                </span>
-
-                <strong id="streak">
-                    0
-                </strong>
-
+                <span class="stat-label">STREAK</span>
+                <strong id="streak">0</strong>
             </div>
+
 
             <div class="combo-container">
-
-                <span class="stat-label">
-                    COMBO
-                </span>
-
-                <strong id="multiplier">
-                    1.0x
-                </strong>
-
+                <span class="stat-label">COMBO</span>
+                <strong id="multiplier">1.0x</strong>
             </div>
+
 
             <div class="level-container">
 
                 <div class="level-info">
-
-                    <span>
-                        LEVEL
-                    </span>
-
-                    <strong id="level">
-                        1
-                    </strong>
-
+                    <span>LEVEL</span>
+                    <strong id="level">1</strong>
                 </div>
 
                 <div class="level-progress">
-
                     <div
                         id="levelProgressBar"
                         class="level-progress-fill">
                     </div>
-
                 </div>
 
             </div>
+
 
             <div class="timer-container">
 
@@ -193,7 +172,7 @@
                 </span>
 
                 <strong id="timer">
-                    1:01
+                    1:00
                 </strong>
 
             </div>
@@ -207,6 +186,7 @@
                 FIND HIM.
             </div>
 
+
             <img
                 id="watson"
                 src="watson.png"
@@ -214,7 +194,9 @@
                 alt="Watson"
             >
 
+
             <div id="feedback"></div>
+
 
             <div id="levelMessage">
 
@@ -227,6 +209,7 @@
                 </div>
 
             </div>
+
 
             <div id="findTimerContainer">
 
@@ -259,6 +242,7 @@
                 ← BACK
             </button>
 
+
             <div class="leaderboard-header">
 
                 <div class="leaderboard-icon">
@@ -279,14 +263,16 @@
 
             </div>
 
+
             <div class="leaderboard-table-header">
 
-                <span>RANK</span>
-                <span>NAME</span>
-                <span>SCORE</span>
-                <span>DATE</span>
+                <div>RANK</div>
+                <div>NAME</div>
+                <div>SCORE</div>
+                <div>DATE</div>
 
             </div>
+
 
             <div id="leaderboardList">
 
@@ -317,6 +303,7 @@
                 TIME'S UP!
             </h1>
 
+
             <div class="final-score">
 
                 <span>
@@ -329,53 +316,36 @@
 
             </div>
 
+
             <div id="newHighScore" class="new-high-score hidden">
                 🏆 NEW HIGH SCORE 🏆
             </div>
 
+
             <div class="results-grid">
 
                 <div class="result-card">
-
                     <span>🎯 WATSONS</span>
-
-                    <strong id="finalWatsons">
-                        0
-                    </strong>
-
+                    <strong id="finalWatsons">0</strong>
                 </div>
 
                 <div class="result-card">
-
                     <span>🔥 BEST STREAK</span>
-
-                    <strong id="finalBestStreak">
-                        0
-                    </strong>
-
+                    <strong id="finalBestStreak">0</strong>
                 </div>
 
                 <div class="result-card">
-
                     <span>🎯 ACCURACY</span>
-
-                    <strong id="finalAccuracy">
-                        0%
-                    </strong>
-
+                    <strong id="finalAccuracy">0%</strong>
                 </div>
 
                 <div class="result-card">
-
                     <span>📈 LEVEL</span>
-
-                    <strong id="finalLevel">
-                        1
-                    </strong>
-
+                    <strong id="finalLevel">1</strong>
                 </div>
 
             </div>
+
 
             <div class="game-over-buttons">
 
@@ -385,11 +355,13 @@
                     PLAY AGAIN
                 </button>
 
+
                 <button
                     id="addLeaderboardButton"
                     class="play-button">
                     🏆 ADD TO LEADERBOARD
                 </button>
+
 
                 <button
                     id="menuButton"
@@ -410,41 +382,58 @@
 
     <div
         id="leaderboardNameOverlay"
-        class="pause-overlay hidden">
+        class="modal hidden">
 
-        <div class="pause-box leaderboard-name-box">
+        <div class="modal-box leaderboard-name-box">
 
-            <div class="pause-icon">
+            <button
+                id="cancelLeaderboardButton"
+                class="close-button">
+                ×
+            </button>
+
+
+            <div class="modal-icon">
                 🏆
             </div>
 
-            <div class="pause-small">
+
+            <div class="leaderboard-small">
                 SUBMIT SCORE
             </div>
 
+
             <h2>
-                ADD YOUR SCORE
+                ADD TO LEADERBOARD
             </h2>
 
+
             <p>
-                Score:
-                <strong id="leaderboardScore">
-                    0
-                </strong>
+                Your Score
             </p>
+
+
+            <div
+                id="leaderboardScore"
+                class="big-score">
+                0
+            </div>
+
 
             <input
                 id="leaderboardNameInput"
                 type="text"
                 maxlength="20"
-                placeholder="Enter your name"
+                placeholder="ENTER YOUR NAME"
                 autocomplete="off"
             >
+
 
             <p
                 id="leaderboardNameError"
                 class="leaderboard-error">
             </p>
+
 
             <button
                 id="submitLeaderboardButton"
@@ -452,8 +441,9 @@
                 SUBMIT SCORE
             </button>
 
+
             <button
-                id="cancelLeaderboardButton"
+                id="cancelLeaderboardButton2"
                 class="menu-button">
                 CANCEL
             </button>
@@ -476,77 +466,10 @@
 
 
     <!-- =========================
-         FIREBASE
+         SCRIPT
     ========================== -->
 
-    <script type="module">
-
-        import {
-            initializeApp
-        } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
-
-        import {
-            getDatabase,
-            ref,
-            set,
-            get,
-            query,
-            orderByChild
-        } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-database.js";
-
-
-        const firebaseConfig = {
-
-            apiKey:
-                "AIzaSyAvs8RGpxommOqs_5Xe5JgKZp5xcSsFlQw",
-
-            authDomain:
-                "find-the-watson-game.firebaseapp.com",
-
-            projectId:
-                "find-the-watson-game",
-
-            storageBucket:
-                "find-the-watson-game.firebasestorage.app",
-
-            messagingSenderId:
-                "642451332683",
-
-            appId:
-                "1:642451332683:web:125d0f0b1b7c825d5b37ce",
-
-            measurementId:
-                "G-L8CLXMKT2R"
-
-        };
-
-
-        const app =
-            initializeApp(firebaseConfig);
-
-
-        window.firebaseDatabase =
-            getDatabase(app);
-
-        window.firebaseRef =
-            ref;
-
-        window.firebaseSet =
-            set;
-
-        window.firebaseGet =
-            get;
-
-        window.firebaseQuery =
-            query;
-
-        window.firebaseOrderByChild =
-            orderByChild;
-
-    </script>
-
-
-    <script src="script.js"></script>
+    <script type="module" src="script.js"></script>
 
 </body>
 </html>
