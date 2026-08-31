@@ -64,7 +64,7 @@
                 </button>
 
                 <button id="leaderboardButton" class="menu-button">
-                    🏆 LEADERBOARD
+                    🌎 LEADERBOARD
                 </button>
 
             </div>
@@ -274,6 +274,100 @@
 
     </main>
 
+    <div id="leaderboardScreen" class="screen hidden">
+
+    <div class="menu-container">
+
+        <div class="logo-small">
+            FIND WATSON
+        </div>
+
+        <div class="logo-container">
+            <h1>
+                <span>LEADERBOARD</span>
+            </h1>
+        </div>
+
+        <div id="leaderboardList">
+            <p>No scores yet.</p>
+        </div>
+
+        <div class="menu-buttons">
+
+            <button id="leaderboardBackButton" class="menu-button">
+                ← BACK
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- LEADERBOARD NAME INPUT -->
+
+<div id="leaderboardNameOverlay" class="modal hidden">
+
+    <div class="modal-box">
+
+        <button id="cancelLeaderboardButton" class="close-button">
+            ×
+        </button>
+
+        <div class="modal-icon">
+            🏆
+        </div>
+
+        <h2>ADD YOUR SCORE</h2>
+
+        <p style="margin-top: 10px;">
+            Enter your name for the leaderboard
+        </p>
+
+        <div style="margin-top: 25px;">
+
+            <input
+                id="leaderboardNameInput"
+                type="text"
+                maxlength="20"
+                placeholder="Enter your name..."
+                autocomplete="off"
+                style="
+                    width: 100%;
+                    padding: 16px;
+                    border-radius: 12px;
+                    border: 1px solid rgba(255,255,255,0.2);
+                    background: rgba(255,255,255,0.08);
+                    color: white;
+                    font-size: 18px;
+                    text-align: center;
+                    outline: none;
+                "
+            >
+
+        </div>
+
+        <div
+            id="leaderboardNameError"
+            style="
+                min-height: 20px;
+                margin-top: 10px;
+                color: #ff5555;
+                font-size: 12px;
+            "
+        ></div>
+
+        <button
+            id="submitLeaderboardButton"
+            class="play-button small"
+        >
+            CONTINUE
+        </button>
+
+    </div>
+
+</div>
+
 
     <!-- =========================================
          GAME OVER
@@ -360,26 +454,21 @@
             </div>
 
 
-            <div class="game-over-buttons">
+<div class="game-over-buttons">
 
-                <button
-                    id="playAgainButton"
-                    class="play-button">
+    <button id="playAgainButton" class="play-button">
+        PLAY AGAIN
+    </button>
 
-                    PLAY AGAIN
+    <button id="addLeaderboardButton" class="menu-button">
+        🏆 ADD TO LEADERBOARD
+    </button>
 
-                </button>
+    <button id="menuButton" class="menu-button">
+        MAIN MENU
+    </button>
 
-
-                <button
-                    id="menuButton"
-                    class="menu-button">
-
-                    MAIN MENU
-
-                </button>
-
-            </div>
+</div>
 
         </div>
 
