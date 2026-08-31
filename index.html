@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,13 +12,12 @@
 
 <body>
 
-    <!-- BACKGROUND OVERLAY -->
     <div class="background-overlay"></div>
 
 
-    <!-- ==============================
+    <!-- =========================
          MAIN MENU
-    =============================== -->
+    ========================== -->
 
     <main id="menuScreen" class="screen">
 
@@ -49,11 +49,13 @@
                 </button>
 
                 <button id="highScoreButton" class="menu-button">
-                    🏆 HIGH SCORE
+                    <span>🏆</span>
+                    <span>HIGH SCORE</span>
                 </button>
 
                 <button id="leaderboardButton" class="menu-button">
-                    🌎 LEADERBOARD
+                    <span>🌎</span>
+                    <span>LEADERBOARD</span>
                 </button>
 
             </div>
@@ -75,7 +77,13 @@
 
 
             <div class="instructions">
-                🎯 FIND WATSON AS MANY TIMES AS POSSIBLE 🎯
+
+                <span>🎯</span>
+
+                FIND WATSON AS MANY TIMES AS POSSIBLE
+
+                <span>🎯</span>
+
             </div>
 
         </div>
@@ -83,9 +91,9 @@
     </main>
 
 
-    <!-- ==============================
+    <!-- =========================
          HIGH SCORE MODAL
-    =============================== -->
+    ========================== -->
 
     <div id="highScoreModal" class="modal hidden">
 
@@ -118,48 +126,89 @@
     </div>
 
 
-    <!-- ==============================
+    <!-- =========================
          GAME
-    =============================== -->
+    ========================== -->
 
     <main id="gameScreen" class="screen hidden">
 
         <header id="topBar">
 
             <div class="top-stat">
-                <span class="stat-label">SCORE</span>
-                <strong id="score">0</strong>
+
+                <span class="stat-label">
+                    SCORE
+                </span>
+
+                <strong id="score">
+                    0
+                </strong>
+
             </div>
+
 
             <div class="top-stat">
-                <span class="stat-label">STREAK</span>
-                <strong id="streak">0</strong>
+
+                <span class="stat-label">
+                    STREAK
+                </span>
+
+                <strong id="streak">
+                    0
+                </strong>
+
             </div>
 
+
             <div class="combo-container">
-                <span class="stat-label">COMBO</span>
-                <strong id="multiplier">1.0x</strong>
+
+                <span class="stat-label">
+                    COMBO
+                </span>
+
+                <strong id="multiplier">
+                    1.0x
+                </strong>
+
             </div>
+
 
             <div class="level-container">
 
                 <div class="level-info">
-                    <span>LEVEL</span>
-                    <strong id="level">1</strong>
+
+                    <span>
+                        LEVEL
+                    </span>
+
+                    <strong id="level">
+                        1
+                    </strong>
+
                 </div>
 
                 <div class="level-progress">
+
                     <div
                         id="levelProgressBar"
                         class="level-progress-fill">
                     </div>
+
                 </div>
 
             </div>
 
+
             <div class="timer-container">
-                <span class="stat-label">TIME</span>
-                <strong id="timer">1:01</strong>
+
+                <span class="stat-label">
+                    TIME
+                </span>
+
+                <strong id="timer">
+                    1:01
+                </strong>
+
             </div>
 
         </header>
@@ -171,14 +220,17 @@
                 FIND HIM.
             </div>
 
+
             <img
                 id="watson"
-                src="watson.png"
+                src="assets/watson.png"
                 draggable="false"
                 alt="Watson"
             >
 
+
             <div id="feedback"></div>
+
 
             <div id="levelMessage">
 
@@ -191,6 +243,7 @@
                 </div>
 
             </div>
+
 
             <div id="findTimerContainer">
 
@@ -209,9 +262,9 @@
     </main>
 
 
-    <!-- ==============================
+    <!-- =========================
          LEADERBOARD
-    =============================== -->
+    ========================== -->
 
     <main id="leaderboardScreen" class="screen hidden">
 
@@ -223,6 +276,7 @@
                 ← BACK
             </button>
 
+
             <div class="leaderboard-header">
 
                 <div class="leaderboard-icon">
@@ -233,7 +287,9 @@
                     GLOBAL RANKINGS
                 </div>
 
-                <h1>LEADERBOARD</h1>
+                <h1>
+                    LEADERBOARD
+                </h1>
 
                 <p>
                     The Top 10 Watson Hunters
@@ -265,9 +321,9 @@
     </main>
 
 
-    <!-- ==============================
+    <!-- =========================
          GAME OVER
-    =============================== -->
+    ========================== -->
 
     <main id="gameOverScreen" class="screen hidden">
 
@@ -281,9 +337,12 @@
                 TIME'S UP!
             </h1>
 
+
             <div class="final-score">
 
-                <span>FINAL SCORE</span>
+                <span>
+                    FINAL SCORE
+                </span>
 
                 <strong id="finalScore">
                     0
@@ -300,23 +359,46 @@
             <div class="results-grid">
 
                 <div class="result-card">
+
                     <span>🎯 WATSONS</span>
-                    <strong id="finalWatsons">0</strong>
+
+                    <strong id="finalWatsons">
+                        0
+                    </strong>
+
                 </div>
 
+
                 <div class="result-card">
+
                     <span>🔥 BEST STREAK</span>
-                    <strong id="finalBestStreak">0</strong>
+
+                    <strong id="finalBestStreak">
+                        0
+                    </strong>
+
                 </div>
 
+
                 <div class="result-card">
+
                     <span>🎯 ACCURACY</span>
-                    <strong id="finalAccuracy">0%</strong>
+
+                    <strong id="finalAccuracy">
+                        0%
+                    </strong>
+
                 </div>
 
+
                 <div class="result-card">
+
                     <span>📈 LEVEL</span>
-                    <strong id="finalLevel">1</strong>
+
+                    <strong id="finalLevel">
+                        1
+                    </strong>
+
                 </div>
 
             </div>
@@ -330,11 +412,13 @@
                     PLAY AGAIN
                 </button>
 
+
                 <button
                     id="addLeaderboardButton"
                     class="play-button">
                     🏆 ADD TO LEADERBOARD
                 </button>
+
 
                 <button
                     id="menuButton"
@@ -349,9 +433,9 @@
     </main>
 
 
-    <!-- ==============================
+    <!-- =========================
          LEADERBOARD NAME POPUP
-    =============================== -->
+    ========================== -->
 
     <div
         id="leaderboardNameOverlay"
@@ -370,6 +454,7 @@
             <h2>
                 ADD YOUR SCORE
             </h2>
+
 
             <p>
                 Score:
@@ -412,32 +497,30 @@
     </div>
 
 
-    <!-- ==============================
+    <!-- =========================
          MUSIC
-    =============================== -->
+    ========================== -->
 
     <audio
         id="gameMusic"
-        src="music.mp3"
+        src="assets/music.mp3"
         loop
         preload="auto">
     </audio>
 
 
-    <!-- ==============================
+    <!-- =========================
          FIREBASE
-         
-         IMPORTANT:
-         This is NOT inside script.js
-    =============================== -->
+         THIS IS THE ONLY FIREBASE
+         INITIALIZATION
+    ========================== -->
 
     <script type="module">
-
-        console.log("🔥 Firebase module starting...");
 
         import {
             initializeApp
         } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+
 
         import {
             getDatabase,
@@ -445,8 +528,7 @@
             set,
             get,
             query,
-            orderByChild,
-            push
+            orderByChild
         } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-database.js";
 
 
@@ -476,79 +558,61 @@
         };
 
 
-        try {
-
-            console.log("🔥 Initializing Firebase...");
-
-            const app =
-                initializeApp(firebaseConfig);
+        console.log(
+            "[FIREBASE] Initializing..."
+        );
 
 
-            console.log(
-                "✅ Firebase initialized:",
-                app
-            );
+        const app =
+            initializeApp(firebaseConfig);
 
 
-            const database =
-                getDatabase(app);
+        const database =
+            getDatabase(app);
 
 
-            console.log(
-                "✅ Firebase database initialized:",
-                database
-            );
+        window.firebaseDatabase =
+            database;
 
 
-            window.firebaseDatabase =
-                database;
-
-            window.firebaseRef =
-                ref;
-
-            window.firebaseSet =
-                set;
-
-            window.firebaseGet =
-                get;
-
-            window.firebaseQuery =
-                query;
-
-            window.firebaseOrderByChild =
-                orderByChild;
-
-            window.firebasePush =
-                push;
+        window.firebaseRef =
+            ref;
 
 
-            window.firebaseReady = true;
+        window.firebaseSet =
+            set;
 
 
-            console.log(
-                "✅ FIREBASE READY!"
-            );
+        window.firebaseGet =
+            get;
 
-        }
 
-        catch (error) {
+        window.firebaseQuery =
+            query;
 
-            console.error(
-                "🔥🔥 FIREBASE INITIALIZATION FAILED 🔥🔥",
-                error
-            );
 
-            window.firebaseReady = false;
+        window.firebaseOrderByChild =
+            orderByChild;
 
-        }
+
+        window.firebaseReady =
+            true;
+
+
+        console.log(
+            "[FIREBASE] Firebase initialized successfully!"
+        );
 
     </script>
 
 
-    <!-- GAME SCRIPT -->
+    <!-- =========================
+         GAME SCRIPT
+    ========================== -->
 
     <script src="script.js"></script>
 
 
 </body>
+
 </html>
