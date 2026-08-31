@@ -448,7 +448,7 @@ gameArea.addEventListener(
 function getMultiplier() {
 
     return Math.min(
-        1 + (streak * 0.15),
+        1 + (streak * 0.3),
         5
     );
 
