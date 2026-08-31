@@ -1,15 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
     <title>FIND WATSON</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link
+        rel="stylesheet"
+        href="style.css">
+
 </head>
 
+
 <body>
+
 
     <!-- =========================================
          BACKGROUND EFFECT
@@ -22,7 +32,9 @@
          MAIN MENU
     ========================================== -->
 
-    <main id="menuScreen" class="screen">
+    <main
+        id="menuScreen"
+        class="screen">
 
         <div class="menu-container">
 
@@ -46,20 +58,43 @@
 
             <div class="menu-buttons">
 
-                <button id="playButton" class="play-button">
+                <button
+                    id="playButton"
+                    class="play-button">
 
-                    <span class="play-icon">▶</span>
+                    <span class="play-icon">
+                        ▶
+                    </span>
 
-                    <span>PLAY</span>
+                    <span>
+                        PLAY
+                    </span>
 
                 </button>
 
 
-                <button id="highScoreButton" class="menu-button">
+                <button
+                    id="highScoreButton"
+                    class="menu-button">
 
                     <span>🏆</span>
 
-                    <span>HIGH SCORE</span>
+                    <span>
+                        HIGH SCORE
+                    </span>
+
+                </button>
+
+
+                <button
+                    id="leaderboardButton"
+                    class="menu-button">
+
+                    <span>🌎</span>
+
+                    <span>
+                        LEADERBOARD
+                    </span>
 
                 </button>
 
@@ -69,13 +104,28 @@
             <div class="menu-stats">
 
                 <div>
-                    <span>HIGH SCORE</span>
-                    <strong id="menuHighScore">0</strong>
+
+                    <span>
+                        HIGH SCORE
+                    </span>
+
+                    <strong id="menuHighScore">
+                        0
+                    </strong>
+
                 </div>
 
+
                 <div>
-                    <span>TIME</span>
-                    <strong>1:00</strong>
+
+                    <span>
+                        TIME
+                    </span>
+
+                    <strong>
+                        1:00
+                    </strong>
+
                 </div>
 
             </div>
@@ -100,30 +150,51 @@
          HIGH SCORE MODAL
     ========================================== -->
 
-    <div id="highScoreModal" class="modal hidden">
+    <div
+        id="highScoreModal"
+        class="modal hidden">
 
         <div class="modal-box">
 
-            <button id="closeHighScore" class="close-button">
+            <button
+                id="closeHighScore"
+                class="close-button">
+
                 ×
+
             </button>
+
 
             <div class="modal-icon">
                 🏆
             </div>
 
-            <h2>HIGH SCORE</h2>
 
-            <div id="modalHighScore" class="big-score">
+            <h2>
+                HIGH SCORE
+            </h2>
+
+
+            <div
+                id="modalHighScore"
+                class="big-score">
+
                 0
+
             </div>
+
 
             <p>
                 Can you beat it?
             </p>
 
-            <button id="modalPlayButton" class="play-button small">
+
+            <button
+                id="modalPlayButton"
+                class="play-button small">
+
                 PLAY
+
             </button>
 
         </div>
@@ -135,11 +206,15 @@
          GAME
     ========================================== -->
 
-    <main id="gameScreen" class="screen hidden">
+    <main
+        id="gameScreen"
+        class="screen hidden">
+
 
         <!-- TOP BAR -->
 
         <header id="topBar">
+
 
             <div class="top-stat">
 
@@ -194,6 +269,7 @@
 
                 </div>
 
+
                 <div class="level-progress">
 
                     <div
@@ -232,10 +308,9 @@
 
             <img
                 id="watson"
-                src="watson.png"
+                src="assets/watson.png"
                 draggable="false"
-                alt="Watson"
-            >
+                alt="Watson">
 
 
             <div id="feedback"></div>
@@ -261,7 +336,7 @@
                 </div>
 
                 <div id="findTimer">
-                    30
+                    20
                 </div>
 
             </div>
@@ -272,16 +347,114 @@
 
 
     <!-- =========================================
+         LEADERBOARD
+    ========================================== -->
+
+    <section
+        id="leaderboardScreen"
+        class="screen hidden">
+
+        <div class="leaderboard-page">
+
+            <div class="leaderboard-container">
+
+
+                <button
+                    id="leaderboardBackButton"
+                    class="leaderboard-back-button">
+
+                    ← BACK
+
+                </button>
+
+
+                <div class="leaderboard-title">
+
+                    <div class="leaderboard-trophy">
+                        🏆
+                    </div>
+
+
+                    <div class="leaderboard-small">
+                        GLOBAL RANKINGS
+                    </div>
+
+
+                    <h1>
+                        LEADERBOARD
+                    </h1>
+
+
+                    <p>
+                        The Top 10 Watson Hunters
+                    </p>
+
+                </div>
+
+
+                <div class="leaderboard-table">
+
+
+                    <div class="leaderboard-table-header">
+
+                        <span>
+                            RANK
+                        </span>
+
+                        <span>
+                            NAME
+                        </span>
+
+                        <span>
+                            SCORE
+                        </span>
+
+                        <span>
+                            DATE
+                        </span>
+
+                    </div>
+
+
+                    <div id="leaderboardList">
+
+                        <div class="leaderboard-loading">
+                            Loading leaderboard...
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="leaderboard-footer">
+
+                    FIND WATSON • GLOBAL TOP 10
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================
          GAME OVER
     ========================================== -->
 
-    <main id="gameOverScreen" class="screen hidden">
+    <main
+        id="gameOverScreen"
+        class="screen hidden">
 
         <div class="game-over-container">
+
 
             <div class="game-over-small">
                 YOU SURVIVED
             </div>
+
 
             <h1>
                 TIME'S UP!
@@ -301,7 +474,9 @@
             </div>
 
 
-            <div id="newHighScore" class="new-high-score hidden">
+            <div
+                id="newHighScore"
+                class="new-high-score hidden">
 
                 🏆 NEW HIGH SCORE 🏆
 
@@ -310,9 +485,12 @@
 
             <div class="results-grid">
 
+
                 <div class="result-card">
 
-                    <span>🎯 WATSONS</span>
+                    <span>
+                        🎯 WATSONS
+                    </span>
 
                     <strong id="finalWatsons">
                         0
@@ -323,7 +501,9 @@
 
                 <div class="result-card">
 
-                    <span>🔥 BEST STREAK</span>
+                    <span>
+                        🔥 BEST STREAK
+                    </span>
 
                     <strong id="finalBestStreak">
                         0
@@ -334,7 +514,9 @@
 
                 <div class="result-card">
 
-                    <span>🎯 ACCURACY</span>
+                    <span>
+                        🎯 ACCURACY
+                    </span>
 
                     <strong id="finalAccuracy">
                         0%
@@ -345,7 +527,9 @@
 
                 <div class="result-card">
 
-                    <span>📈 LEVEL</span>
+                    <span>
+                        📈 LEVEL
+                    </span>
 
                     <strong id="finalLevel">
                         1
@@ -358,11 +542,21 @@
 
             <div class="game-over-buttons">
 
+
                 <button
                     id="playAgainButton"
                     class="play-button">
 
                     PLAY AGAIN
+
+                </button>
+
+
+                <button
+                    id="addLeaderboardButton"
+                    class="play-button">
+
+                    🏆 ADD TO LEADERBOARD
 
                 </button>
 
@@ -381,16 +575,107 @@
 
     </main>
 
-    
+
+    <!-- =========================================
+         LEADERBOARD NAME MODAL
+    ========================================== -->
+
+    <div
+        id="leaderboardNameOverlay"
+        class="leaderboard-modal hidden">
+
+
+        <div class="leaderboard-name-box">
+
+
+            <button
+                id="cancelLeaderboardButton"
+                class="leaderboard-close-button">
+
+                ×
+
+            </button>
+
+
+            <div class="leaderboard-name-icon">
+                🏆
+            </div>
+
+
+            <div class="leaderboard-name-small">
+                GLOBAL LEADERBOARD
+            </div>
+
+
+            <h2>
+                ADD YOUR SCORE
+            </h2>
+
+
+            <p class="leaderboard-score-label">
+                YOUR SCORE
+            </p>
+
+
+            <strong
+                id="leaderboardScore"
+                class="leaderboard-score">
+
+                0
+
+            </strong>
+
+
+            <input
+                id="leaderboardNameInput"
+                class="leaderboard-name-input"
+                type="text"
+                maxlength="20"
+                placeholder="ENTER YOUR NAME"
+                autocomplete="off">
+
+
+            <p
+                id="leaderboardNameError"
+                class="leaderboard-error">
+            </p>
+
+
+            <button
+                id="submitLeaderboardButton"
+                class="play-button">
+
+                SUBMIT SCORE
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================
+         MUSIC
+    ========================================== -->
 
     <audio
         id="gameMusic"
-        src="music.mp3"
+        src="assets/music.mp3"
         loop
         preload="auto">
     </audio>
 
-    <script src="script.js"></script>
+
+    <!-- =========================================
+         SCRIPT
+    ========================================== -->
+
+    <script
+        type="module"
+        src="script.js">
+    </script>
+
 
 </body>
+
 </html>
