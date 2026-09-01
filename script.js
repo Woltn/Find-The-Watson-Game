@@ -2222,9 +2222,6 @@ console.log(
 // LEADERBOARD NAME PROMPT
 // ============================================================
 
-const addLeaderboardButton =
-    document.getElementById("addLeaderboardButton");
-
 const leaderboardNameOverlay =
     document.getElementById("leaderboardNameOverlay");
 
